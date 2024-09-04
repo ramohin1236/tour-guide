@@ -21,16 +21,8 @@ const Traveller = () => {
           <img src="/public/nara park.jpg" alt="Travelers in Osaka" className="rounded shadow-lg" />
         </div>
         <div className="col-span-1 lg:col-span-2" data-aos="fade-left" data-aos-duration="3000">
-          <iframe
-            width="100%"
-            height="325"
-            src="https://www.youtube.com/embed/9DcvOtYug3M"
-            title="Traveler Video"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="rounded-lg shadow-lg"
-          ></iframe>
+        <iframe  width="100%"  height="325" src="https://www.youtube.com/embed/G5RpJwCJDqc?si=8N1bkCwBnpY5ITEi" title="YouTube video player"  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"  allowfullscreen></iframe>
+         
         </div>
       </div>
     </div>
