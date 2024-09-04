@@ -1,16 +1,42 @@
 import { Link } from 'react-router-dom';
 import { MdMenu, MdArrowDropDown } from 'react-icons/md';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MobileNav from './MobileNav';
 
+import Doc from '../Components/Doc/Doc';
 const Navbar = () => {
+    const {navImage}=Doc()
+    const [scrolled, setScrolled] = useState(false);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        const offset = window.scrollY;
+        if (offset > 10) {  
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
+      };
+  
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
+  
     const [isSideNavOpen, setIsSideNavOpen] = useState(false);
   
     const toggleSideNav = () => {
         setIsSideNavOpen(!isSideNavOpen);
     };
   return (
-    <header className="fixed top-0 left-0 w-full z-50 shadow-2xl">
+    <header
+    className={`fixed top-0 left-0 w-full z-50 shadow-2xl  ${scrolled ? 'bg-cover bg-center ' : ''}`}
+    style={{
+      backgroundImage: scrolled ? `url(${navImage}) ` : 'none',
+    }}
+  >
+       
     <nav className="bg-transparent active">
         <div className="container mx-auto flex items-center justify-between p-4">
             <Link to="/" className="flex items-center text-2xl font-bold">
