@@ -3,6 +3,7 @@
 import PopularCard from './PopularCard'
 
 const PopularPlace = ({ id, spots }) => {
+    console.log(spots);
   return (
     <div id={id} className="flex flex-wrap justify-center">
     {spots.map((spot, index) => (
