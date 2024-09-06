@@ -1,25 +1,35 @@
 import { useState } from "react";
 import PopularTab from "./PopularTab";
 import PopularPlace from "./PopularPlace";
+import Doc from "../../Doc/Doc";
 
 
 /* eslint-disable react/no-unescaped-entities */
 const PopularSpots = () => {
+    const [activeTab, setActiveTab] = useState('tokyo');
+    const { tokoyoTower, meijiJinguGaien, fuziMountain, omotesando, jinguShrine, sensojiTemple } = Doc()
+
     const tokyoSpots = [
         {
-            image: '/tokyo tower.jpg',
+            image: tokoyoTower,
             title: 'Meiji Shrine',
             description: 'Shrine dedicated to the deified spirits of Emperor Meiji and Empress Shoken',
             number: '01',
         },
         {
-            image: '/tokyo sky tree.jpg',
-            title: 'Shibuya City',
-            description: 'Center for youth fashion, culture, entertainment and fashion trends',
-            number: '02',
+            image: omotesando,
+            title: 'Omotesando Harajuku',
+            description: 'Tokyu Plaza is a multi-storey department store in the Omotesando / Harajuku district of central Tokyo.',
+            number: '04',
         },
         {
-            image: '/fuzi mountain.jpg',
+            image: jinguShrine,
+            title: 'Meiji Jingu Shrine',
+            description: 'located in technologically advanced Tokyo and only a few minutes from the quirky streets of Harajuku.',
+            number: '05',
+        },
+        {
+            image: fuziMountain,
             title: 'Illuminated tower',
             description: '180 lights that make up the typical light-up that illuminates Tokyo Tower',
             number: '03',
@@ -110,8 +120,6 @@ const PopularSpots = () => {
         },
     ];
 
-    const [activeTab, setActiveTab] = useState('tokyo');
-
     const spots = {
         tokyo: tokyoSpots,
         osaka: osakaSpots,
@@ -122,7 +130,7 @@ const PopularSpots = () => {
 
     return (
         <div>
-            <div className="pt-32 text-center mb-5 text-[#212121]">
+            <div className="pt-32 px-[20px] md:px-[100px] text-center mb-5 text-[#212121]">
                 <h1 className="text-5xl font-bold mb-4 text-[#A04747]">
                     OUR DESTINATION
                 </h1>
