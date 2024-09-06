@@ -1,13 +1,12 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
 import PopularTab from "./PopularTab";
 import PopularPlace from "./PopularPlace";
 import Doc from "../../Doc/Doc";
 
-
-/* eslint-disable react/no-unescaped-entities */
 const PopularSpots = () => {
     const [activeTab, setActiveTab] = useState('tokyo');
-    const { tokoyoTower, meijiJinguGaien, fuziMountain, omotesando, jinguShrine, sensojiTemple } = Doc()
+    const {tokoyoTower, fuziMountain, omotesando, jinguShrine} = Doc()
 
     const tokyoSpots = [
         {
