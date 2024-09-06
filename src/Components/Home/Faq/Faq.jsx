@@ -39,7 +39,7 @@ const Faq = () => {
 
 
   return (
-    <section className="px-[100px] py-20  relative">
+    <section className="px-[20px] md:px-[100px] py-20  relative">
       <p className="text-center text-xl text-[#202020]" data-aos="fade-up" data-aos-duration="3000">
         Don't miss out on the fun! We will help you answer some questions that make you ponder.
       </p>
@@ -49,7 +49,7 @@ const Faq = () => {
       <div>
         <img src="/rsz_grad2_black.png" className="absolute top-0 left-0  w-full pointer-events-none" />
 
-        <ul className="mt-10">
+        <ul className="mt-10 px-[20px]">
           {faqs.map((faq, index) => (
             <li key={index} className="border-b border-[#A04747] last:border-b-0">
               <div
