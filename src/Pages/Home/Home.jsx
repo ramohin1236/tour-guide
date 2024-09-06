@@ -1,5 +1,6 @@
 import { BookingSection } from "../../Components/Home/Booking/BookingSection";
 import Faq from "../../Components/Home/Faq/Faq";
+import Travel from "../../Components/Home/Travel/Travel";
 import Traveller from "../../Components/Home/Traveller/Traveller";
 import VideoSlider from "../../Components/Home/VideoSlider";
 import MustVisitDestination from "../../Components/MustVisitDestination/MustVisitDestination";
@@ -17,7 +18,7 @@ const Home = () => {
          <BookingSection/>
          </div>
          <Faq/>
-         {/* <Travel/> */}
+         <Travel/>
          <Traveller/>
          <div className="mt-20">
          <Footer/>
