@@ -6,7 +6,7 @@ import Doc from "../../Doc/Doc";
 
 const PopularSpots = () => {
     const [activeTab, setActiveTab] = useState('tokyo');
-    const {tokoyoTower, fuziMountain, omotesando, jinguShrine} = Doc()
+    const {tokoyoTower, fuziMountain, omotesando, jinguShrine, kinkakuzi, naraPark, osaka} = Doc()
 
     const tokyoSpots = [
         {
@@ -37,19 +37,19 @@ const PopularSpots = () => {
 
     const osakaSpots = [
         {
-            image: '/Hushimi.jpg',
+            image: fuziMountain,
             title: 'Tsutenkaku Tower',
             description: 'Representation of Naniwa with the Osaka version of the Eiffel Tower',
             number: '01',
         },
         {
-            image: '/kinkakuzi.jpg',
+            image: kinkakuzi,
             title: 'Osaka Castle',
             description: 'Impressively well-built stone wall, astonishing in its sheer magnitude',
             number: '02',
         },
         {
-            image: '/osaka.jpg',
+            image: jinguShrine,
             title: 'Super Nintendo World',
             description: 'Team up with pals to combat rivals and grow stronger',
             number: '03',
@@ -58,19 +58,19 @@ const PopularSpots = () => {
 
     const kyotoSpots = [
         {
-            image: '/nara park.jpg',
+            image: fuziMountain,
             title: 'Fushimi Inari Shrine',
             description: 'Inari\'s Head Temple that can be found in the Kyoto Prefecture.',
             number: '01',
         },
         {
-            image: '/kinkakuzi.jpg',
+            image: kinkakuzi,
             title: 'Katsura Imperial Villa',
             description: 'Imperial home with accompanying gardens and outbuildings.',
             number: '02',
         },
         {
-            image: '/osaka.jpg',
+            image: omotesando,
             title: 'Aoi Matsuri',
             description: 'One of the three most significant festivals in Kyoto',
             number: '03',
@@ -79,19 +79,19 @@ const PopularSpots = () => {
 
     const naraSpots = [
         {
-            image: '/public/narita airport1.jpg',
+            image: tokoyoTower,
             title: 'Narita Temple',
             description: 'A historic temple near Narita Airport.',
             number: '01',
         },
         {
-            image: '/public/narita airport2.jpg',
+            image: jinguShrine,
             title: 'Narita Park',
             description: 'A beautiful park to relax before a flight.',
             number: '02',
         },
         {
-            image: '/public/narita airport3.jpg',
+            image: omotesando,
             title: 'Narita ',
             description: 'A place to visitors for traditional goods.',
             number: '03',
@@ -100,19 +100,19 @@ const PopularSpots = () => {
 
     const supporoSpots = [
         {
-            image: '/public/haneda1.jpg',
+            image: naraPark,
             title: 'Haneda Airport',
             description: 'Haneda Airport with a view of Tokyo.',
             number: '01',
         },
         {
-            image: '/public/haneda1.jpg',
+            image: osaka,
             title: 'Haneda Museum',
             description: 'A museum showcasing the history of aviation.',
             number: '02',
         },
         {
-            image: '/public/haneda1.jpg',
+            image: jinguShrine,
             title: 'Haneda Shopping Mall',
             description: 'A large shopping area within the airport.',
             number: '03',
