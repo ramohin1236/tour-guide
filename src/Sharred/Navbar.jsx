@@ -34,6 +34,7 @@ const Navbar = () => {
               spy={true}
               smooth={true}
               duration={500}
+               className="text-[#A04747] cursor-pointer"
             >
               Home
             </Link>
@@ -42,6 +43,7 @@ const Navbar = () => {
               spy={true}
               smooth={true}
               duration={500}
+               className="text-[#A04747] cursor-pointer"
             >
             Destination
             </Link>
@@ -50,6 +52,7 @@ const Navbar = () => {
               spy={true}
               smooth={true}
               duration={500}
+              className="text-[#A04747] cursor-pointer"
             >
              Booking
             </Link>
@@ -63,7 +66,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <div className="lg:hidden flex items-center">
+          <div className="lg:hidden flex items-center text-[#A04747] cursor-pointer">
             {menu ? (
               <AiOutlineClose size={28} onClick={handleChange} />
             ) : (
