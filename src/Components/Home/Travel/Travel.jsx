@@ -103,14 +103,12 @@ const Travel = () => {
     const totalSlides = cardData.length;
     const angle = (index - currentSlide) * (280 / totalSlides);
   
-   
     const smallDeviceTranslateZ = '50px';    
     const mobileTranslateZ = '30px';          
     const tabletTranslateZ = '50px';          
     const mediumDeviceTranslateZ = '200px';   
     const largeDeviceTranslateZ = '300px';    
     const veryLargeDeviceTranslateZ = '600px'; 
-
     
     let translateZValue;
     if (window.innerWidth <= 375) {
@@ -143,9 +141,9 @@ const Travel = () => {
 
   return (
     <div className="px-4 md:px-8 lg:px-16">
-      <p className="text-center mt-12">Here are the other places that you must visit.</p>
-      <h1 className="text-3xl md:text-4xl lg:text-5xl uppercase font-semibold text-center py-2 mb-12">
-        Travel And Ins<span className="text-red-600">Pire your life</span>
+      <p className="text-center text-xl text-[#202020] mt-10">Here are the other places that you must visit.</p>
+      <h1 className="text-center mt-4 mb-10 text-3xl md:text-6xl font-semibold text-[#A04747] uppercase">
+        Travel And InsPire your life
       </h1>
       <div
         className="relative flex justify-center items-center h-[500px] md:h-[600px] perspective-1000"
@@ -163,17 +161,16 @@ const Travel = () => {
             />
           ))}
         </div>
-
         {/* Navigation Buttons */}
         <button
           onClick={prevSlide}
-          className="absolute left-6 md:left-12 lg:left-36 top-44 transform -translate-y-1/2 bg-gray-300 p-2 rounded-full"
+          className="absolute left-6 md:left-12 lg:left-36 top-44 transform -translate-y-1/2 p-5 rounded-full bg-[#A04747] text-white"
         >
           <FaArrowLeft />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-6 md:right-12 lg:right-40 top-44 transform -translate-y-1/2 bg-gray-300 p-2 rounded-full"
+          className="absolute right-6 md:right-12 lg:right-40 top-44 transform -translate-y-1/2 rounded-full bg-[#A04747] p-5 text-white"
         >
           <FaArrowRight />
         </button>

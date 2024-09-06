@@ -121,10 +121,10 @@ const PopularSpots = () => {
     };
 
   return (
-    <div className="mt-16">
-    <div className="text-center mb-6 text-[#212121]">
-        <p className="text-xl">
-            We've selected some popular tourist spots for you.
+    <div className="mt-10">
+    <div className="text-center mb-5 text-[#212121]">
+        <p className="text-xl text-red-600">
+        Top Must-Visit Destination in Japan: Handpicked for Your Ultimate Travel Experience.
         </p>
         <h2 className="text-6xl font-bold my-2">
             OUR <span className="text-red-600">DESTINATION</span>

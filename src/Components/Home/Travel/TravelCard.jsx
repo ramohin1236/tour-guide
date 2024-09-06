@@ -34,7 +34,7 @@ const TravelCard = ({ card, calculatePosition, index }) => {
           <h3 className="text-lg md:text-xl lg:text-2xl font-bold text-[#451717]">{card.title}</h3>
         </div>
         <Link
-          to="/book-now"
+          to="/"
           className="text-blue-500 font-semibold text-sm md:text-lg mt-2 flex items-center justify-between"
         >
           <p>Book Now</p>
