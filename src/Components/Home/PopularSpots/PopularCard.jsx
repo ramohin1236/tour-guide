@@ -4,21 +4,22 @@
 const PopularCard = ({ image, title, description, number }) => {
   return (
     <div
-    data-aos="fade-up"
-    data-aos-duration="2000"
-    className="relative mt-12 p-4 w-full md:w-1/3 "
-  >
-    <div className="card">
-      <img src={image} alt={title} className="w-full object-cover h-96" />
-      <div className="bg-black bg-opacity-75 p-4 text-center">
-        <h3 className="text-white text-2xl font-bold">{title}</h3>
-        <p className="text-gray-300">{description}</p>
+      data-aos="fade-up"
+      data-aos-duration="2000"
+      className="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] w-full max-w-sm rounded-lg overflow-hidden mx-auto font-[sans-serif] mt-4">
+      <div className="min-h-[256px]">
+        <img src={image} className="h-72 object-cover" />
       </div>
-      <div className="absolute top-4 left-4 bg-gradient-to-b from-black to-transparent p-4">
-        <span className="text-white text-4xl font-bold">{number}</span>
+
+      <div className="p-5">
+        <h3 className="text-gray-800 text-xl font-bold">{title}</h3>
+        <p className="mt-4 text-sm text-gray-500 leading-relaxed">
+          {description}
+        </p>
+        <button type="button"
+          className="mt-6 px-5 py-2.5 rounded-lg text-white text-sm tracking-wider border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600">View More</button>
       </div>
     </div>
-  </div>
   )
 }
 

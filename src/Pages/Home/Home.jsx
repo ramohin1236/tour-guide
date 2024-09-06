@@ -7,23 +7,17 @@ import MustVisitDestination from "../../Components/MustVisitDestination/MustVisi
 import Footer from "../../Sharred/Footer/Footer";
 
 const Home = () => {
-
-   
-
     return (
-     <div>
-         <VideoSlider/>
-         <MustVisitDestination/>
-         <div className="mt-10 md:mt-20">
-         <BookingSection/>
-         </div>
-         <Faq/>
-         <Travel/>
-         <Traveller/>
-         <div className="mt-20">
-         <Footer/>
-         </div>
-     </div>
+        <div>
+            <VideoSlider />
+            <MustVisitDestination />
+            <div className="mt-10 md:mt-20">
+                <BookingSection />
+            </div>
+            <Faq />
+            <Travel />
+            <Traveller />
+        </div>
     )
 }
 

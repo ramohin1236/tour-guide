@@ -1,7 +1,7 @@
 
 const Traveller = () => {
   return (
-    <div className="mx-auto px-[20px] md:px-[100px]">
+    <div className="mx-auto px-[20px] md:px-[100px] mb-10">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="col-span-1 lg:col-span-1" data-aos="fade-right" data-aos-duration="3000">
           <h2 className="text-3xl md:text-6xl font-semibold text-[#A04747]">BEST TRAVELER SHARED PHOTO</h2>

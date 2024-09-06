@@ -68,7 +68,7 @@ const PopularSpots = () => {
         },
     ];
 
-    const naritaAirport = [
+    const naraSpots = [
         {
             image: '/public/narita airport1.jpg',
             title: 'Narita Temple',
@@ -89,7 +89,7 @@ const PopularSpots = () => {
         },
     ];
 
-    const hanedaAirport = [
+    const supporoSpots = [
         {
             image: '/public/haneda1.jpg',
             title: 'Haneda Airport',
@@ -116,27 +116,28 @@ const PopularSpots = () => {
         tokyo: tokyoSpots,
         osaka: osakaSpots,
         kyoto: kyotoSpots,
-        narita: naritaAirport,
-        haneda: hanedaAirport,
+        nara: naraSpots,
+        supporo: supporoSpots,
     };
 
-  return (
-    <div className="mt-10">
-    <div className="text-center mb-5 text-[#212121]">
-        <p className="text-xl text-red-600">
-        Top Must-Visit Destination in Japan: Handpicked for Your Ultimate Travel Experience.
-        </p>
-        <h2 className="text-6xl font-bold my-2">
-            OUR <span className="text-red-600">DESTINATION</span>
-        </h2>
-    </div>
+    return (
+        <div>
+            <div className="pt-32 text-center mb-5 text-[#212121]">
+                <h1 className="text-5xl font-bold mb-4 text-[#A04747]">
+                    OUR DESTINATION
+                </h1>
+                <p className="text-xl text-black">
+                    Top Must-Visit Destinations in Japan: Carefully Handpicked for Your Unforgettable Travel Experience.
+                </p>
 
-    <div className="container mx-auto px-6 py-12">
-        <PopularTab activeTab={activeTab} setActiveTab={setActiveTab} />
-        <PopularPlace id={activeTab} spots={spots[activeTab]} />
-    </div>
-</div>
-  );
+            </div>
+
+            <div className="mx-auto px-6 py-12">
+                <PopularTab activeTab={activeTab} setActiveTab={setActiveTab} />
+                <PopularPlace id={activeTab} spots={spots[activeTab]} />
+            </div>
+        </div>
+    );
 };
 
 export default PopularSpots;

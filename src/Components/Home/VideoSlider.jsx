@@ -46,12 +46,12 @@ const VideoSlider = () => {
             className="object-cover w-full h-full opacity-60"
           ></video>
           <div className="absolute 
-       left-[200px] md:left-1/2 top-[55%] md:top-[45%] transform -translate-x-1/2 -translate-y-1/2 w-[100%] text-center mx-10">
-            <h1 className="text-white font-bold text-[clamp(4rem,7vw,7rem)] leading-tight
+       left-[200px] md:left-1/2 top-[55%] md:top-[55%] transform -translate-x-1/2 -translate-y-1/2 w-[100%] text-center mx-10">
+            <h1 className=" text-white font-bold text-[clamp(4rem,7vw,7rem)] leading-tight
           text-xl md:text-5xl md:mr-10">
               {slide.title}
             </h1>
-            <p className="text-white mt-5 mr-7 md:mr-20 ml-7 md:ml-5">{slide.description}</p>
+            <p className="md:px-[250px] text-white mt-5 mr-7 md:mr-20 ml-7 md:ml-5 text-sm md:text-base">{slide.description}</p>
             <div className="mt-5 mr-7 md:mr-20 ml-7 md:ml-5">
               <Link to="/">
                 <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
