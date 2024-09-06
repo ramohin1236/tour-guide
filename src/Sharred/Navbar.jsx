@@ -21,7 +21,7 @@ const Navbar = () => {
             <Link to="/" spy={true} smooth={true} duration={500}>
             <div className="flex justify-center text-center items-center">
             <img src="/logo.png" className="w-16 h-16 object-cover" alt="logo" />
-              <h1 className=" text-xl font-semibold hover:text-[#A04747]">
+              <h1 className=" text-xl font-semibold text-[#A04747]">
                Japan Travels & Tours
               </h1>
             </div>
@@ -34,7 +34,6 @@ const Navbar = () => {
               spy={true}
               smooth={true}
               duration={500}
-              className=" hover:text-[#A04747] transition-all cursor-pointer"
             >
               Home
             </Link>
@@ -43,7 +42,6 @@ const Navbar = () => {
               spy={true}
               smooth={true}
               duration={500}
-              className=" hover:text-[#A04747] transition-all cursor-pointer"
             >
             Destination
             </Link>
@@ -52,7 +50,6 @@ const Navbar = () => {
               spy={true}
               smooth={true}
               duration={500}
-              className=" hover:text-[#A04747] transition-all cursor-pointer"
             >
              Booking
             </Link>
@@ -60,7 +57,7 @@ const Navbar = () => {
 
           <div className="hidden lg:flex">
             <Link to="/">
-              <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-3 rounded-md transition duration-300 ease-in-out">
+              <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
                Contact
               </button>
             </Link>
@@ -84,7 +81,6 @@ const Navbar = () => {
             spy={true}
             smooth={true}
             duration={500}
-            className=" hover:text-[#98dad9] transition-all cursor-pointer"
           >
             Home
           </Link>
@@ -93,7 +89,6 @@ const Navbar = () => {
             spy={true}
             smooth={true}
             duration={500}
-            className="hover:text-[#98dad9] transition-all cursor-pointer"
             onClick={closeMenu}
           >
             Destination
@@ -103,7 +98,6 @@ const Navbar = () => {
             spy={true}
             smooth={true}
             duration={500}
-            className="hover:text-[#98dad9] transition-all cursor-pointer"
             onClick={closeMenu}
           >
             Booking
@@ -111,7 +105,7 @@ const Navbar = () => {
          
           <div className=" lg:hidden">
             <Link to="/">
-              <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-3 rounded-md transition duration-300 ease-in-out">
+              <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
                Contact
               </button>
             </Link>
