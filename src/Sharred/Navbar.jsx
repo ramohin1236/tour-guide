@@ -1,150 +1,122 @@
-import { Link } from 'react-router-dom';
-import { MdMenu, MdArrowDropDown } from 'react-icons/md';
-import { useEffect, useState } from 'react';
-import MobileNav from './MobileNav';
+import { useState } from "react";
+import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
-import Doc from '../Components/Doc/Doc';
 const Navbar = () => {
-    const {navImage}=Doc()
-    const [scrolled, setScrolled] = useState(false);
+  const [menu, setMenu] = useState(false);
 
-    useEffect(() => {
-      const handleScroll = () => {
-        const offset = window.scrollY;
-        if (offset > 10) {  
-          setScrolled(true);
-        } else {
-          setScrolled(false);
-        }
-      };
-  
-      window.addEventListener('scroll', handleScroll);
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, []);
-  
-    const [isSideNavOpen, setIsSideNavOpen] = useState(false);
-  
-    const toggleSideNav = () => {
-        setIsSideNavOpen(!isSideNavOpen);
-    };
+  const handleChange = () => {
+    setMenu(!menu);
+  };
+
+  const closeMenu = () => {
+    setMenu(false);
+  };
+
   return (
-    <header
-    className={`fixed top-0 left-0 w-full z-50 shadow-2xl  ${scrolled ? 'bg-cover bg-center ' : ''}`}
-    style={{
-      backgroundImage: scrolled ? `url(${navImage}) ` : 'none',
-    }}
-  >
-       
-    <nav className="bg-transparent active">
-        <div className="container mx-auto flex items-center justify-between p-4">
-            <Link to="/" className="flex items-center text-2xl font-bold">
-                <div className="logo-img bg-cover bg-center w-12 h-12">
-                    <img src="/logo.png" className="w-full h-full object-cover" alt="logo" />
-                </div>
-                <span className="text-white mt-2">JT&T</span>
-            </Link>
-            <div className="flex items-center">
-                <button className="sidenav-trigger md:hidden" aria-label="Open Menu" onClick={toggleSideNav}>
-                    <MdMenu className="text-white font-semibold text-3xl" />
-                </button>
-                <ul className="max-sm:hidden sm:hidden md:flex lg:flex max-xl:flex items-center space-x-6">
-                <li className=' h-16 flex items-center justify-center w-20'>
-  <Link
-    to="/"
-    className="text-white font-semibold hover:text-gray-300  transition-all duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 before:ease-in-out hover:before:w-full h-full w-full flex items-center justify-center"
-  >
-    HOME
-  </Link>
-</li>
-
-<li className=' h-16 flex items-center justify-center w-20'>
-  <Link
-    to="/"
-    className="text-white font-semibold hover:text-gray-300  transition-all duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 before:ease-in-out hover:before:w-full h-full w-full flex items-center justify-center"
-  >
-    POPULAR
-  </Link>
-</li>
-<li className=' h-16 flex items-center justify-center w-20'>
-  <Link
-    to="/"
-    className="text-white font-semibold hover:text-gray-300  transition-all duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 before:ease-in-out hover:before:w-full h-full w-full flex items-center justify-center"
-  >
-    BOOKING
-  </Link>
-</li>
-  <li>
-    <div className="relative group ">
-      <button className="text-white font-semibold flex items-center  transition-all duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 before:ease-in-out group-hover:before:w-full">
-        MORE <MdArrowDropDown />
-      </button>
-      <ul className="absolute left-0 mt-2 p-2 bg-white hidden group-hover:block space-y-1">
-      <li className=' h-16 flex items-center justify-center w-20'>
-  <Link
-    to="/"
-    className="text-white font-semibold hover:text-gray-300  transition-all duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 before:ease-in-out hover:before:w-full h-full w-full flex items-center justify-center"
-  >
-   ACTIVITY
-  </Link>
-</li>
-<li className=' h-16 flex items-center justify-center w-20'>
-  <Link
-    to="/"
-    className="text-white font-semibold hover:text-gray-300  transition-all duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 before:ease-in-out hover:before:w-full h-full w-full flex items-center justify-center"
-  >
-    FAQ
-  </Link>
-</li>
-<li className=' h-16 flex items-center justify-center w-20'>
-  <Link
-    to="/"
-    className="text-white font-semibold hover:text-gray-300  transition-all duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 before:ease-in-out hover:before:w-full h-full w-full flex items-center justify-center"
-  >
-    PLACES
-  </Link>
-</li>
-<li className=' h-16 flex items-center justify-center w-20'>
-  <Link
-    to="/"
-    className="text-white font-semibold hover:text-gray-300  transition-all duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 before:ease-in-out hover:before:w-full h-full w-full flex items-center justify-center"
-  >
-    PHOTOS
-  </Link>
-</li>
-      </ul>
-    </div>
-  </li>
-  <li className=' h-16 flex items-center justify-center w-20'>
-  <Link
-    to="/"
-    className="text-white font-semibold hover:text-gray-300  transition-all duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 before:ease-in-out hover:before:w-full h-full w-full flex items-center justify-center"
-  >
-    CONTACT
-  </Link>
-</li>
-<li className=' h-16 flex items-center justify-center w-20'>
-  <Link
-    to="/"
-    className="text-white font-semibold hover:text-gray-300  transition-all duration-300 relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 before:h-[2px] before:bg-white before:transition-all before:duration-300 before:ease-in-out hover:before:w-full h-full w-full flex items-center justify-center"
-  >
-    EXPLORE
-  </Link>
-</li>
-</ul>
-
+    <div className="fixed z-50 w-full text-white md:pl-[70px] md:pr-[100px] pr-[20px] bg-white text-[#A04747]">
+      <div>
+        <div className=" flex flex-row justify-between md:py-5 py-3">
+          <div className=" flex flex-row items-center cursor-pointer">
+            <Link to="/" spy={true} smooth={true} duration={500}>
+            <div className="flex justify-center text-center items-center">
+            <img src="/logo.png" className="w-16 h-16 object-cover" alt="logo" />
+              <h1 className=" text-xl font-semibold text-[#A04747]">
+               Japan Travels & Tours
+              </h1>
             </div>
+            </Link>
+          </div>
+
+          <nav className="font-semibold hidden lg:flex flex-row items-center text-xl gap-8">
+            <Link
+              to="/"
+              spy={true}
+              smooth={true}
+              duration={500}
+               className="text-[#A04747] cursor-pointer"
+            >
+              Home
+            </Link>
+            <Link
+              to="/"
+              spy={true}
+              smooth={true}
+              duration={500}
+               className="text-[#A04747] cursor-pointer"
+            >
+            Destination
+            </Link>
+            <Link
+              to="/"
+              spy={true}
+              smooth={true}
+              duration={500}
+              className="text-[#A04747] cursor-pointer"
+            >
+             Booking
+            </Link>
+          </nav>
+
+          <div className="hidden lg:flex">
+            <Link to="/">
+              <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
+               Contact
+              </button>
+            </Link>
+          </div>
+
+          <div className="lg:hidden flex items-center text-[#A04747] cursor-pointer">
+            {menu ? (
+              <AiOutlineClose size={28} onClick={handleChange} />
+            ) : (
+              <AiOutlineMenu size={28} onClick={handleChange} />
+            )}
+          </div>
         </div>
-    </nav>
+        <div
+          className={`${
+            menu ? "translate-x-0" : "-translate-x-full"
+          } lg:hidden flex flex-col absolute text-[#A04747] bg-white  left-0 top-20 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
+        >
+          <Link
+            to="/"
+            spy={true}
+            smooth={true}
+            duration={500}
+          >
+            Home
+          </Link>
+          <Link
+            to="/"
+            spy={true}
+            smooth={true}
+            duration={500}
+            onClick={closeMenu}
+          >
+            Destination
+          </Link>
+          <Link
+            to="/"
+            spy={true}
+            smooth={true}
+            duration={500}
+            onClick={closeMenu}
+          >
+            Booking
+          </Link>
+         
+          <div className=" lg:hidden">
+            <Link to="/">
+              <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
+               Contact
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-    {/* Mobile Navigation */}
-    <MobileNav 
-    toggleSideNav={toggleSideNav} 
-    isSideNavOpen={isSideNavOpen}
-    />
-</header>
-  )
-}
-
-export default Navbar
+export default Navbar;
