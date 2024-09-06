@@ -5,7 +5,6 @@ import VideoSlider from "../../Components/Home/VideoSlider";
 import MustVisitDestination from "../../Components/MustVisitDestination/MustVisitDestination";
 import Footer from "../../Sharred/Footer/Footer";
 
-
 const Home = () => {
 
    
