@@ -31,7 +31,7 @@ const VideoSlider = () => {
   }, []);
 
   return (
-    <section id="home" className="relative bg-black h-[500px] md:h-[650px]">
+    <section id="home" className="relative bg-black h-[500px] md:h-[650px] overflow-hidden">
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -45,8 +45,8 @@ const VideoSlider = () => {
             muted
             className="object-cover w-full h-full opacity-60"
           ></video>
-          <div className="caption absolute 
-        left-40 md:left-1/2 top-[55%] md:top-[45%] transform -translate-x-1/2 -translate-y-1/2 w-[100%] text-center mx-10">
+          <div className="absolute 
+       left-[220px] md:left-1/2 top-[55%] md:top-[45%] transform -translate-x-1/2 -translate-y-1/2 w-[100%] text-center mx-10">
             <h1 className="text-white font-bold text-[clamp(4rem,7vw,7rem)] leading-tight
           text-xl md:text-5xl md:mr-10">
               {slide.title}

@@ -7,12 +7,12 @@ export const BookingSection = () => {
     <div>
    
       <section
-        className="relative h-96 bg-fixed bg-center bg-cover"
+        className="relative h-[300px] md:h-[400px] bg-fixed bg-center bg-cover"
         style={{
-            backgroundImage: "url('/public/nav.jpg')",
+            backgroundImage: "url('/public/nav3.jpg')",
           }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        {/* <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
           <div className=" p-8 rounded-lg bg-white shadow-2xl -mt-64 md:-mt-96 max-sm:w-96 sm:w-2/4 md:w-3/4 lg:w-2/4 max-xl:w-2/4">
             <h1 className="text-3xl font-bold mb-4">BOOK <span className="text-red-600">NOW</span> </h1>
             <p className="mb-4">
@@ -60,11 +60,10 @@ export const BookingSection = () => {
   </button>
 </form>
           </div>
-        </div>
+        </div> */}
       </section>
 
       <BookingAdventure/>
-    
     </div>
   );
 };
