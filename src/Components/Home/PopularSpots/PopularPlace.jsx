@@ -5,7 +5,7 @@ import PopularCard from './PopularCard'
 const PopularPlace = ({ id, spots }) => {
     console.log(spots);
   return (
-    <div id={id} className="flex flex-wrap justify-center">
+    <div id={id} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
     {spots.map((spot, index) => (
       <PopularCard
         key={index}
