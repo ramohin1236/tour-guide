@@ -1,39 +1,42 @@
 /* eslint-disable react/prop-types */
 
+import Doc from "../Doc/Doc";
+
 const MustVisitDestination = () => {
+    const {tokoyoTower,meijiJinguGaien,fuziMountain,omotesando,jinguShrine,sensojiTemple}=Doc()
     const item = [
         {
-            image: '/tokyo tower.jpg',
+            image: tokoyoTower,
             title: 'Meiji Shrine',
             description: 'Shrine dedicated to the deified spirits of Emperor Meiji and Empress Shoken.',
             number: '01',
         },
         {
-            image: '/meiji-jingu-gaien.jpg',
+            image: meijiJinguGaien,
             title: 'Meiji Jingu Gaien',
             description: 'This huge park in the heart of Tokyo is known for its numerous sports facilities.',
             number: '02',
         },
         {
-            image: '/fuzi mountain.jpg',
+            image: fuziMountain,
             title: 'Illuminated tower',
             description: '180 lights that make up the typical light-up that illuminates Tokyo Tower.',
             number: '03',
         },
         {
-            image: '/omotesando-harajuku.jpg',
+            image: omotesando,
             title: 'Omotesando Harajuku',
             description: 'Tokyu Plaza is a multi-storey department store in the Omotesando / Harajuku district of central Tokyo.',
             number: '04',
         },
         {
-            image: '/meiji-jingu-shrine.jpg',
+            image: jinguShrine,
             title: 'Meiji Jingu Shrine',
             description: 'located in technologically advanced Tokyo and only a few minutes from the quirky streets of Harajuku.',
             number: '05',
         },
         {
-            image: '/tokyo-sensoji-temple.jpg',
+            image: sensojiTemple,
             title: 'Sensoji Temple',
             description: 'Senso-ji Temple (浅草寺, Sensōji) is a popular spot for omikuji, or fortunes.',
             number: '06',

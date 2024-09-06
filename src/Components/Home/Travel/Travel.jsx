@@ -1,62 +1,64 @@
 import { useState } from "react";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import TravelCard from "./TravelCard";
+import Doc from "../../Doc/Doc";
 
 const Travel = () => {
+    const {kinkakuzi,naraPark,osaka,tokoyoTower}=Doc()
     const cardData = [
         {
           id: 1,
           title: "Mount Fuji",
-          image: "/public/kinkakuzi.jpg",
+          image: kinkakuzi,
           discount: "50% off",
           offerInfo: "5D/4N | People: 8 | Kyoto",
         },
         {
           id: 2,
           title: "Nara Park",
-          image: "/public/nara park.jpg",
+          image: naraPark,
           discount: "30% off",
           offerInfo: "3D/2N | People: 5 | Nara",
         },
         {
           id: 3,
           title: "Tokyo Tower",
-          image: "/public/osaka.jpg",
+          image: osaka,
           discount: "40% off",
           offerInfo: "4D/3N | People: 6 | Tokyo",
         },
         {
           id: 4,
           title: "Nara Park",
-          image: "/public/nara park.jpg",
+          image: naraPark,
           discount: "30% off",
           offerInfo: "3D/2N | People: 5 | Nara",
         },
         {
           id: 5,
           title: "Nara Park",
-          image: "/public/tokyo tower.jpg",
+          image: tokoyoTower,
           discount: "30% off",
           offerInfo: "3D/2N | People: 5 | Nara",
         },
         {
           id: 6,
           title: "Nara Park",
-          image: "/public/nara park.jpg",
+          image: naraPark,
           discount: "30% off",
           offerInfo: "3D/2N | People: 5 | Nara",
         },
         {
           id: 7,
           title: "Nara Park",
-          image: "/public/nara park.jpg",
+          image: osaka,
           discount: "30% off",
           offerInfo: "3D/2N | People: 5 | Nara",
         },
         {
           id: 8,
           title: "Nara Park",
-          image: "/public/nara park.jpg",
+          image: kinkakuzi,
           discount: "30% off",
           offerInfo: "3D/2N | People: 5 | Nara",
         },
@@ -109,25 +111,19 @@ const Travel = () => {
     const mediumDeviceTranslateZ = '200px';   
     const largeDeviceTranslateZ = '300px';    
     const veryLargeDeviceTranslateZ = '600px'; 
-    
+  
     let translateZValue;
     if (window.innerWidth <= 375) {
-   
       translateZValue = smallDeviceTranslateZ;
     } else if (window.innerWidth <= 425) {
-   
       translateZValue = mobileTranslateZ;
     } else if (window.innerWidth <= 768) {
-    
       translateZValue = tabletTranslateZ;
     } else if (window.innerWidth <= 1024) {
-   
       translateZValue = mediumDeviceTranslateZ;
     } else if (window.innerWidth <= 1440) {
-  
       translateZValue = largeDeviceTranslateZ;
     } else {
-     
       translateZValue = veryLargeDeviceTranslateZ;
     }
   
@@ -135,6 +131,7 @@ const Travel = () => {
       transform: `rotateY(${angle}deg) translateZ(${translateZValue})`,
       opacity: index === currentSlide ? 1 : 0.2,
       filter: index === currentSlide ? 'none' : 'blur(4px)',
+      zIndex: index === currentSlide ? 10 : 1,  
       transition: 'transform 0.7s, opacity 0.7s, filter 0.7s',
     };
   };
@@ -151,7 +148,7 @@ const Travel = () => {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
       >
-        <div className="relative w-[300px] h-full md:w-[400px] transform-style-preserve-3d">
+        <div className="relative w-[300px] h-full md:w-[400px] transform-style-preserve-3d ml-12">
           {cardData.map((card, index) => (
             <TravelCard
               key={card.id}
@@ -164,13 +161,13 @@ const Travel = () => {
         {/* Navigation Buttons */}
         <button
           onClick={prevSlide}
-          className="absolute left-6 md:left-12 lg:left-36 top-44 transform -translate-y-1/2 p-5 rounded-full bg-[#A04747] text-white"
+          className="absolute left-6 md:left-12 lg:left-36 top-44 transform -translate-y-1/2 p-2 md:p-5 rounded-full bg-[#A04747] text-white"
         >
           <FaArrowLeft />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-6 md:right-12 lg:right-40 top-44 transform -translate-y-1/2 rounded-full bg-[#A04747] p-5 text-white"
+          className="absolute right-6 md:right-12 lg:right-40 top-44 transform -translate-y-1/2 rounded-full bg-[#A04747]  p-2 md:p-5 text-white"
         >
           <FaArrowRight />
         </button>

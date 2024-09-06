@@ -1,11 +1,8 @@
-import adventure from '/public/adventure/adventure.png'
-import trekking from '/public/adventure/trekking.png'
-import campfire from '/public/adventure/campfire.png'
-import offroad from '/public/adventure/offroad.png'
-import camping from '/public/adventure/camping.png'
-import exploring from '/public/adventure/exploring.png'
+
+import Doc from '../../Doc/Doc'
 import AdventureCart from './AdventureCart'
 const BookingAdventure = () => {
+    const {adventure,trekking,campfire,offroad,camping,exploring}=Doc()
   const AdventureItems = [
     {
       image: adventure,

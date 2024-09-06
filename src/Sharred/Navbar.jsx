@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import Doc from "../Components/Doc/Doc";
 
 const Navbar = () => {
+    const {logo}=Doc()
   const [menu, setMenu] = useState(false);
 
   const handleChange = () => {
@@ -20,7 +22,7 @@ const Navbar = () => {
           <div className=" flex flex-row items-center cursor-pointer">
             <Link to="/" spy={true} smooth={true} duration={500}>
             <div className="flex justify-center text-center items-center">
-            <img src="/logo.png" className="w-16 h-16 object-cover" alt="logo" />
+            <img src={logo} className="w-16 h-16 object-cover" alt="logo" />
               <h1 className=" text-xl font-semibold text-[#A04747]">
                Japan Travels & Tours
               </h1>

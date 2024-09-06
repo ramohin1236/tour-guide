@@ -1,7 +1,9 @@
 
-import { FaMapMarkerAlt, FaUser, FaCalendarAlt } from "react-icons/fa";
+
 import BookingAdventure from "./BookingAdventure";
+import Doc from "../../Doc/Doc";
 export const BookingSection = () => {
+    const {nav3}=Doc()
   
   return (
     <div>
@@ -9,7 +11,7 @@ export const BookingSection = () => {
       <section
         className="relative h-[300px] md:h-[400px] bg-fixed bg-center bg-cover"
         style={{
-            backgroundImage: "url('/public/nav3.jpg')",
+            backgroundImage: `url(${nav3})`,
           }}
       >
         {/* <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
