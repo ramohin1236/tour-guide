@@ -1,7 +1,7 @@
 import Doc from "../../Doc/Doc"
 
 const Traveller = () => {
-    const {naraPark,tokoyoSky,fuziMountain}=Doc()
+    const {naraPark,tokoyoSky,tokoyoTower, meijiJinguGaien, fuziMountain, omotesando, jinguShrine, sensojiTemple }=Doc()
   return (
     <div className="mx-auto px-[20px] md:px-[100px] mb-10">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -16,7 +16,7 @@ const Traveller = () => {
           <img src={fuziMountain} alt="Travelers in Kyoto" className="rounded shadow-lg" />
         </div>
         <div className="col-span-1 lg:col-span-1 border-2" data-aos="fade-left" data-aos-duration="3000">
-          <img src={tokoyoSky} alt="Travelers in Tokyo" className="rounded shadow-lg w-full object-cover" />
+          <img src={omotesando} alt="Travelers in Tokyo" className="rounded shadow-lg w-full object-cover" />
         </div>
         <div className="col-span-1 lg:col-span-1" data-aos="fade-right" data-aos-duration="3000">
           <img src={naraPark} alt="Travelers in Osaka" className="rounded shadow-lg" />
