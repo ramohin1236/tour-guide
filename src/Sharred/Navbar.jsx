@@ -41,7 +41,7 @@ const Navbar = () => {
               Home
             </Link>
             <Link
-              to="/"
+              to="/destination"
               spy={true}
               smooth={true}
               duration={500}
@@ -90,7 +90,7 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            to="/"
+            to="/destination"
             spy={true}
             smooth={true}
             duration={500}

@@ -3,24 +3,23 @@
 
 const PopularTab = ({ activeTab, setActiveTab }) => {
   return (
-    <ul className="flex justify-center border-b-2 border-gray-300">
-      {['tokyo', 'kyoto', 'osaka', 'narita', 'haneda'].map((tab) => (
+    <ul className="flex justify-center mb-5">
+      {['tokyo', 'kyoto', 'osaka', 'nara', 'supporo']?.map((tab) => (
         <li key={tab} className="mx-4">
           <button
             onClick={() => setActiveTab(tab)}
-            className={`font-bold pb-2 ${
-              activeTab === tab ? 'text-red-600 border-b-4 border-red-600' : 'text-black'
-            }`}
+            className={`font-bold pb-2 ${activeTab === tab ? 'text-red-600 border-b-4 border-red-600' : 'text-black'
+              }`}
           >
             {tab === 'kyoto'
               ? 'KYOTO'
               : tab === 'osaka'
-              ? 'OSAKA'
-              : tab === 'tokyo'
-              ? 'TOKYO'
-              : tab === 'narita'
-              ? 'NARITA AIRPORT'
-              : 'HANEDA AIRPORT'}
+                ? 'OSAKA'
+                : tab === 'nara'
+                  ? 'NARA'
+                  : tab === 'supporo'
+                    ? 'SUPPORO'
+                    : 'TOKYO'}
           </button>
         </li>
       ))}
