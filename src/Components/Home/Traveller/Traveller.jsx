@@ -6,7 +6,7 @@ const Traveller = () => {
     <div className="mx-auto px-[20px] md:px-[100px] mb-10">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div className="col-span-1 lg:col-span-1" data-aos="fade-right" data-aos-duration="3000">
-          <h2 className="text-3xl md:text-6xl font-semibold text-[#A04747]">BEST TRAVELER SHARED PHOTO</h2>
+          <h2 className="text-xl md:text-5xl font-semibold text-[#A04747]">BEST TRAVELER SHARED PHOTO</h2>
           <p className="mt-4 text-justify">
             Excellent opportunity to sample local cuisine and culture while seeing the main attractions.
             A good mix of modern, traditional, and historical sights or experiences. RYOKOU handled the transportation arrangements for us, making it simple for us to move between cities and nations. The guide was very helpful and always went above and beyond for the group.
@@ -16,7 +16,7 @@ const Traveller = () => {
           <img src={fuziMountain} alt="Travelers in Kyoto" className="rounded shadow-lg" />
         </div>
         <div className="col-span-1 lg:col-span-1 border-2" data-aos="fade-left" data-aos-duration="3000">
-          <img src={tokoyoSky} alt="Travelers in Tokyo" className="rounded shadow-lg h-80 w-full object-cover" />
+          <img src={tokoyoSky} alt="Travelers in Tokyo" className="rounded shadow-lg w-full object-cover" />
         </div>
         <div className="col-span-1 lg:col-span-1" data-aos="fade-right" data-aos-duration="3000">
           <img src={naraPark} alt="Travelers in Osaka" className="rounded shadow-lg" />
