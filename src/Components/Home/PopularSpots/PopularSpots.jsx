@@ -6,7 +6,7 @@ import Doc from "../../Doc/Doc";
 
 const PopularSpots = () => {
     const [activeTab, setActiveTab] = useState('tokyo');
-    const {tokoyoTower, fuziMountain, omotesando, jinguShrine, kinkakuzi, naraPark, osaka, tokoyoSky} = Doc()
+    const {tokoyoTower, fuziMountain, omotesando, jinguShrine, kinkakuzi, naraPark, osaka} = Doc()
 
     const tokyoSpots = [
         {
@@ -112,7 +112,7 @@ const PopularSpots = () => {
             number: '02',
         },
         {
-            image: tokoyoSky,
+            image: jinguShrine,
             title: 'Haneda Shopping Mall',
             description: 'A large shopping area within the airport.',
             number: '03',
