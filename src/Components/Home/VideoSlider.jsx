@@ -53,9 +53,9 @@ const VideoSlider = () => {
             </h1>
             <p className="md:px-[250px] text-white mt-5 mr-7 md:mr-20 ml-7 md:ml-5 text-sm md:text-base">{slide.description}</p>
             <div className="mt-5 mr-7 md:mr-20 ml-7 md:ml-5">
-              <Link to="/">
+              <Link to="/destination">
                 <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
-                  Get Startted
+                  Get Started
                 </button>
               </Link>
             </div>
