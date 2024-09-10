@@ -3,6 +3,9 @@ import MainLayout from "../Main/MainLayout";
 import Home from "../Pages/Home/Home";
 import PopularSpots from "../Components/Home/PopularSpots/PopularSpots";
 import Contact from "../Components/Contact/Contact";
+import SignUp from "../Pages/Auth/Signup/SignUp";
+import Signin from "../Pages/Auth/Signin/Signin";
+import DetailsPage from "../Pages/Details/DetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -18,17 +21,22 @@ export const router = createBrowserRouter([
         element: <PopularSpots/>
       },
       {
+        path: "/details/:id",
+        element: <DetailsPage/>
+      },
+      {
         path: "/contact",
         element: <Contact/>,
       },
-      // {
-      //   path: "/hadith",
-      //   element: <Hadith />,
-      // },
-      // {
-      //   path: "/namaz",
-      //   element: <Namaz />,
-      // }
+      {
+        path: "/signup",
+        element: <SignUp/>,
+      },
+      {
+        path: "/signin",
+        element: <Signin/>,
+      },
+     
     ],
   },
 ]);

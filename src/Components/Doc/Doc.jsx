@@ -27,9 +27,10 @@ import campfire from '/public/adventure/campfire.png'
 import offroad from '/public/adventure/offroad.png'
 import camping from '/public/adventure/camping.png'
 import exploring from '/public/adventure/exploring.png'
+import signup from '/public/signup/signup.png'
 
 const Doc = () => {
-    return {navImage, nav1, nav2, nav3, nav4, nav5, nav6,tokoyoTower,meijiJinguGaien,fuziMountain,omotesando,jinguShrine,sensojiTemple,kinkakuzi,naraPark,osaka,tokoyoSky ,adventure,trekking,campfire,offroad,camping,exploring,logo}
+    return {navImage, nav1, nav2, nav3, nav4, nav5, nav6,tokoyoTower,meijiJinguGaien,fuziMountain,omotesando,jinguShrine,sensojiTemple,kinkakuzi,naraPark,osaka,tokoyoSky ,adventure,trekking,campfire,offroad,camping,exploring,logo,signup}
   }
 
 export default Doc
