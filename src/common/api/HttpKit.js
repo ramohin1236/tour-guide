@@ -1,10 +1,10 @@
 import axios from "axios";
 import { BASE_URL } from "../constant/constant";
-import Cookies from "js-cookie";
 
 // Create an instance of axios
 const axiosInstance = axios.create({
   baseURL: `${BASE_URL}`, // Base URL for all requests,
+  withCredentials: true,
   timeout: 5000, // Timeout after 5 seconds
   headers: {
     "Content-Type": "application/json", // Default headers
@@ -14,14 +14,10 @@ const axiosInstance = axios.create({
 // Request interceptor for attaching tokens, logging, etc.
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Get the XSRF-TOKEN cookie
-    const xsrfToken = Cookies.get("XSRF-TOKEN");
-    console.log("XSRF-TOKEN:", xsrfToken);
     // Add auth token or other headers to the request
     const token = localStorage.getItem("authToken");
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
-      config.headers["X-CSRF-Token"] = xsrfToken;
     }
     return config;
   },
@@ -39,14 +35,22 @@ axiosInstance.interceptors.response.use(
   },
   (error) => {
     if (error.response) {
-      // Server responded with a status outside the 2xx range
-      if (error.response.status === 401) {
-        // Handle 401 Unauthorized errors globally
-        // Redirect to login or refresh token
+      const { status } = error.response;
+      if (status === 401) {
+        // Handle 401 Unauthorized: perhaps redirect to login
+        console.log("Unauthorized, redirecting to login...");
+        window.location.href = "/login";
       }
-      if (error.response.status === 500) {
-        // Handle 500 Internal Server Error globally
+      if (status === 500) {
+        // Handle 500 Internal Server Error: show an error message
+        console.log("Internal Server Error, please try again later.");
       }
+    } else if (error.request) {
+      // The request was made but no response was received
+      console.error("Network error or no response from server");
+    } else {
+      // Something happened in setting up the request
+      console.error("Error in request setup:", error.message);
     }
     return Promise.reject(error);
   }
