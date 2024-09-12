@@ -1,13 +1,5 @@
 import navImage from '/public/nav.jpg'
-<<<<<<< HEAD
-import nav1 from '/public/nav1.jpg'
-import nav2 from '/public/nav2.jpg'
-import nav3 from '/public/nav3.jpg'
-import nav4 from '/public/nav4.jpg'
-import nav5 from '/public/nav5.jpg'
-import nav6 from '/public/nav6.jpg'
-import logo from '/public/logo.png'
-=======
+
 import nav1 from '../../../public/nav1.jpg'
 import nav2 from '../../../public/nav2.jpg'
 import nav3 from '../../../public/nav3.jpg'
@@ -15,9 +7,6 @@ import nav4 from '../../../public/nav4.jpg'
 import nav5 from '../../../public/nav5.jpg'
 import nav6 from '../../../public/nav6.jpg'
 import logo from '../../../public/logo.png'
->>>>>>> 8945001e697318442d1793f807add9bb36d7f9a5
-
-// Destination image
 import tokoyoTower from '/public/tokyo tower.jpg'
 import meijiJinguGaien from '/public/meiji-jingu-gaien.jpg'
 import fuziMountain from '/public/fuzi mountain.jpg'

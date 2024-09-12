@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 
-=======
-import React from "react";
->>>>>>> 8945001e697318442d1793f807add9bb36d7f9a5
 const Footer = () => {
   return (
     <footer className="bg-white py-12 px-6 font-sans tracking-wide">
