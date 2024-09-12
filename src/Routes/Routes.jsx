@@ -48,11 +48,11 @@ export const router = createBrowserRouter([
 
   {
     path: '/dashboard',
-    element: <PrivateRoute><DashLayout/></PrivateRoute>,
+    element: <DashLayout/>,
     children:[
         {
             path: 'alluser',
-            element: <PrivateRoute><AllUser/></PrivateRoute>
+            element: <AllUser/>
         },
         {
             path: 'alldestination',
