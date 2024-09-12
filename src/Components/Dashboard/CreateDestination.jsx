@@ -1,10 +1,10 @@
 import ReactQuill from "react-quill"
 import 'react-quill/dist/quill.snow.css';
 
-const UpdateDestination = () => {
+const CreateDestination = () => {
   return (
     <div className='p-4 max-w-4xl mx-auto min-h-screen'>
-    <h1 className='text-center text-3xl my-7 font-semibold'>Update Destination</h1>
+    <h1 className='text-center text-3xl my-7 font-semibold'>Create a Destination</h1>
     <form className='flex flex-col gap-6'>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <input
@@ -71,11 +71,11 @@ const UpdateDestination = () => {
         type='submit'
         className='px-4 py-2 bg-gradient-to-r bg-green-500 font-bold text-white rounded-md'
       >
-        Update
+        Publish
       </button>
     </form>
   </div>
   )
 }
 
-export default UpdateDestination
+export default CreateDestination

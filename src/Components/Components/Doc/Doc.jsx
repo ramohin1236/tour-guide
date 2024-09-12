@@ -1,5 +1,4 @@
 import navImage from '/public/nav.jpg'
-
 import nav1 from '../../../public/nav1.jpg'
 import nav2 from '../../../public/nav2.jpg'
 import nav3 from '../../../public/nav3.jpg'
@@ -7,6 +6,8 @@ import nav4 from '../../../public/nav4.jpg'
 import nav5 from '../../../public/nav5.jpg'
 import nav6 from '../../../public/nav6.jpg'
 import logo from '../../../public/logo.png'
+
+// Destination image
 import tokoyoTower from '/public/tokyo tower.jpg'
 import meijiJinguGaien from '/public/meiji-jingu-gaien.jpg'
 import fuziMountain from '/public/fuzi mountain.jpg'
@@ -27,10 +28,9 @@ import offroad from '/public/adventure/offroad.png'
 import camping from '/public/adventure/camping.png'
 import exploring from '/public/adventure/exploring.png'
 import signup from '/public/signup/signup.png'
-import signupImage from '/public/signupImage.jpg'
 
 const Doc = () => {
-    return {navImage, nav1, nav2, nav3, nav4, nav5, nav6,tokoyoTower,meijiJinguGaien,fuziMountain,omotesando,jinguShrine,sensojiTemple,kinkakuzi,naraPark,osaka,tokoyoSky ,adventure,trekking,campfire,offroad,camping,exploring,logo,signup,signupImage}
+    return {navImage, nav1, nav2, nav3, nav4, nav5, nav6,tokoyoTower,meijiJinguGaien,fuziMountain,omotesando,jinguShrine,sensojiTemple,kinkakuzi,naraPark,osaka,tokoyoSky ,adventure,trekking,campfire,offroad,camping,exploring,logo,signup}
   }
 
 export default Doc

@@ -1,0 +1,58 @@
+// sign up user 
+
+import axiosInstance from "./HttpKit";
+
+// User SignUpp
+// complete
+export const userSignUp = async (data) => {
+    
+    try {
+      const response = await axiosInstance.post("/api/users/signup_user",data);
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error("An error occurred");
+    }
+  };
+
+// user signin 
+// complete
+export const userSignIn = async (email, password) => {
+    try {
+      const response = await axiosInstance.post("/api/auth/signin", {
+        email,
+        password
+      });
+      return response.data;
+    } catch (error) {
+      throw error.response ? error.response.data : new Error("An error occurred");
+    }
+  };
+
+// password update
+// complete
+
+export const userPasswordUpdate = async (email, password) => {
+    try {
+      
+      const response = await axiosInstance.post('/api/auth/change_password', {
+        email,
+        password,
+      });
+      return response.data; 
+    } catch (error) {
+      
+      throw error.response ? error.response.data : new Error('An error occurred');
+    }
+  };
+
+//   user profile
+  export const userProfile = async () => {
+    try {
+      const response = await axiosInstance.get('/api/auth/profile');
+  
+      return response.data;
+    } catch (error) {
+  
+      throw error.response ? error.response.data : new Error('An error occurred while fetching user profile');
+    }
+  };

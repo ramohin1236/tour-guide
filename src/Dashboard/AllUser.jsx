@@ -1,140 +1,147 @@
+/* eslint-disable no-unused-vars */
+import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
-import Pagination from "../Sharred/Pagination";
+
+import { allUsers, deleteUser } from "../common/api/ApiKit";
+import Pagination from "../Components/Sharred/Pagination";
+import toast from "react-hot-toast";
+
 
 const AllUser = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage] = useState(10);
+  const [error, setError] = useState(null);
 
-    const users = [
-        {
-          imageSrc: "/pr1.png",
-          title: "Luxe Lounge Sofa",
-          email: "asfsaf@gmail.com",
+ 
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await allUsers(); 
+        console.log(response.result); 
+        setUsers(response.result);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message || "Failed to fetch users");
+        setLoading(false);
+      }
+    };
+    fetchUsers();
+  }, []);
+
+  // Pagination logic
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  
+  const handleDelete = async (userId) => {
+    if (!userId) {
+      toast.error("User ID is not provided");
+      return;
+    }
+  
+    try {
+
+      await deleteUser(userId);
+  
     
-          role: "User",
-        },
-        {
-          imageSrc: "/chair.png",
+      setUsers(users.filter(user => user.user_id !== userId));
+  
+      
+      toast.success("User deleted successfully!");
+    } catch (error) {
     
-          title: "Elegant Dining Table",
-          email: "asfsaf@gmail.com",
-          role: "User",
-        },
-        {
-          imageSrc: "/chair.png",
-          email: "asfsaf@gmail.com",
-          title: "Modern Floor Lamp",
-    
-          role: "Admin",
-        },
-        {
-          imageSrc: "/chair.png",
-          title: "Comfort King Bed",
-          email: "mohinr26@gmail.com",
-          role: "User",
-        },
-        {
-          imageSrc: "/chair.png",
-    
-          title: "Office Desk",
-          email: "asfsaf@gmail.com",
-          role: "Admin",
-        },
-        {
-          imageSrc: "/chair.png",
-    
-          title: "Stylish Armchair",
-          email: "asfsaf@gmail.com",
-          role: "Admin",
-        },
-      ];
+      console.error("Failed to delete user:", error);
+  
+   
+      toast.error("Failed to delete user");
+    }
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>{error}</p>;
+
   return (
     <div>
       <div className="flex justify-between py-6">
-        <p className="text-3xl font-semibold">All User</p>
-       <Link to='/dashboard/createproduct'> <button className="bg-green-700 w-28 h-12 rounded-lg text-white font-bold">
-          Add User
-        </button></Link>
+        <p className="text-3xl font-semibold">All Users</p>
+        <Link to="/dashboard/createuser">
+          <button className="bg-green-700 w-28 h-12 rounded-lg text-white font-bold">
+            Add User
+          </button>
+        </Link>
       </div>
 
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
         <table className="min-w-full text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 py-3">
-                SL
-              </th>
-              <th scope="col" className="px-6 py-3">
-                User image
-              </th>
-              <th scope="col" className="px-6 py-3">
-                User Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                User Email
-              </th>
-
-              <th scope="col" className="px-6 py-3">
-                Role
-              </th>
-              <th scope="col" className="px-16 py-3">
-                Action
-              </th>
+              <th scope="col" className="px-6 py-3">SL</th>
+              <th scope="col" className="px-6 py-3">User Image</th>
+              <th scope="col" className="px-6 py-3">User Name</th>
+              <th scope="col" className="px-6 py-3">User Email</th>
+              <th scope="col" className="px-6 py-3">Role</th>
+              <th scope="col" className="px-16 py-3">Action</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((post, index) => (
-              <tr
-                key={post._id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xl font-medium"
-              >
-                <td className="px-6 py-4">{index + 1}</td>
-                <td className="px-6 py-4">
-                  <Link to={`/post/${post.slug}`}>
-                    <img
-                      src={post.imageSrc}
-                      alt={post.title}
-                      className="md:w-20 md:h-20 rounded-full object-cover bg-gray-500"
-                    />
-                  </Link>
-                </td>
-                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                  <Link to={`/post/${post.slug}`}>{post.title}</Link>
-                </td>
-                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                  {post.email}{" "}
-                </td>
-
-                <td
-                  className={`px-6 py-4 font-medium  dark:text-white ${
-                    post.role === "Admin" ? "text-green-500" : "text-red-500"
-                  }`}
-                >
-                  {post.role}
-                </td>
-
-                <td className="px-6 py-4  flex gap-3 hover:underline hover:cursor-pointer">
-                  <td className="px-6 py-4  flex gap-3 hover:underline hover:cursor-pointer">
-                    <div>
-                      <MdDelete className="text-3xl hover:text-red-500" />
-                    </div>
-                    <div>
-                      <Link to="/dashboard/edituser">
-                        <FaEdit className="text-3xl hover:text-teal-500" />
-                      </Link>
-                    </div>
-                  </td>
-                </td>
-              </tr>
-            ))}
+          {currentUsers.map((user, index) => (
+  <tr
+    key={user.user_id}
+    className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xl font-medium"
+  >
+    <td className="px-6 py-4">{index + 1}</td>
+    <td className="px-6 py-4">
+      <img
+        src={user.imageSrc || "/default-image.png"}
+        alt={user.title}
+        className="md:w-20 md:h-20 rounded-full object-cover bg-gray-500"
+      />
+    </td>
+    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+      {`${user.firstName} ${user.lastName}`}
+    </td>
+    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+      {user.email}
+    </td>
+    <td
+      className={`px-6 py-4 font-medium dark:text-white ${
+        user.role === "Admin" ? "text-green-500" : "text-red-500"
+      }`}
+    >
+      {user.role}
+    </td>
+    <td className="px-6 py-4 flex gap-3 hover:underline hover:cursor-pointer">
+      <MdDelete
+        className="text-3xl"
+        onClick={() => {handleDelete(user.user_id)}}
+      />
+      <Link to="/dashboard/edituser">
+        <FaEdit className="text-3xl hover:text-teal-500" />
+      </Link>
+    </td>
+  </tr>
+))}
           </tbody>
         </table>
       </div>
+
+      {/* Pagination */}
       <div className="mt-8 flex justify-end p-4">
-        <Pagination />
+        <Pagination
+          usersPerPage={usersPerPage}
+          totalUsers={users.length}
+          paginate={paginate}
+        />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default AllUser
+export default AllUser;
