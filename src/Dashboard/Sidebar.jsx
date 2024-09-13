@@ -6,8 +6,10 @@ import { IoHomeOutline } from "react-icons/io5";
 
 import { Link, useLocation } from "react-router-dom";
 import { CiLocationOn } from "react-icons/ci";
+import Doc from "../Components/Doc/Doc";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+    const {logo4}=Doc()
   const { pathname } = useLocation();
   const trigger = useRef(null);
   const sidebar = useRef(null);
@@ -67,9 +69,13 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     >
       {/* Sideber Header Start*/}
       <div className="flex items-center justify-between h-[90px] z-999 text-[#A04747] py-[20px] px-[15px] ">
-        <Link to ='/' className="md:text-2xl font-semibold hover:cursor-pointer ">
+        <Link to ='/' className=" font-semibold hover:cursor-pointer ">
           
-          Japan Travel & Tour
+        <img
+                  src={logo4}
+                  className=" w-12 md:w-24 h-12 md:h-24 ml-4 object-cover"
+                  alt="logo"
+                />
           
         </Link>
         <button
@@ -77,7 +83,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           onClick={() => setSidebarOpen(!sidebarOpen)}
           aria-controls="sidebar"
           aria-expanded={sidebarOpen}
-          className="block lg:hidden  dark:text-black text-[#A04747]"
+          className="block lg:hidden  text-2xl font-bold text-[#A04747]"
         >
           <svg
             className="fill-current"
