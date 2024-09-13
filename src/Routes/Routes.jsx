@@ -11,7 +11,7 @@ import AllUser from "../Dashboard/AllUser";
 import AllDestination from "../Dashboard/AllDestination";
 import CreateDestination from "../Dashboard/CreateDestination";
 import UpdateDestination from "../Dashboard/UpdateDestination";
-import PrivateRoute from './PrivateRoute';
+// import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
   {
