@@ -34,7 +34,6 @@ const PopularSpots = () => {
             number: '03',
         },
     ];
-
     const osakaSpots = [
         {
             image: fuziMountain,
@@ -55,7 +54,6 @@ const PopularSpots = () => {
             number: '03',
         },
     ];
-
     const kyotoSpots = [
         {
             image: fuziMountain,
@@ -76,7 +74,6 @@ const PopularSpots = () => {
             number: '03',
         },
     ];
-
     const naraSpots = [
         {
             image: tokoyoTower,
@@ -97,7 +94,6 @@ const PopularSpots = () => {
             number: '03',
         },
     ];
-
     const supporoSpots = [
         {
             image: naraPark,
@@ -118,7 +114,6 @@ const PopularSpots = () => {
             number: '03',
         },
     ];
-
     const spots = {
         tokyo: tokyoSpots,
         osaka: osakaSpots,
@@ -139,7 +134,7 @@ const PopularSpots = () => {
 
             </div>
 
-            <div className="mx-auto px-6 py-12">
+            <div className="mx-auto px-[20px] md:px-[100px] py-10">
                 <PopularTab activeTab={activeTab} setActiveTab={setActiveTab} />
                 <PopularPlace id={activeTab} spots={spots[activeTab]} />
             </div>

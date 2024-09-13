@@ -36,7 +36,7 @@ const MustVisitDestination = () => {
     },
   ];
   return (
-    <div className="mt-10 px-[10px] md:px-[100px]">
+    <div className="mt-10 px-[20px] md:px-[100px]">
       <div className="text-center mb-10 text-[#212121]">
         <p className="text-5xl text-[#A04747]">Must Visited Destination </p>
         <p className="text-xl font-bold mt-2">
