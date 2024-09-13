@@ -4,14 +4,7 @@ import { Link } from "react-router-dom";
 import Doc from "../Doc/Doc";
 
 const MustVisitDestination = () => {
-  const {
-    tokoyoTower,
-    meijiJinguGaien,
-    fuziMountain,
-    omotesando,
-    jinguShrine,
-    sensojiTemple,
-  } = Doc();
+  const { tokoyoTower, meijiJinguGaien, fuziMountain, omotesando } = Doc();
   const item = [
     {
       image: tokoyoTower,
@@ -41,20 +34,6 @@ const MustVisitDestination = () => {
         "Tokyu Plaza is a multi-storey department store in the Harajuku district of central Tokyo.",
       number: "04",
     },
-    {
-      image: jinguShrine,
-      title: "Meiji Jingu Shrine",
-      description:
-        "located in technologically advanced Tokyo and near from the quirky streets of Harajuku.",
-      number: "05",
-    },
-    {
-      image: sensojiTemple,
-      title: "Sensoji Temple",
-      description:
-        "Senso-ji Temple (浅草寺, Sensōji) is a popular spot for omikuji, or fortunes.",
-      number: "06",
-    },
   ];
   return (
     <div className="mt-10 px-[10px] md:px-[100px]">
@@ -65,7 +44,7 @@ const MustVisitDestination = () => {
           Land of the Rising Sun
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
         {item.map((spot, index) => (
           <div key={index}>
             <div className="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] w-full max-w-sm rounded-lg overflow-hidden mx-auto font-[sans-serif] mt-4 transition-transform duration-300 hover:scale-105">
