@@ -21,7 +21,7 @@ const PopularCard = ({ image, title, description, number }) => {
         </p>
         <Link to='/details/:id'>
         <button type="button"
-          className="mt-6 px-5 py-2.5 rounded-lg text-white text-sm tracking-wider border-none outline-none bg-blue-600 hover:bg-blue-700 active:bg-blue-600">View More</button>
+          className="mt-6 px-5 py-2.5 rounded-lg text-white text-sm tracking-wider border-none outline-none bg-[#c34c4c] hover:bg-[#a04747]">View More</button>
          </Link>
       </div>
     </div>

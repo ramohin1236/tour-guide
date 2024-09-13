@@ -72,7 +72,7 @@ const AllUser = () => {
       <div className="flex justify-between py-6">
         <p className="text-3xl font-semibold">All Users</p>
         <Link to="/dashboard/createuser">
-          <button className="bg-green-700 w-28 h-12 rounded-lg text-white font-bold">
+          <button className="bg-[#c75f5f] font-bold text-white hover:bg-[#a04747] w-28 h-12 rounded-lg ">
             Add User
           </button>
         </Link>
@@ -119,7 +119,7 @@ const AllUser = () => {
     </td>
     <td className="px-6 py-4 flex gap-3 hover:underline hover:cursor-pointer">
       <MdDelete
-        className="text-3xl"
+        className="text-3xl hover:text-red-600"
         onClick={() => {handleDelete(user.user_id)}}
       />
       <Link to="/dashboard/edituser">

@@ -5,6 +5,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { IoHomeOutline } from "react-icons/io5";
 
 import { Link, useLocation } from "react-router-dom";
+import { CiLocationOn } from "react-icons/ci";
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const { pathname } = useLocation();
@@ -65,23 +66,23 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       }`}
     >
       {/* Sideber Header Start*/}
-      <div className="flex items-center justify-between h-[90px] z-999 bg-white py-[20px] px-[15px] ">
-        <h1 className="text-2xl font-semibold hover:text-[#98dad9]">
+      <div className="flex items-center justify-between h-[90px] z-999 text-[#A04747] py-[20px] px-[15px] ">
+        <Link to ='/' className="md:text-2xl font-semibold hover:cursor-pointer ">
           
           Japan Travel & Tour
           
-        </h1>
+        </Link>
         <button
           ref={trigger}
           onClick={() => setSidebarOpen(!sidebarOpen)}
           aria-controls="sidebar"
           aria-expanded={sidebarOpen}
-          className="block lg:hidden text-black dark:text-black"
+          className="block lg:hidden  dark:text-black text-[#A04747]"
         >
           <svg
             className="fill-current"
-            width="20"
-            height="18"
+            width="16"
+            height="16"
             viewBox="0 0 20 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -92,6 +93,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             />
           </svg>
         </button>
+       
       </div>
       {/* Sideber Header Close*/}
 
@@ -99,57 +101,70 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         <nav className=" flex flex-col gap-[24px]">
           <ul className="mb-6 flex flex-col gap-1">
          
-         
-            
-           
-          
-            <li>
+          <li>
               <Link
                 to="/dashboard/alldestination"
-                className={` group relative flex items-center gap-2 rounded-sm my-2 font-medium duration-200 dark:text-[#6C757D] ease-in-out hover:bg-graydark  ${
-                  pathname === "/dashboard/alldestination" ? "bg-gray-300 p-3 rounded-xl" : "text-[#6C757D]"
+                className={` group relative flex items-center gap-2 rounded-sm my-2 font-medium duration-200 text-[#A04747] ease-in-out hover:bg-graydark  ${
+                  pathname === "/dashboard/alldestination" ? "bg-[#A04747] p-3 rounded-xl text-white" : "text-[#6C757D]"
                 }`}
                 style={{
-                  fontSize: "14px",
-                  fontWeight: "400",
+                  fontSize: "20px",
+                  fontWeight: "600",
                   fontStyle: "normal",
                   lineHeight: "normal",
                   fontFamily: "",
                 }}
               >
                 <IoMdApps />
-                All Destination
+                 Destination
               </Link>
             </li>
-          
+            <li>
+              <Link
+                to="/dashboard/allocation"
+                className={` group relative flex items-center gap-2 rounded-sm my-2 font-medium duration-200 text-[#A04747] ease-in-out hover:bg-graydark  ${
+                  pathname === "/dashboard/allocation" ? "bg-[#A04747] p-3 rounded-xl text-white" : "text-[#6C757D]"
+                }`}
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "600",
+                  fontStyle: "normal",
+                  lineHeight: "normal",
+                  fontFamily: "",
+                }}
+              >
+                <CiLocationOn />
+                 Location
+              </Link>
+            </li>
             <li>
               <Link
                 to="/dashboard/alluser"
-                className={` group relative flex items-center gap-2 rounded-sm my-2 font-medium duration-200 dark:text-[#6C757D] ease-in-out hover:bg-graydark  ${
-                  pathname === "/dashboard/alluser" ? "bg-gray-300 p-3 rounded-xl" : "text-[#6C757D]"
+                className={` group relative flex items-center gap-2 rounded-sm my-2 font-medium duration-200 text-[#A04747] ease-in-out hover:bg-graydark  ${
+                  pathname === "/dashboard/alluser" ? "bg-[#A04747] p-3 rounded-xl text-white" : "text-[#6C757D]"
                 }`}
                 style={{
-                  fontSize: "14px",
-                  fontWeight: "400",
+                    fontSize: "20px",
+                    fontWeight: "600",
                   fontStyle: "normal",
                   lineHeight: "normal",
                   fontFamily: "",
                 }}
               >
                 <FaUserAlt />
-                All Users
+                 Users
               </Link>
             </li>
             <li></li>
             <li>
               <Link
                 to="/"
-                className={` group relative flex items-center gap-2 rounded-sm my-2 font-medium duration-200 dark:text-[#6C757D] ease-in-out hover:bg-graydark  ${
+                className={` group relative flex items-center gap-2 rounded-sm my-2 font-medium duration-200 text-[#A04747] ease-in-out hover:bg-graydark  ${
                   pathname === "/" ? "bg-gray-300 p-1" : "text-[#6C757D]"
                 }`}
                 style={{
-                  fontSize: "14px",
-                  fontWeight: "400",
+                    fontSize: "20px",
+                    fontWeight: "600",
                   fontStyle: "normal",
                   lineHeight: "normal",
                   fontFamily: "",

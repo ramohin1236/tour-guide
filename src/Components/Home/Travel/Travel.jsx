@@ -161,13 +161,13 @@ const Travel = () => {
         {/* Navigation Buttons */}
         <button
           onClick={prevSlide}
-          className="absolute left-6 md:left-12 lg:left-36 top-44 transform -translate-y-1/2 p-2 md:p-5 rounded-full bg-[#A04747] text-white"
+          className="absolute left-6 md:left-12 lg:left-36 top-44 transform -translate-y-1/2 -translate-x-1/2  p-2 md:p-5 rounded-full bg-[#A04747] text-white"
         >
           <FaArrowLeft />
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-6 md:right-12 lg:right-40 top-44 transform -translate-y-1/2 rounded-full bg-[#A04747]  p-2 md:p-5 text-white"
+          className="absolute right-6 md:right-12 lg:right-40 top-44 transform -translate-y-1/2 rounded-full translate-x-2/3  bg-[#A04747] p-2 md:p-5 text-white"
         >
           <FaArrowRight />
         </button>
