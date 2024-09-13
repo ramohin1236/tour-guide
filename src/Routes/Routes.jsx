@@ -15,6 +15,7 @@ import AllLocation from "../Dashboard/AllLocation";
 import CreateLocation from "../Dashboard/CreateLocation";
 import Booking from "../Pages/Booking/Booking";
 import Payment from "../Pages/Payment/Payment";
+import AllBooking from "../Dashboard/AllBooking";
 // import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
         {
             path: 'alluser',
             element: <AllUser/>
+        },
+        {
+            path: 'bookings',
+            element: <AllBooking/>
         },
         {
             path: 'alldestination',
