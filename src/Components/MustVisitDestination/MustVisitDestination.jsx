@@ -38,14 +38,14 @@ const MustVisitDestination = () => {
       image: omotesando,
       title: "Omotesando Harajuku",
       description:
-        "Tokyu Plaza is a multi-storey department store in the Omotesando / Harajuku district of central Tokyo.",
+        "Tokyu Plaza is a multi-storey department store in the Harajuku district of central Tokyo.",
       number: "04",
     },
     {
       image: jinguShrine,
       title: "Meiji Jingu Shrine",
       description:
-        "located in technologically advanced Tokyo and only a few minutes from the quirky streets of Harajuku.",
+        "located in technologically advanced Tokyo and near from the quirky streets of Harajuku.",
       number: "05",
     },
     {

@@ -16,9 +16,9 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed z-50 w-full   md:px-[100px] px-[20px] bg-white text-[#A04747]">
+    <div className="z-50 fixed w-full md:px-[100px] px-[20px] bg-white text-[#A04747]">
       <div>
-        <div className=" flex flex-row justify-between items-center md:py-5 py-3">
+        <div className=" flex flex-row justify-between items-center md:py-3 py-3">
           <div className=" flex flex-row items-center cursor-pointer">
             <Link to="/" spy={true} smooth={true} duration={500}>
               <div className="flex justify-center text-center items-center">
