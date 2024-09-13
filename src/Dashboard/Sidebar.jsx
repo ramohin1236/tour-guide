@@ -139,6 +139,24 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             </li>
             <li>
               <Link
+                to="/dashboard/bookings"
+                className={` group relative flex items-center gap-2 rounded-sm my-2 font-medium duration-200 text-[#A04747] ease-in-out hover:bg-graydark  ${
+                  pathname === "/dashboard/bookings" ? "bg-[#A04747] p-3 rounded-xl text-white" : "text-[#6C757D]"
+                }`}
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "600",
+                  fontStyle: "normal",
+                  lineHeight: "normal",
+                  fontFamily: "",
+                }}
+              >
+                <CiLocationOn />
+                 Bookings
+              </Link>
+            </li>
+            <li>
+              <Link
                 to="/dashboard/alluser"
                 className={` group relative flex items-center gap-2 rounded-sm my-2 font-medium duration-200 text-[#A04747] ease-in-out hover:bg-graydark  ${
                   pathname === "/dashboard/alluser" ? "bg-[#A04747] p-3 rounded-xl text-white" : "text-[#6C757D]"

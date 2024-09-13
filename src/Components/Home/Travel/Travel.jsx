@@ -167,7 +167,7 @@ const Travel = () => {
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-6 md:right-12 lg:right-40 top-44 transform -translate-y-1/2 rounded-full translate-x-2/3  bg-[#A04747] p-2 md:p-5 text-white"
+          className="absolute right-6 md:right-12 lg:right-40 top-44 transform -translate-y-1/2 rounded-full translate-x-8  bg-[#A04747] p-2 md:p-5 text-white"
         >
           <FaArrowRight />
         </button>
