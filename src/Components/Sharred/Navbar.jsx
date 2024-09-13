@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="fixed z-50 w-full text-white md:pl-[70px] md:pr-[100px] pr-[20px] bg-white text-[#A04747]">
+    <div className="fixed z-50 w-full md:pl-[70px] md:pr-[100px] pr-[20px] bg-white text-[#A04747]">
       <div>
         <div className=" flex flex-row justify-between md:py-5 py-3">
           <div className=" flex flex-row items-center cursor-pointer">
