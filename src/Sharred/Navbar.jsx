@@ -45,7 +45,7 @@ const Navbar = () => {
               Destination
             </Link>
             <Link
-              to="/"
+              to="/booking"
               spy={true}
               smooth={true}
               duration={500}
@@ -54,7 +54,7 @@ const Navbar = () => {
               Booking
             </Link>
             <Link
-              to="/dashboard"
+              to="/dashboard/alldestination"
               spy={true}
               smooth={true}
               duration={500}
@@ -107,7 +107,16 @@ const Navbar = () => {
             Destination
           </Link>
           <Link
-            to="/"
+              to="/dashboard/alldestination"
+              spy={true}
+              smooth={true}
+              duration={500}
+              className="text-[#A04747] cursor-pointer"
+            >
+              Dashboard
+            </Link>
+          <Link
+            to="/booking"
             spy={true}
             smooth={true}
             duration={500}

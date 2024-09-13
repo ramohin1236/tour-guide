@@ -11,6 +11,10 @@ import AllUser from "../Dashboard/AllUser";
 import AllDestination from "../Dashboard/AllDestination";
 import CreateDestination from "../Dashboard/CreateDestination";
 import UpdateDestination from "../Dashboard/UpdateDestination";
+import AllLocation from "../Dashboard/AllLocation";
+import CreateLocation from "../Dashboard/CreateLocation";
+import Booking from "../Pages/Booking/Booking";
+import Payment from "../Pages/Payment/Payment";
 // import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
@@ -31,8 +35,16 @@ export const router = createBrowserRouter([
         element: <DetailsPage/>
       },
       {
+        path: '/booking',
+        element: <Booking/>
+      },
+      {
         path: "/contact",
         element: <Contact/>,
+      },
+      {
+        path: "/payment",
+        element: <Payment/>,
       },
       {
         path: "/signup",
@@ -62,6 +74,15 @@ export const router = createBrowserRouter([
             path: 'createdestination',
             element: <CreateDestination/>
         },
+        {
+            path: 'allocation',
+            element: <AllLocation/>
+        },
+        {
+            path: 'createlocation',
+            element: <CreateLocation/>
+        },
+        
         {
             path: "updatedestination/:id",
             element: <UpdateDestination/>,

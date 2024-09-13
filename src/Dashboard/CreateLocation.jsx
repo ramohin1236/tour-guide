@@ -1,7 +1,7 @@
 import ReactQuill from "react-quill"
-import 'react-quill/dist/quill.snow.css';
 
-const CreateDestination = () => {
+
+const CreateLocation = () => {
   return (
     <div className='p-4 max-w-4xl mx-auto min-h-screen'>
   <h1 className='text-center text-3xl my-7 font-semibold text-[#a04747]'>Create a Location</h1>
@@ -23,8 +23,42 @@ const CreateDestination = () => {
         <option value='dubai'>Dubai</option>
       </select>
     </div>
-        
-    
+         {/* email and number */}
+         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+      <input
+        type='number'
+        placeholder='Phone number'
+        required
+        id='number'
+        className='p-2 border border-gray-300 rounded-md w-full'
+      />
+      <input
+        type='email'
+        placeholder='Email'
+        required
+        id='number'
+        className='p-2 border border-gray-300 rounded-md w-full'
+      />
+    </div>
+    {/* Responsive time input */}
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+      <div className='flex flex-col'>
+        <label htmlFor='open-time' className='mb-2 font-medium'>Open Time</label>
+        <input
+          type='time'
+          id='open-time'
+          className='p-2 border border-gray-300 rounded-md'
+        />
+      </div>
+      <div className='flex flex-col'>
+        <label htmlFor='close-time' className='mb-2 font-medium'>Close Time</label>
+        <input
+          type='time'
+          id='close-time'
+          className='p-2 border border-gray-300 rounded-md'
+        />
+      </div>
+    </div>
 
     {/* File upload section */}
     <div className='grid grid-cols-1 md:grid-cols-3 gap-4 items-center border-4 border-[#a04747] border-dotted p-3'>
@@ -84,4 +118,4 @@ const CreateDestination = () => {
   )
 }
 
-export default CreateDestination
+export default CreateLocation

@@ -1,10 +1,10 @@
-import Pagination from "../Sharred/Pagination";
+import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { FaEdit } from "react-icons/fa";
+import Pagination from "../Sharred/Pagination";
 
 
-const AllDestination = () => {
+const AllLocation = () => {
     const users = [
         {
           imageSrc: "/pr1.png",
@@ -49,9 +49,9 @@ const AllDestination = () => {
   return (
     <div>
     <div className="flex justify-between py-6">
-      <p className="text-3xl font-semibold">All Destination</p>
-      <Link to='/dashboard/createdestination'> <button className="hover:bg-[#a04747] hover:text-white text-[#a04747] w-36 h-12 rounded-lg  font-bold bg-white shadow-lg">
-        Add Destination
+      <p className="text-3xl font-semibold">All Location</p>
+     <Link to='/dashboard/createlocation'> <button className="hover:bg-[#a04747] hover:text-white text-[#a04747] w-36 h-12 rounded-lg  font-bold bg-white shadow-lg">
+        Add Location
       </button></Link>
     </div>
 
@@ -128,4 +128,4 @@ const AllDestination = () => {
   )
 }
 
-export default AllDestination
+export default AllLocation
