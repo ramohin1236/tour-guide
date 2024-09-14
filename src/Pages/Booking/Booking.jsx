@@ -40,7 +40,7 @@ const Booking = () => {
             name: item.name,
             locations: item.locations,
           }));
-          setDestinations(formattedDestinations); // Set as array
+          setDestinations(formattedDestinations);
         } else {
           console.error("Expected response to be an array but got:", response);
         }
@@ -98,6 +98,7 @@ const Booking = () => {
     try {
       await userNewBooking(bookingData);
       toast.success('Your Booking is Successfull!')
+      navigate('/bookingDetails')
     } catch (error) {
       console.error("Booking failed:", error);
     }

@@ -71,11 +71,7 @@ const AllUser = () => {
     <div>
       <div className="flex justify-between py-6">
         <p className="text-3xl font-semibold">All Users</p>
-        <Link to="/dashboard/createuser">
-          <button className="bg-[#c75f5f] font-bold text-white hover:bg-[#a04747] w-28 h-12 rounded-lg ">
-            Add User
-          </button>
-        </Link>
+       
       </div>
 
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
@@ -86,7 +82,7 @@ const AllUser = () => {
               <th scope="col" className="px-6 py-3">User Image</th>
               <th scope="col" className="px-6 py-3">User Name</th>
               <th scope="col" className="px-6 py-3">User Email</th>
-              <th scope="col" className="px-6 py-3">Role</th>
+              <th scope="col" className="px-6 py-3">User Mobile</th>
               <th scope="col" className="px-16 py-3">Action</th>
             </tr>
           </thead>
@@ -111,11 +107,9 @@ const AllUser = () => {
       {user.email}
     </td>
     <td
-      className={`px-6 py-4 font-medium dark:text-white ${
-        user.role === "Admin" ? "text-green-500" : "text-red-500"
-      }`}
+      className="px-6 py-4 font-medium dark:text-white text-gray-900"
     >
-      {user.role}
+      {user?.phoneNumber}
     </td>
     <td className="px-6 py-4 flex gap-3 hover:underline hover:cursor-pointer">
       <MdDelete

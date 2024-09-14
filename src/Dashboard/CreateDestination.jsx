@@ -22,7 +22,7 @@ const CreateDestination = () => {
 
   const destinationData = {
     name: title,
-    description: stripHtmlTags(description), // Remove HTML tags
+    description: stripHtmlTags(description), 
     image: '',
     airport: airport,
   };

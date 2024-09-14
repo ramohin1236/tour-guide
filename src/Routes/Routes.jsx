@@ -19,6 +19,7 @@ import AllBooking from "../Dashboard/AllBooking";
 import Profile from "../Components/Components/Profile/Profile";
 import TermsOfService from "../Pages/Terms/Terms";
 import PrivacyPolicy from "../Pages/Privacy/Privacy";
+import BookingDetails from "../Pages/BookingDetails";
 // import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
@@ -69,6 +70,10 @@ export const router = createBrowserRouter([
       {
         path: "/privacy",
         element: <PrivacyPolicy/>
+      },
+      {
+        path: "/bookingDetails",
+        element: <BookingDetails/>
       },
      
     ],

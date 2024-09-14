@@ -2,9 +2,10 @@
 import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { findAllBookings } from "../common/api/bookingApi";
+import { deleteBooking, findAllBookings } from "../common/api/bookingApi";
 import moment from 'moment';
 import UserPagination from "../Components/Sharred/Pagination";
+import toast from "react-hot-toast";
 
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -12,7 +13,8 @@ const AllBookings = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [bookingsPerPage] = useState(10); 
   const [error, setError] = useState(null);
-
+  const [users, setUsers] = useState([]);
+  console.log(users);
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -28,6 +30,24 @@ const AllBookings = () => {
     fetchBookings();
   }, []);
 
+  const handleDelete = async (userId) => {
+    console.log(userId);
+    if (!userId) {
+      toast.error("User ID is not provided");
+      return;
+    }
+  
+    try {
+      await deleteBooking(userId);
+  
+      setBookings(bookings.filter(booking => booking.booking_id !== userId)); // bookings স্টেট আপডেট
+  
+      toast.success("Booking deleted successfully!");
+    } catch (error) {
+      console.error("Failed to delete booking:", error);
+      toast.error("Failed to delete booking");
+    }
+  };
   // Pagination logic
   const indexOfLastBooking = currentPage * bookingsPerPage;
   const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
@@ -97,13 +117,12 @@ const AllBookings = () => {
                      {booking.booking_status}
                   </button>
                 </td>
-                <td className="px-6 py-4 flex gap-3  hover:cursor-pointer">
-                  <MdDelete
-                    className="text-3xl hover:text-red-600"
-                    
-                  />
-                 
-                </td>
+                <td className="px-6 py-4 flex gap-3 hover:cursor-pointer">
+  <MdDelete
+    onClick={() => { handleDelete(booking.booking_id) }}  // `booking.booking_id` পাস করতে হবে এখানে
+    className="text-3xl hover:text-red-600"
+  />
+</td>
               </tr>
             ))
           ) : (
