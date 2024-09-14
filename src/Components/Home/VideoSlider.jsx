@@ -46,7 +46,9 @@ const VideoSlider = () => {
             className="object-cover w-full h-full opacity-60 "
           ></video>
           <div className="absolute 
-         top-[25%] md:top-[35%]  w-[100%] text-center z-40">
+
+         top-[25%] md:top-[35%]  w-[100%] text-center z-30">
+
             <h1 className=" text-white font-bold text-[clamp(4rem,7vw,7rem)] leading-tight
           text-xl md:text-5xl md:mr-10">
               {slide.title}
