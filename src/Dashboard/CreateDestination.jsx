@@ -9,19 +9,18 @@ const CreateDestination = () => {
     <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
       <input
         type='text'
-        placeholder='Title'
+        placeholder='Your Place Title '
         required
         id='title'
         className='p-2 border border-gray-300 rounded-md w-full'
       />
-      <select className='p-2 border border-gray-300 rounded-md w-full'>
-        <option value='uncategorized'>Select a Location</option>
-        <option value='tokyo'>Tokyo</option>
-        <option value='newyork'>New York</option>
-        <option value='paris'>Paris</option>
-        <option value='london'>London</option>
-        <option value='dubai'>Dubai</option>
-      </select>
+      <input
+        type='text'
+        placeholder='Your Airport name'
+        required
+        id='title'
+        className='p-2 border border-gray-300 rounded-md w-full'
+      />
     </div>
         
     

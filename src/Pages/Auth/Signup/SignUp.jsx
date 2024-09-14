@@ -118,7 +118,7 @@ const SignUp = () => {
               placeholder="First Name"
               value={formData.firstName}
               onChange={handleChange}
-              className="w-full lg:w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full lg:w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
               required
             />
             <input
@@ -127,7 +127,7 @@ const SignUp = () => {
               placeholder="Last Name"
               value={formData.lastName}
               onChange={handleChange}
-              className="w-full lg:w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full lg:w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
               required
             />
           </div>
@@ -137,7 +137,7 @@ const SignUp = () => {
             placeholder="Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
             required
           />
           <input
@@ -146,7 +146,7 @@ const SignUp = () => {
             placeholder="Phone"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
             required
           />
           <input
@@ -155,7 +155,7 @@ const SignUp = () => {
             placeholder="Password"
             value={formData.password}
             onChange={handleChange}
-            className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 ${passwordError ? 'ring-red-500' : 'ring-indigo-500'}`}
+            className={`w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 ${passwordError ? 'ring-red-500' : 'ring-[#A04747]'}`}
             required
           />
           {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>} {/* Show password validation error */}
@@ -165,13 +165,13 @@ const SignUp = () => {
             placeholder="Confirm Password"
             value={formData.confirmPassword}
             onChange={handleChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
             required
           />
           {error && <p className="text-red-500 text-center">{error}</p>}
           <button
-            className={`w-full bg-indigo-500 text-white py-2 rounded-lg font-semibold transition-colors duration-300 ${
-              loading ? "cursor-not-allowed bg-gray-400" : "hover:bg-indigo-600"
+            className={`w-full bg-[#A04747] text-white py-2 rounded-lg font-semibold transition-colors duration-300 ${
+              loading ? "cursor-not-allowed bg-gray-400" : "hover:bg-[#A04747]"
             }`}
             type="submit"
             disabled={loading || passwordError} // Disable button while loading or if there is a validation error
@@ -181,7 +181,7 @@ const SignUp = () => {
         </form>
         <p className="mt-4 text-gray-600 text-center">
           Already have an account?{" "}
-          <Link to="/signin" className="text-indigo-500 font-semibold">
+          <Link to="/signin" className="text-[#A04747] font-semibold">
             Sign In
           </Link>
         </p>

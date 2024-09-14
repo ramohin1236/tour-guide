@@ -47,7 +47,7 @@ const Signin = () => {
         {/* Signup Form Section */}
         <div className="w-full lg:w-1/2 px-6 lg:px-8 py-6">
           <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            Signin Your Account
+            Sign In 
           </h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <input
@@ -55,7 +55,7 @@ const Signin = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
               required
             />
 
@@ -64,13 +64,13 @@ const Signin = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
               required
             />
 
             <button
               type="submit"
-              className="w-full bg-indigo-500 text-white py-2 rounded-lg font-semibold hover:bg-indigo-600 transition-colors duration-300"
+              className="w-full bg-[#A04747] text-white py-2 rounded-lg font-semibold  transition-colors duration-300"
               disabled={loading}
             >
               {loading ? "Signing In..." : "Sign In"}
@@ -80,7 +80,7 @@ const Signin = () => {
           </form>
           <p className="mt-4 text-gray-600 text-center">
             Don't have an account?
-            <Link to="/signup" className="text-indigo-500 font-semibold">
+            <Link to="/signup" className="text-[#A04747] font-semibold">
               Sign Up
             </Link>
           </p>
