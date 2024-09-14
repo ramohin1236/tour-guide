@@ -17,6 +17,8 @@ import Booking from "../Pages/Booking/Booking";
 import Payment from "../Pages/Payment/Payment";
 import AllBooking from "../Dashboard/AllBooking";
 import Profile from "../Components/Components/Profile/Profile";
+import TermsOfService from "../Pages/Terms/Terms";
+import PrivacyPolicy from "../Pages/Privacy/Privacy";
 // import PrivateRoute from './PrivateRoute';
 
 export const router = createBrowserRouter([
@@ -59,6 +61,14 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile/>
+      },
+      {
+        path: "/terms",
+        element: <TermsOfService />
+      },
+      {
+        path: "/privacy",
+        element: <PrivacyPolicy/>
       },
      
     ],
