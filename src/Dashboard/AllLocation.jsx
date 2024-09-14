@@ -76,9 +76,12 @@ const AllLocation = () => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">SL</th>
-              <th scope="col" className="px-6 py-3">Destination Image</th>
-              <th scope="col" className="px-6 py-3">Destination Name</th>
-              <th scope="col" className="px-8 py-3">Destination Location</th>
+              <th scope="col" className="px-6 py-3">Location Name</th>
+              <th scope="col" className="px-6 py-3">Email</th>
+              <th scope="col" className="px-8 py-3">Phone</th>
+              <th scope="col" className="px-8 py-3">Address</th>
+              <th scope="col" className="px-8 py-3">Hours</th>
+              <th scope="col" className="px-8 py-3">Website</th>
               <th scope="col" className="px-16 py-3">Action</th>
             </tr>
           </thead>
@@ -91,19 +94,22 @@ const AllLocation = () => {
                 >
                   <td className="px-6 py-4">{index + 1}</td>
                   <td className="px-6 py-4">
-                    <Link to={`/details/${location._id}`}>
-                      <img
-                        src={location.imageSrc}
-                        alt={location.title}
-                        className="md:w-20 md:h-20 rounded-full object-cover bg-gray-500"
-                      />
-                    </Link>
+                    <p>{location.name}</p>
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    <Link to={`/details/${location._id}`}>{location.title}</Link>
+                    {location.email}
                   </td>
                   <td className="px-6 py-4 font-medium dark:text-white">
-                    {location.location}
+                    {location.phone}
+                  </td>
+                  <td className="px-6 py-4 font-medium dark:text-white">
+                    {location.address}
+                  </td>
+                  <td className="px-6 py-4 font-medium dark:text-white">
+                    {location.hours}
+                  </td>
+                  <td className="px-6 py-4 font-medium dark:text-white">
+                   <a href={location.website} className="underline">{location.website}</a> 
                   </td>
                   <td className="px-6 py-4 flex gap-3 hover:underline hover:cursor-pointer">
                     <div>
