@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Outlet } from "react-router-dom";
 import Navbar from "../Sharred/Navbar";
 import Footer from "../Sharred/Footer/Footer";
@@ -7,7 +8,8 @@ import { useEffect } from "react";
 const MainLayout = () => {
   const getAllUsers = async () => {
     const users = await allUsers();
-    console.log(users);
+    // console.log(users);
+    
   };
   useEffect(() => {
     getAllUsers();

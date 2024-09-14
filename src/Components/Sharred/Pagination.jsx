@@ -38,7 +38,7 @@ const UserPagination = ({ usersPerPage, totalUsers, paginate }) => {
       <button
         onClick={handlePrev}
         disabled={currentRange === 1}
-        className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 disabled:opacity-50"
+        className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-[#a04747] disabled:opacity-50"
       >
         Prev
       </button>
@@ -47,7 +47,7 @@ const UserPagination = ({ usersPerPage, totalUsers, paginate }) => {
         {startPage > 1 && (
           <>
             <li
-              className="cursor-pointer text-base font-bold px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+              className="cursor-pointer text-base font-bold px-4 py-2 bg-gray-200 rounded-lg hover:bg-[#a04747]"
               onClick={() => handlePageClick(1)}
             >
               1
@@ -59,8 +59,8 @@ const UserPagination = ({ usersPerPage, totalUsers, paginate }) => {
           <li
             key={number}
             className={`cursor-pointer text-base font-bold px-4 py-2 rounded-lg ${
-              number === activePage ? 'bg-green-500 text-white' : 'bg-gray-200'
-            } hover:bg-gray-300`}
+              number === activePage ? 'bg-[#a04747] text-white' : 'bg-gray-200'
+            } hover:bg-[#a04747] hover:text-white`}
             onClick={() => handlePageClick(number)}
           >
             {number}
@@ -70,7 +70,7 @@ const UserPagination = ({ usersPerPage, totalUsers, paginate }) => {
           <>
             {endPage < totalPages - 1 && <span className="px-4 py-2">...</span>}
             <li
-              className="cursor-pointer text-base font-bold px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300"
+              className="cursor-pointer text-base font-bold px-4 py-2 bg-gray-200 rounded-lg hover:bg-[#a04747]"
               onClick={() => handlePageClick(totalPages)}
             >
               {totalPages}

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
-import Pagination from "../Components/Sharred/Pagination";
 import { getAllLocations } from "../common/api/locationApi";
+import UserPagination from "../Components/Sharred/Pagination";
 
 const AllLocation = () => {
   const [locations, setLocations] = useState([]);
@@ -136,9 +136,9 @@ const AllLocation = () => {
 
       {locations.length > 0 && (
         <div className="mt-8 flex justify-end p-4">
-          <Pagination
-            itemsPerPage={locationsPerPage}
-            totalItems={locations.length}
+          <UserPagination
+            usersPerPage={locationsPerPage}
+            totalUsers={locations.length}
             paginate={paginate}
           />
         </div>
