@@ -6,6 +6,11 @@ import Doc from "../Components/Doc/Doc";
 const Navbar = () => {
   const { logo4 } = Doc();
   const [menu, setMenu] = useState(false);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  const togglePopover = () => {
+    setIsPopoverOpen(!isPopoverOpen);
+  };
 
   const handleChange = () => {
     setMenu(!menu);
@@ -16,7 +21,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="z-50 fixed w-full md:px-[100px] px-[20px] bg-white text-[#A04747]">
+    <div className="z-40 fixed w-full md:px-[100px] px-[20px] bg-white text-[#A04747]">
       <div>
         <div className=" flex flex-row justify-between items-center md:py-3 py-3">
           <div className=" flex flex-row items-center cursor-pointer">
@@ -73,12 +78,27 @@ const Navbar = () => {
             </Link>
           </nav>
 
-          <div className="hidden lg:flex">
-            <Link to="/signup">
+          <div className="hidden lg:flex flex-row justify-between items-center gap-5">
+            <Link to="/signin">
               <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
-                Sign Up
+                Sign In
               </button>
             </Link>
+            <img
+              src="https://readymadeui.com/profile_2.webp"
+              onClick={togglePopover}
+              className="w-14 h-14 rounded-full mx-auto focus:outline-none"
+            />
+            {isPopoverOpen && (
+              <div className="absolute right-0 top-12 mt-10 w-48 bg-white rounded-lg shadow-lg py-5">
+                <a href="/profile" className="block px-4 py-2 text-[#A04747]">
+                  Profile
+                </a>
+                <a href="/logout" className="block px-4 py-2 text-[#A04747]">
+                  Logout
+                </a>
+              </div>
+            )}
           </div>
 
           <div className="lg:hidden flex items-center text-[#A04747] cursor-pointer">
@@ -94,9 +114,6 @@ const Navbar = () => {
             menu ? "translate-x-0" : "-translate-x-full"
           } lg:hidden flex flex-col absolute text-[#A04747] bg-white  left-0 top-20 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
         >
-          <Link to="/" spy={true} smooth={true} duration={500}>
-            Home
-          </Link>
           <Link
             to="/destination"
             spy={true}
@@ -107,14 +124,14 @@ const Navbar = () => {
             Destination
           </Link>
           <Link
-              to="/dashboard/alldestination"
-              spy={true}
-              smooth={true}
-              duration={500}
-              className="text-[#A04747] cursor-pointer"
-            >
-              Dashboard
-            </Link>
+            to="/dashboard/alldestination"
+            spy={true}
+            smooth={true}
+            duration={500}
+            className="text-[#A04747] cursor-pointer"
+          >
+            Dashboard
+          </Link>
           <Link
             to="/booking"
             spy={true}
@@ -124,11 +141,20 @@ const Navbar = () => {
           >
             Booking
           </Link>
+          <Link
+            to="/contact"
+            spy={true}
+            smooth={true}
+            duration={500}
+            className="text-[#A04747] cursor-pointer"
+          >
+            Contact Us
+          </Link>
 
-          <div className=" lg:hidden">
-            <Link to="/contact">
+          <div className=" lg:hidden flex justify-center items-center gap-5">
+            <Link to="/signin">
               <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
-                Contact
+                Sign In
               </button>
             </Link>
           </div>
