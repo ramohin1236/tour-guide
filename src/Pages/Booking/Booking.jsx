@@ -1,10 +1,13 @@
-import { useState } from "react";
-
-import { Link, useNavigate } from "react-router-dom";
-import Doc from "../../Components/Doc/Doc";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { userNewBooking } from "../../common/api/bookingApi";
+import { findAllDestination } from "../../common/api/destinationApi";
+import Doc from './../../Components/Doc/Doc';
+import { userProfile } from "../../common/api/authApi";
+import toast from "react-hot-toast";
 
 const Booking = () => {
-  const { naraPark } = Doc();
+    const { naraPark } = Doc();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -12,39 +15,96 @@ const Booking = () => {
     email: "",
     phone: "",
     destination: "",
-    location: "",
+    // location: "",
     checkIn: "",
     checkOut: "",
     totalPersons: "",
     totalDays: "",
   });
-  const destinations = {
-    Tokyo: [
-      "Meiji Shrine",
-      "Omotesando Harajuku",
-      "Meiji Jingu Shrine",
-      "Illuminated tower",
-    ],
-    Kyoto: ["Fushimi Inari Shrine", "Katsura Imperial Villa", "Aoi Matsuri"],
-    Osaka: ["Tsutenkaku Tower", "Osaka Castle", "Super Nintendo World"],
-    Nara: ["Narita Temple", "Narita Park", "Narita"],
-    Supporo: ["Haneda Airport", "Haneda Museum", "Haneda Shopping Mall"],
-  };
+  
+  const [destinations, setDestinations] = useState([]);
+  const [currentUser, setCurrentUser]=useState(null)
+  
   const navigate = useNavigate();
 
+
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const response = await findAllDestination();
+        console.log("Fetched response:", response.result);
+  
+        if (Array.isArray(response.result)) {
+          const formattedDestinations = response.result.map((item) => ({
+            id: item.destination_id,
+            name: item.name,
+            locations: item.locations,
+          }));
+          setDestinations(formattedDestinations); // Set as array
+        } else {
+          console.error("Expected response to be an array but got:", response);
+        }
+      } catch (error) {
+        console.error("Error fetching destinations:", error);
+      }
+    };
+  
+    fetchDestinations();
+  }, []);
+
+  const getCurrentusers = async () => {
+    const user = await userProfile();
+    setCurrentUser(user?.result)
+   
+    
+  };
+  useEffect(() => {
+    getCurrentusers();
+  }, []);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  const handleSubmit = (e) => {
+  
+  const handleDestinationChange = (e) => {
+    const selectedDestination = destinations.find(
+      (dest) => 
+        
+        dest.id.toString() === e.target.value
+    );
+    setFormData({
+      ...formData,
+      destination: selectedDestination ? selectedDestination.id : "",
+      location: "",
+    });
+  };
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // api
-    console.log(formData);
-    navigate("/booking-confirmation");
+  console.log("sdfsadfsadfsdf",formData);
+    const bookingData = {
+      address: "Dhaka, Bangladesh",
+      booking_status: "pending",
+      country: "Bangladesh",
+      destination_id: formData.destination, 
+      email: formData.email,
+      first_name: formData.firstName,
+      last_name: formData.lastName,
+      phone: formData.phone,
+      trip_ends: new Date(formData.checkOut).toISOString(),
+      trip_starts: new Date(formData.checkIn).toISOString(),
+      user_id: currentUser?.user_id,
+    };
+  
+    try {
+      await userNewBooking(bookingData);
+      toast.success('Your Booking is Successfull!')
+    } catch (error) {
+      console.error("Booking failed:", error);
+    }
   };
 
   return (
-    <div className="py-20  ">
+    <div className="py-20">
       <div
         className="relative h-screen bg-cover bg-center"
         style={{ backgroundImage: `url(${naraPark})` }}
@@ -55,8 +115,8 @@ const Booking = () => {
             <h2 className="text-2xl font-bold mb-4 text-gray-800">
               Make Your Reservation
             </h2>
-            <form onSubmit={handleSubmit} className="space-y-4 ">
-              {/* first name last nname */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* First Name and Last Name */}
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-gray-600">First Name</label>
@@ -67,11 +127,9 @@ const Booking = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747] focus:outline-none focus:ring-2 focus:ring-[#A04747]"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   />
                 </div>
-
-                {/* Last Name */}
                 <div>
                   <label className="block text-gray-600">Last Name</label>
                   <input
@@ -85,9 +143,9 @@ const Booking = () => {
                   />
                 </div>
               </div>
-              {/* email phone  */}
+
+              {/* Email and Phone Number */}
               <div className="grid grid-cols-2 gap-4">
-                {/* Email */}
                 <div>
                   <label className="block text-gray-600">Email</label>
                   <input
@@ -100,12 +158,10 @@ const Booking = () => {
                     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   />
                 </div>
-
-                {/* Phone Number */}
                 <div>
                   <label className="block text-gray-600">Phone Number</label>
                   <input
-                    type="number"
+                    type="text"
                     name="phone"
                     placeholder="Enter your phone number"
                     value={formData.phone}
@@ -116,28 +172,29 @@ const Booking = () => {
                 </div>
               </div>
 
+              {/* Destination */}
               <div>
                 <label className="block text-gray-600">Your Destination</label>
                 <select
-                  name="destination"
-                  value={formData.destination}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
-                >
-                  <option value="" disabled>
-                    Select a destination
-                  </option>
-                  {Object.keys(destinations).map((dest) => (
-                    <option key={dest} value={dest}>
-                      {dest}
-                    </option>
-                  ))}
-                </select>
+  name="destination"
+  value={formData.destination}
+  onChange={handleDestinationChange} // Updated handler
+  required
+  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
+>
+  <option value="" disabled>
+    Select a destination
+  </option>
+  {destinations.map((dest) => (
+    <option key={dest.id} value={dest.id}>
+      {dest.name}
+    </option>
+  ))}
+</select>
               </div>
 
               {/* Location */}
-              <div>
+              {/* <div>
                 <label className="block text-gray-600">Your Location</label>
                 <select
                   name="location"
@@ -145,7 +202,7 @@ const Booking = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
-                  disabled={!formData.destination} // Disable if no destination is selected
+                  disabled={!formData.destination}
                 >
                   <option value="" disabled>
                     {formData.destination
@@ -153,13 +210,14 @@ const Booking = () => {
                       : "Select a destination first"}
                   </option>
                   {formData.destination &&
-                    destinations[formData.destination].map((location) => (
+                    Array.isArray(destinations[formData.destination]) &&
+                    destinations[formData.destination]?.map((location) => (
                       <option key={location} value={location}>
                         {location}
                       </option>
                     ))}
                 </select>
-              </div>
+              </div> */}
 
               {/* Check-in and Check-out Dates */}
               <div className="grid grid-cols-2 gap-4">
@@ -186,6 +244,7 @@ const Booking = () => {
                   />
                 </div>
               </div>
+
               {/* Total Persons */}
               <div>
                 <label className="block text-gray-600">Total People</label>
@@ -197,12 +256,11 @@ const Booking = () => {
                   onChange={handleChange}
                   min="1"
                   className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
-                  required
                 />
               </div>
 
               {/* Total Days */}
-              <div className="py-2">
+              <div>
                 <label className="block text-gray-600">Total Days</label>
                 <input
                   type="number"
@@ -212,19 +270,16 @@ const Booking = () => {
                   onChange={handleChange}
                   min="1"
                   className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
-                  required
                 />
               </div>
 
               {/* Submit Button */}
-             <Link to='/payment'>
-             <button
+              <button
                 type="submit"
-                className="w-full bg-[#A04747] text-white py-2 rounded-md hover:bg-[#7A2F2F] transition"
+                className="w-full bg-[#A04747] text-white py-2 rounded-md hover:bg-[#A04747] focus:outline-none focus:ring-2 focus:ring-[#A04747]"
               >
-                Check availability
+                Submit
               </button>
-             </Link>
             </form>
           </div>
         </div>

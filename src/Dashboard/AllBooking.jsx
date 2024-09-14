@@ -2,10 +2,9 @@
 import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { FaEdit } from "react-icons/fa";
-import Pagination from "../Components/Sharred/Pagination";
 import { findAllBookings } from "../common/api/bookingApi";
 import moment from 'moment';
+import UserPagination from "../Components/Sharred/Pagination";
 
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -36,21 +35,7 @@ const AllBookings = () => {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-//   const handleDelete = async (bookingId) => {
-//     if (!bookingId) {
-//       toast.error("Booking ID is not provided");
-//       return;
-//     }
-  
-//     try {
-//       await deleteBooking(bookingId); // Assuming you have a deleteBooking API call
-//       setBookings(bookings.filter(booking => booking.id !== bookingId));
-//       toast.success("Booking deleted successfully!");
-//     } catch (error) {
-//       console.error("Failed to delete booking:", error);
-//       toast.error("Failed to delete booking");
-//     }
-//   };
+
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
@@ -58,12 +43,8 @@ const AllBookings = () => {
   return (
     <div>
       <div className="flex justify-between py-6">
-        <p className="text-3xl font-semibold">All Bookings</p>
-        <Link to="/dashboard/createbooking">
-          <button className="bg-[#c75f5f] font-bold text-white hover:bg-[#a04747] w-28 h-12 rounded-lg ">
-            Add Booking
-          </button>
-        </Link>
+        <p className="text-3xl font-semibold text-[#a04747]">Total {bookings?.length} Bookings</p>
+        
       </div>
 
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
@@ -71,10 +52,10 @@ const AllBookings = () => {
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
               <th scope="col" className="px-6 py-3">SL</th>
-              <th scope="col" className="px-6 py-3">Booking ID</th>
+              <th scope="col" className="px-10 py-3">Booking ID</th>
               <th scope="col" className="px-6 py-3">User Name</th>
-              <th scope="col" className="px-6 py-3">Email</th>
-              <th scope="col" className="px-6 py-3">Phone</th>
+              <th scope="col" className="px-32 py-3">Email</th>
+              <th scope="col" className="px-10 py-3">Phone</th>
               <th scope="col" className="px-6 py-3">Booking Start </th>
               <th scope="col" className="px-6 py-3">Booking End </th>
               <th scope="col" className="px-6 py-3">Country From </th>
@@ -139,9 +120,9 @@ const AllBookings = () => {
       {/* Pagination */}
       {bookings.length > 0 && (
         <div className="mt-8 flex justify-end p-4">
-          <Pagination
-            itemsPerPage={bookingsPerPage}
-            totalItems={bookings.length}
+          <UserPagination
+            usersPerPage={bookingsPerPage}
+            totalUsers={bookings.length}
             paginate={paginate}
           />
         </div>

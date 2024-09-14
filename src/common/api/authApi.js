@@ -46,13 +46,18 @@ export const userPasswordUpdate = async (email, password) => {
   };
 
 //   user profile
-  export const userProfile = async () => {
+export const userProfile = async () => {
     try {
-      const response = await axiosInstance.get('/api/auth/profile');
+      const token = localStorage.getItem("authToken"); // Get token from localStorage
+      const response = await axiosInstance.get('/api/auth/profile', {
+        headers: {
+          Authorization: `Bearer ${token}` // Set token in headers
+        }
+      });
   
       return response.data;
     } catch (error) {
-  
       throw error.response ? error.response.data : new Error('An error occurred while fetching user profile');
     }
   };
+  

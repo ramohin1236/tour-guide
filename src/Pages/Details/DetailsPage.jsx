@@ -86,13 +86,13 @@ const DetailsPage = () => {
       </div>
 
       {/* bottom part */}
-      <p className="container mx-auto text-4xl font-semibold mt-12">Same Category Here..</p>
+      {/* <p className="container mx-auto text-4xl font-semibold mt-12">Same Category Here..</p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
       <PopularCard/> 
       <PopularCard/> 
       <PopularCard/> 
       <PopularCard/> 
-      </div>
+      </div> */}
       
     </div>
   )

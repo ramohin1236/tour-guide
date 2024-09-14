@@ -4,7 +4,6 @@ import { BASE_URL } from "../constant/constant";
 // Create an instance of axios
 const axiosInstance = axios.create({
   baseURL: `${BASE_URL}`, // Base URL for all requests,
-  withCredentials: true,
   timeout: 5000, // Timeout after 5 seconds
   headers: {
     "Content-Type": "application/json", // Default headers
@@ -17,7 +16,7 @@ axiosInstance.interceptors.request.use(
     // Add auth token or other headers to the request
     const token = localStorage.getItem("authToken");
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      config.headers["authorization"] = `Bearer ${token}`;
     }
     return config;
   },
@@ -39,7 +38,7 @@ axiosInstance.interceptors.response.use(
       if (status === 401) {
         // Handle 401 Unauthorized: perhaps redirect to login
         console.log("Unauthorized, redirecting to login...");
-        window.location.href = "/login";
+        window.location.href = "/signin";
       }
       if (status === 500) {
         // Handle 500 Internal Server Error: show an error message
