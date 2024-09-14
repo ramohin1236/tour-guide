@@ -10,10 +10,7 @@ const TravelCard = ({ card, calculatePosition, index }) => {
       className="absolute w-64 h-80 md:w-72 md:h-96 lg:w-80 lg:h-96 rounded-lg shadow-lg transition-transform duration-700"
       style={calculatePosition(index)}
     >
-      {/* Discount Badge */}
-      {/* <div className="absolute top-0 right-0 bg-red-600 text-white text-xs font-bold px-2 py-1">
-        {card.discount}
-      </div> */}
+    
 
       {/* Image */}
       <img
@@ -35,7 +32,7 @@ const TravelCard = ({ card, calculatePosition, index }) => {
           </h3>
         </div>
         <Link
-          to="/"
+          to="/booking"
           className="text-[#A04747] font-semibold text-sm md:text-lg mt-2 flex items-center justify-between"
         >
           <p>Book Now</p>

@@ -67,7 +67,7 @@ const Booking = () => {
                     value={formData.firstName}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border border-gray-300 rounded-md"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747] focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   />
                 </div>
 
@@ -81,7 +81,7 @@ const Booking = () => {
                     value={formData.lastName}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border border-gray-300 rounded-md"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   />
                 </div>
               </div>
@@ -97,7 +97,7 @@ const Booking = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border border-gray-300 rounded-md"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   />
                 </div>
 
@@ -111,7 +111,7 @@ const Booking = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border border-gray-300 rounded-md"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   />
                 </div>
               </div>
@@ -123,7 +123,7 @@ const Booking = () => {
                   value={formData.destination}
                   onChange={handleChange}
                   required
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                 >
                   <option value="" disabled>
                     Select a destination
@@ -144,7 +144,7 @@ const Booking = () => {
                   value={formData.location}
                   onChange={handleChange}
                   required
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   disabled={!formData.destination} // Disable if no destination is selected
                 >
                   <option value="" disabled>
@@ -171,7 +171,7 @@ const Booking = () => {
                     value={formData.checkIn}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border border-gray-300 rounded-md"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   />
                 </div>
                 <div>
@@ -182,7 +182,7 @@ const Booking = () => {
                     value={formData.checkOut}
                     onChange={handleChange}
                     required
-                    className="w-full p-2 border border-gray-300 rounded-md"
+                    className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   />
                 </div>
               </div>
@@ -196,7 +196,7 @@ const Booking = () => {
                   value={formData.totalPersons}
                   onChange={handleChange}
                   min="1"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   required
                 />
               </div>
@@ -211,7 +211,7 @@ const Booking = () => {
                   value={formData.totalDays}
                   onChange={handleChange}
                   min="1"
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                   required
                 />
               </div>

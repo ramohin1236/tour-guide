@@ -1,131 +1,125 @@
-import Pagination from "../Sharred/Pagination";
+
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { findAllDestination } from "../common/api/destinationApi";
+import Pagination from "../Sharred/Pagination";
 
 
 const AllDestination = () => {
-    const users = [
-        {
-          imageSrc: "/pr1.png",
-          title: "Luxe Lounge Sofa",
-          location: "Tokyo",
-    
-        },
-        {
-          imageSrc: "/chair.png",
-    
-          title: "Elegant Dining Table",
-          location: "Tokyo",
-       
-        },
-        {
-          imageSrc: "/chair.png",
-          location: "Tokyo",
-          title: "Modern Floor Lamp",
-    
-        },
-        {
-          imageSrc: "/chair.png",
-          title: "Comfort King Bed",
-          location: "tokoyo",
-       
-        },
-        {
-          imageSrc: "/chair.png",
-    
-          title: "Office Desk",
-          location: "Tokyo",
-     
-        },
-        {
-          imageSrc: "/chair.png",
-    
-          title: "Stylish Armchair",
-          location: "Tokyo",
-      
-        },
-      ];
+
+  const [destinations, setDestinations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+ 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [destinationsPerPage] = useState(5); 
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const data = await findAllDestination();
+        console.log(data); 
+  
+        if (Array.isArray(data)) {
+          setDestinations(data);
+        } else {
+          setDestinations([]);
+        }
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    fetchDestinations();
+  }, []);
+
+  
+  const indexOfLastDestination = currentPage * destinationsPerPage;
+  const indexOfFirstDestination = indexOfLastDestination - destinationsPerPage;
+  const currentDestinations = destinations.slice(
+    indexOfFirstDestination,
+    indexOfLastDestination
+  );
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div>
-    <div className="flex justify-between py-6">
-      <p className="text-3xl font-semibold">All Destination</p>
-      <Link to='/dashboard/createdestination'> <button className="hover:bg-[#a04747] hover:text-white text-[#a04747] w-36 h-12 rounded-lg  font-bold bg-white shadow-lg">
-        Add Destination
-      </button></Link>
-    </div>
+      <div className="flex justify-between py-6">
+        <p className="text-3xl font-semibold">All Destination</p>
+        <Link to="/dashboard/createdestination">
+          <button className="hover:bg-[#a04747] hover:text-white text-[#a04747] w-36 h-12 rounded-lg font-bold bg-white shadow-lg">
+            Add Destination
+          </button>
+        </Link>
+      </div>
 
-    <div className="overflow-x-auto shadow-md sm:rounded-lg">
-      <table className="min-w-full text-sm text-left text-gray-500">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
-            <th scope="col" className="px-6 py-3">
-              SL
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Destination image
-            </th>
-            <th scope="col" className="px-6 py-3">
-            Destination Name
-            </th>
-            <th scope="col" className="px-8 py-3">
-            Destination Location
-            </th>
-
-            <th scope="col" className="px-16 py-3 ">
-              Action
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((post, index) => (
-            <tr
-              key={post._id}
-              className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xl font-medium"
-            >
-              <td className="px-6 py-4">{index + 1}</td>
-              <td className="px-6 py-4">
-                <Link to={`/details/:id`}>
-                  <img
-                    src={post.imageSrc}
-                    alt={post.title}
-                    className="md:w-20 md:h-20 rounded-full object-cover bg-gray-500"
-                  />
-                </Link>
-              </td>
-              <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                <Link to={`/details/:id`}>{post.title}</Link>
-              </td>
-              
-
-              <td
-                className='px-6 py-4 font-medium  dark:text-white'
-              >
-                {post.location}
-              </td>
-
-              <td className="px-6 py-4  flex gap-3 hover:underline hover:cursor-pointer">
-                <td className="px-6 py-4  flex gap-3 hover:underline hover:cursor-pointer">
-                  <div>
-                    <MdDelete className="text-3xl hover:text-red-500" />
-                  </div>
-                  <div>
-                    <Link to="/dashboard/updatedestination/:id">
-                      <FaEdit className="text-3xl hover:text-teal-500" />
-                    </Link>
-                  </div>
-                </td>
-              </td>
+      <div className="overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="min-w-full text-sm text-left text-gray-500">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" className="px-6 py-3">SL</th>
+              <th scope="col" className="px-6 py-3">Destination image</th>
+              <th scope="col" className="px-6 py-3">Destination Name</th>
+              <th scope="col" className="px-8 py-3">Destination Location</th>
+              <th scope="col" className="px-16 py-3">Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    <div className="mt-8 flex justify-end p-4">
-      <Pagination />
-    </div>
-  </div>
-  )
-}
+          </thead>
+          <tbody>
+            {currentDestinations.map((post, index) => (
+              <tr
+                key={post.destination_id}
+                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xl font-medium"
+              >
+                <td className="px-6 py-4">{indexOfFirstDestination + index + 1}</td>
+                <td className="px-6 py-4">
+                  <Link to={`/details/${post._id}`}>
+                    <img
+                      src={post.imageSrc}
+                      alt={post.title}
+                      className="md:w-20 md:h-20 rounded-full object-cover bg-gray-500"
+                    />
+                  </Link>
+                </td>
+                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                  <Link to={`/details/${post._id}`}>{post.title}</Link>
+                </td>
+                <td className="px-6 py-4 font-medium dark:text-white">
+                  {post.location}
+                </td>
+                <td className="px-6 py-4 flex gap-3">
+                  <MdDelete className="text-3xl hover:text-red-500" />
+                  <Link to={`/dashboard/updatedestination/${post._id}`}>
+                    <FaEdit className="text-3xl hover:text-teal-500" />
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-export default AllDestination
+      <div className="mt-8 flex justify-end p-4">
+        <Pagination
+          usersPerPage={destinationsPerPage}
+          totalUsers={destinations.length}
+          paginate={paginate}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default AllDestination;
