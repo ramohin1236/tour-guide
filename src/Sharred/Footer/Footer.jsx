@@ -1,4 +1,3 @@
-
 const Footer = () => {
   return (
     <footer className="bg-white py-12 px-6 font-sans tracking-wide">
@@ -122,7 +121,7 @@ const Footer = () => {
         <ul className="flex flex-wrap gap-x-5 gap-4 ">
           <li>
             <a
-              href="javascript:void(0)"
+              href="/terms"
               className="text-[#A04747] hover:underline  text-base transition-all"
             >
               Terms of Service
@@ -130,7 +129,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              href="javascript:void(0)"
+              href="/privacy"
               className="text-[#A04747] hover:underline  text-base transition-all"
             >
               Privacy Policy
@@ -138,7 +137,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              href="javascript:void(0)"
+              href="/contact"
               className="text-[#A04747] hover:underline  text-base transition-all"
             >
               Contact
