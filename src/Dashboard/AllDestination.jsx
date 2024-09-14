@@ -11,22 +11,18 @@ const AllDestination = () => {
 
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
- 
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [destinationsPerPage] = useState(5); 
+  const [error, setError] = useState(null);
+  
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
         const data = await findAllDestination();
-        console.log(data); 
-  
-        if (Array.isArray(data)) {
-          setDestinations(data);
-        } else {
-          setDestinations([]);
-        }
+        console.log(data.result); 
+      setDestinations(data.result)
+      setLoading(false);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -74,6 +70,7 @@ const AllDestination = () => {
               <th scope="col" className="px-6 py-3">Destination image</th>
               <th scope="col" className="px-6 py-3">Destination Name</th>
               <th scope="col" className="px-8 py-3">Destination Location</th>
+              <th scope="col" className="px-8 py-3">Description</th>
               <th scope="col" className="px-16 py-3">Action</th>
             </tr>
           </thead>
@@ -87,20 +84,23 @@ const AllDestination = () => {
                 <td className="px-6 py-4">
                   <Link to={`/details/${post._id}`}>
                     <img
-                      src={post.imageSrc}
+                      src={post.image}
                       alt={post.title}
-                      className="md:w-20 md:h-20 rounded-full object-cover bg-gray-500"
+                      className="md:w-16 md:h-12 rounded-md object-cover bg-gray-500"
                     />
                   </Link>
                 </td>
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                  <Link to={`/details/${post._id}`}>{post.title}</Link>
+                  <Link to={`/details/${post._id}`}>{post.name}</Link>
                 </td>
                 <td className="px-6 py-4 font-medium dark:text-white">
-                  {post.location}
+                  {post.airport}
+                </td>
+                <td className="px-6 py-4 font-medium dark:text-white">
+                  {post.description}
                 </td>
                 <td className="px-6 py-4 flex gap-3">
-                  <MdDelete className="text-3xl hover:text-red-500" />
+                  <MdDelete className="text-3xl hover:text-red-500 cursor-pointer" />
                   <Link to={`/dashboard/updatedestination/${post._id}`}>
                     <FaEdit className="text-3xl hover:text-teal-500" />
                   </Link>

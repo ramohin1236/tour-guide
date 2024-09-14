@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import Pagination from "../Components/Sharred/Pagination";
 import { findAllBookings } from "../common/api/bookingApi";
-
+import moment from 'moment';
 
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -74,7 +74,11 @@ const AllBookings = () => {
               <th scope="col" className="px-6 py-3">Booking ID</th>
               <th scope="col" className="px-6 py-3">User Name</th>
               <th scope="col" className="px-6 py-3">Email</th>
-              <th scope="col" className="px-6 py-3">Booking Date</th>
+              <th scope="col" className="px-6 py-3">Phone</th>
+              <th scope="col" className="px-6 py-3">Booking Start </th>
+              <th scope="col" className="px-6 py-3">Booking End </th>
+              <th scope="col" className="px-6 py-3">Country From </th>
+              <th scope="col" className="px-6 py-3">Status </th>
               <th scope="col" className="px-16 py-3">Action</th>
             </tr>
           </thead>
@@ -82,7 +86,7 @@ const AllBookings = () => {
           {currentBookings.length > 0 ? (
             currentBookings.map((booking, index) => (
               <tr
-                key={booking.id}
+                key={booking.booking_id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xl font-medium"
               >
                 <td className="px-6 py-4">{index + 1}</td>
@@ -90,22 +94,34 @@ const AllBookings = () => {
                   {booking.booking_id}
                 </td>
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                  {booking.userName}
+                  {booking.first_name} {booking.last_name}
                 </td>
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
                   {booking.email}
                 </td>
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                  {booking.bookingDate}
+                  {booking.phone}
                 </td>
-                <td className="px-6 py-4 flex gap-3 hover:underline hover:cursor-pointer">
+                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                {moment(booking.trip_starts).format('MMMM Do, YYYY')}
+                </td>
+                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                {moment(booking.trip_ends).format('MMMM Do, YYYY')}
+                </td>
+                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                {booking.country}
+                </td>
+                <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                <button >
+                     {booking.booking_status}
+                  </button>
+                </td>
+                <td className="px-6 py-4 flex gap-3  hover:cursor-pointer">
                   <MdDelete
                     className="text-3xl hover:text-red-600"
                     
                   />
-                  <Link to={`/dashboard/editbooking/${booking.id}`}>
-                    <FaEdit className="text-3xl hover:text-teal-500" />
-                  </Link>
+                 
                 </td>
               </tr>
             ))
