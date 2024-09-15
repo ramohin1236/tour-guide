@@ -213,7 +213,7 @@ const Booking = () => {
                       </option>
                     ))}
                 </select>
-              </div> */}
+              </div> 
 
               {/* Check-in and Check-out Dates */}
               <div className="grid grid-cols-2 gap-4">

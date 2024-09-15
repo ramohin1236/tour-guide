@@ -1,26 +1,27 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-
 import { Link } from "react-router-dom";
+import config from "../../config/config";
 
-const PopularCard = ({ image, title, description, number }) => {
+const PopularCard = ({loc}) => {
+    console.log(loc);
+    const {apiUrl}=config
+    const {default_image,name,description,location_id}=loc;
   return (
     <div className="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] w-full max-w-sm rounded-lg overflow-hidden mx-auto font-[sans-serif] mt-4 transition-transform duration-300 hover:scale-105">
       <div className="min-h-[256px] overflow-hidden">
         <img
-          src={image}
+          src={`${apiUrl}/${default_image}`}
           className="h-72 object-cover transition-transform duration-300 hover:scale-110"
         />
       </div>
 
       <div className="p-5">
         <h3 className="text-black hover:text-[#A04747] text-2xl font-bold">
-          {title}
+          {name}
         </h3>
         <p className="mt-4 text-base text-black leading-relaxed">
           {description}
         </p>
-        <Link to="/details/:id">
+        <Link to={`/details/${location_id}`}>
           <button
             type="button"
             className="mt-6 px-5 py-3 rounded-lg text-white text-base tracking-wider border-none outline-none relative overflow-hidden transition-all duration-300 group"

@@ -4,6 +4,7 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { deleteLocation, getAllLocations } from "../common/api/locationApi";
 import UserPagination from "../Components/Sharred/Pagination";
+import { getAllAttachments } from "../common/api/attachmentApi";
 
 const AllLocation = () => {
   const [locations, setLocations] = useState([]);
@@ -12,6 +13,9 @@ const AllLocation = () => {
   const [locationsPerPage] = useState(10);
   const [error, setError] = useState(null);
   const [refetch, setRefetch] = useState(true);
+  const [attachments,setAttachments] = useState(null)
+  console.log(attachments);
+
 
   useEffect(() => {
     if (refetch) {
@@ -27,7 +31,18 @@ const AllLocation = () => {
           setLoading(false);
         }
       };
+
+      const fetchAttachments = async () => {
+        try {
+          const response = await getAllAttachments();
+          setAttachments(response); 
+        } catch (error) {
+          console.error("Failed to fetch attachments", error);
+        }
+      };
+
       fetchLocations();
+      fetchAttachments();
     }
   }, [refetch]);
 

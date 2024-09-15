@@ -3,14 +3,16 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Doc from "../Components/Doc/Doc";
 import { IoPersonOutline } from "react-icons/io5";
+import { userProfile } from '../common/api/authApi';
 
 const Navbar = () => {
   const { logo4 } = Doc();
   const [menu, setMenu] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isLoggedin, setIsLoggedin] = useState(false);
-
-  useEffect(() => {
+  const [currentUser, setCurrentUser] = useState(null);
+   console.log(currentUser);
+   useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
       setIsLoggedin(true);
@@ -36,16 +38,25 @@ const Navbar = () => {
     setIsLoggedin(false);
   };
 
+  const getCurrentusers = async () => {
+    const user = await userProfile();
+    setCurrentUser(user?.result);
+  };
+
+  useEffect(() => {
+    getCurrentusers();
+  }, []);
+
   return (
     <div className="z-40 fixed w-full md:px-[100px] px-[20px] bg-white text-[#A04747]">
       <div>
-        <div className=" flex flex-row justify-between items-center md:py-3 py-3">
-          <div className=" flex flex-row items-center cursor-pointer">
+        <div className="flex flex-row justify-between items-center md:py-3 py-3">
+          <div className="flex flex-row items-center cursor-pointer">
             <Link to="/" spy={true} smooth={true} duration={500}>
               <div className="flex justify-center text-center items-center">
                 <img
                   src={logo4}
-                  className=" w-12 md:w-24 h-12 md:h-24 object-cover"
+                  className="w-12 md:w-24 h-12 md:h-24 object-cover"
                   alt="logo"
                 />
                 <h1 className="text-xl md:text-2xl font-semibold text-[#A04747]">
@@ -74,15 +85,20 @@ const Navbar = () => {
             >
               Booking
             </Link>
-            <Link
-              to="/dashboard/alldestination"
-              spy={true}
-              smooth={true}
-              duration={500}
-              className="text-[#A04747] cursor-pointer"
-            >
-              Dashboard
-            </Link>
+
+            {/* Admin চেক করে Dashboard লিংক দেখাবে */}
+            {currentUser?.isAdmin && (
+              <Link
+                to="/dashboard/alldestination"
+                spy={true}
+                smooth={true}
+                duration={500}
+                className="text-[#A04747] cursor-pointer"
+              >
+                Dashboard
+              </Link>
+            )}
+
             <Link
               to="/contact"
               spy={true}
@@ -97,14 +113,15 @@ const Navbar = () => {
           <div className="hidden lg:flex flex-row justify-between items-center gap-5">
             {!isLoggedin ? (
               <Link to="/signin">
-                <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
+                <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
                   Sign In
                 </button>
               </Link>
             ) : (
               <IoPersonOutline
-              onClick={togglePopover}
-              size={40} />
+                onClick={togglePopover}
+                size={40}
+              />
             )}
             {isLoggedin && isPopoverOpen && (
               <div className="absolute text-xl font-semibold right-0 top-12 mt-16 w-52 bg-white rounded-lg shadow-lg p-5">
@@ -112,7 +129,7 @@ const Navbar = () => {
                   Profile
                 </a>
                 <p
-                  className=" text-[#A04747] font-semibold"
+                  className="text-[#A04747] font-semibold"
                   onClick={handleLogout}
                 >
                   Logout
@@ -129,10 +146,11 @@ const Navbar = () => {
             )}
           </div>
         </div>
+
         <div
           className={`${
             menu ? "translate-x-0" : "-translate-x-full"
-          } lg:hidden flex flex-col absolute text-[#A04747] bg-white  left-0 top-16 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
+          } lg:hidden flex flex-col absolute text-[#A04747] bg-white left-0 top-16 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
         >
           <Link
             to="/destination"
@@ -144,15 +162,6 @@ const Navbar = () => {
             Destination
           </Link>
           <Link
-            to="/dashboard/alldestination"
-            spy={true}
-            smooth={true}
-            duration={500}
-            className="text-[#A04747] cursor-pointer"
-          >
-            Dashboard
-          </Link>
-          <Link
             to="/booking"
             spy={true}
             smooth={true}
@@ -161,6 +170,21 @@ const Navbar = () => {
           >
             Booking
           </Link>
+
+          {/* Admin চেক করে Dashboard লিংক দেখাবে */}
+          {currentUser?.isAdmin && (
+            <Link
+              to="/dashboard/alldestination"
+              spy={true}
+              smooth={true}
+              duration={500}
+              onClick={closeMenu}
+              className="text-[#A04747] cursor-pointer"
+            >
+              Dashboard
+            </Link>
+          )}
+
           <Link
             to="/contact"
             spy={true}
@@ -172,18 +196,18 @@ const Navbar = () => {
           </Link>
 
           {!isLoggedin && (
-            <div className=" lg:hidden flex justify-center items-center gap-5">
+            <div className="lg:hidden flex justify-center items-center gap-5">
               <Link to="/signin">
-                <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
+                <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
                   Sign In
                 </button>
               </Link>
             </div>
           )}
           {isLoggedin && (
-            <div className=" lg:hidden flex justify-center items-center gap-5">
+            <div className="lg:hidden flex justify-center items-center gap-5">
               <button
-                className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out"
+                className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out"
                 onClick={handleLogout}
               >
                 Logout
