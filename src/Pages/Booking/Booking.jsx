@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { userNewBooking } from "../../common/api/bookingApi";
 import { findAllDestination } from "../../common/api/destinationApi";
-import Doc from './../../Components/Doc/Doc';
+import Doc from "./../../Components/Doc/Doc";
 import { userProfile } from "../../common/api/authApi";
 import toast from "react-hot-toast";
 
 const Booking = () => {
-    const { naraPark } = Doc();
+  const { bird_art } = Doc();
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -21,19 +21,18 @@ const Booking = () => {
     totalPersons: "",
     totalDays: "",
   });
-  
-  const [destinations, setDestinations] = useState([]);
-  const [currentUser, setCurrentUser]=useState(null)
-  
-  const navigate = useNavigate();
 
+  const [destinations, setDestinations] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
         const response = await findAllDestination();
         console.log("Fetched response:", response.result);
-  
+
         if (Array.isArray(response.result)) {
           const formattedDestinations = response.result.map((item) => ({
             id: item.destination_id,
@@ -48,15 +47,13 @@ const Booking = () => {
         console.error("Error fetching destinations:", error);
       }
     };
-  
+
     fetchDestinations();
   }, []);
 
   const getCurrentusers = async () => {
     const user = await userProfile();
-    setCurrentUser(user?.result)
-   
-    
+    setCurrentUser(user?.result);
   };
   useEffect(() => {
     getCurrentusers();
@@ -64,12 +61,10 @@ const Booking = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  
+
   const handleDestinationChange = (e) => {
     const selectedDestination = destinations.find(
-      (dest) => 
-        
-        dest.id.toString() === e.target.value
+      (dest) => dest.id.toString() === e.target.value
     );
     setFormData({
       ...formData,
@@ -77,15 +72,15 @@ const Booking = () => {
       location: "",
     });
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-  console.log("sdfsadfsadfsdf",formData);
+    console.log("sdfsadfsadfsdf", formData);
     const bookingData = {
       address: "Dhaka, Bangladesh",
       booking_status: "pending",
       country: "Bangladesh",
-      destination_id: formData.destination, 
+      destination_id: formData.destination,
       email: formData.email,
       first_name: formData.firstName,
       last_name: formData.lastName,
@@ -94,24 +89,24 @@ const Booking = () => {
       trip_starts: new Date(formData.checkIn).toISOString(),
       user_id: currentUser?.user_id,
     };
-  
+
     try {
       await userNewBooking(bookingData);
-      toast.success('Your Booking is Successfull!')
-      navigate('/bookingDetails')
+      toast.success("Your Booking is Successfull!");
+      navigate("/bookingDetails");
     } catch (error) {
       console.error("Booking failed:", error);
     }
   };
 
   return (
-    <div className="py-20">
+    <div className="pt-28 pb-0">
       <div
         className="relative h-screen bg-cover bg-center"
-        style={{ backgroundImage: `url(${naraPark})` }}
+        style={{ backgroundImage: `url(${bird_art})` }}
       >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 flex items-center justify-center md:py-20">
+        <div className="absolute inset-0 bg-black opacity-10"></div>
+        <div className="relative z-10 flex items-center justify-center md:justify-end md:pr-52 md:py-20">
           <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
             <h2 className="text-2xl font-bold mb-4 text-gray-800">
               Make Your Reservation
@@ -177,21 +172,21 @@ const Booking = () => {
               <div>
                 <label className="block text-gray-600">Your Destination</label>
                 <select
-  name="destination"
-  value={formData.destination}
-  onChange={handleDestinationChange} // Updated handler
-  required
-  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
->
-  <option value="" disabled>
-    Select a destination
-  </option>
-  {destinations.map((dest) => (
-    <option key={dest.id} value={dest.id}>
-      {dest.name}
-    </option>
-  ))}
-</select>
+                  name="destination"
+                  value={formData.destination}
+                  onChange={handleDestinationChange} // Updated handler
+                  required
+                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
+                >
+                  <option value="" disabled>
+                    Select a destination
+                  </option>
+                  {destinations.map((dest) => (
+                    <option key={dest.id} value={dest.id}>
+                      {dest.name}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               {/* Location */}
