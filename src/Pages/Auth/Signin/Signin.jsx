@@ -1,13 +1,12 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Doc from "../../../Components/Doc/Doc";
 import { userProfile, userSignIn } from "../../../common/api/authApi";
 import toast from "react-hot-toast";
 
 const Signin = () => {
-    const navigate =useNavigate()
   const { signupImage } = Doc();
 
   const [email, setEmail] = useState("");
@@ -15,25 +14,23 @@ const Signin = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
- 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-  
+
     try {
       const data = await userSignIn(email, password);
       console.log("token", data.result.accessToken);
       if (data?.result?.accessToken) {
         localStorage.setItem("authToken", data?.result?.accessToken);
-  
 
         const profileData = await userProfile();
         console.log(profileData);
-        localStorage.setItem("userId", profileData.id); 
-  
+        localStorage.setItem("userId", profileData.id);
+
         toast.success("Sign in successful!");
-        navigate('/');
+        window.location.replace("/");
         console.log("Sign in successful:", data);
       }
     } catch (err) {
@@ -60,7 +57,7 @@ const Signin = () => {
         {/* Signup Form Section */}
         <div className="w-full lg:w-1/2 px-6 lg:px-8 py-6">
           <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            Sign In 
+            Sign In
           </h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <input

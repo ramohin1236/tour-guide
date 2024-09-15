@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Doc from "../Components/Doc/Doc";
@@ -7,6 +7,16 @@ const Navbar = () => {
   const { logo4 } = Doc();
   const [menu, setMenu] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isLoggedin, setIsLoggedin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (token) {
+      setIsLoggedin(true);
+    } else {
+      setIsLoggedin(false);
+    }
+  }, []);
 
   const togglePopover = () => {
     setIsPopoverOpen(!isPopoverOpen);
@@ -18,6 +28,11 @@ const Navbar = () => {
 
   const closeMenu = () => {
     setMenu(false);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    setIsLoggedin(false);
   };
 
   return (
@@ -79,24 +94,30 @@ const Navbar = () => {
           </nav>
 
           <div className="hidden lg:flex flex-row justify-between items-center gap-5">
-            <Link to="/signin">
-              <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
-                Sign In
-              </button>
-            </Link>
-            <img
-              src="https://readymadeui.com/profile_2.webp"
-              onClick={togglePopover}
-              className="w-14 h-14 rounded-full mx-auto focus:outline-none"
-            />
-            {isPopoverOpen && (
+            {!isLoggedin ? (
+              <Link to="/signin">
+                <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
+                  Sign In
+                </button>
+              </Link>
+            ) : (
+              <img
+                src="https://readymadeui.com/profile_2.webp"
+                onClick={togglePopover}
+                className="w-14 h-14 rounded-full mx-auto focus:outline-none"
+              />
+            )}
+            {isLoggedin && isPopoverOpen && (
               <div className="absolute right-0 top-12 mt-10 w-48 bg-white rounded-lg shadow-lg py-5">
                 <a href="/profile" className="block px-4 py-2 text-[#A04747]">
                   Profile
                 </a>
-                <a href="/logout" className="block px-4 py-2 text-[#A04747]">
+                <button
+                  className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out"
+                  onClick={handleLogout}
+                >
                   Logout
-                </a>
+                </button>
               </div>
             )}
           </div>
@@ -151,13 +172,25 @@ const Navbar = () => {
             Contact Us
           </Link>
 
-          <div className=" lg:hidden flex justify-center items-center gap-5">
-            <Link to="/signin">
-              <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
-                Sign In
+          {!isLoggedin && (
+            <div className=" lg:hidden flex justify-center items-center gap-5">
+              <Link to="/signin">
+                <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
+                  Sign In
+                </button>
+              </Link>
+            </div>
+          )}
+          {isLoggedin && (
+            <div className=" lg:hidden flex justify-center items-center gap-5">
+              <button
+                className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out"
+                onClick={handleLogout}
+              >
+                Logout
               </button>
-            </Link>
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
