@@ -7,7 +7,7 @@ import { userProfile, userSignIn } from "../../../common/api/authApi";
 import toast from "react-hot-toast";
 
 const Signin = () => {
-  const { signupImage } = Doc();
+  const { signup } = Doc();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -40,13 +40,13 @@ const Signin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-12">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-32">
       <div className="bg-white shadow-lg rounded-lg flex flex-col-reverse lg:flex-row max-w-6xl p-5 md:p-0 h-auto lg:h-[700px] mt-16">
         {/* Left Image Section */}
         <div className="lg:flex w-full lg:w-1/2 items-center justify-center mb-8 lg:mb-0">
           <div className="relative w-full h-64 lg:h-full">
             <img
-              src={signupImage}
+              src={signup}
               alt="Sign In Illustration"
               className="rounded-lg shadow-lg object-cover w-full h-full transition-transform duration-500 ease-in-out hover:scale-105"
             />
