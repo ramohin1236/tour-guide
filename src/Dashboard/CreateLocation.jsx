@@ -1,26 +1,22 @@
 import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import { findAllDestination } from "../common/api/destinationApi";
-// import { createLocation } from "../common/api/locationApi";
 import { BASE_URL } from "../common/constant/constant";
 import axios from "axios";
 
 const CreateLocation = () => {
   // Individual states for each property
-
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [website, setWebsite] = useState("");
-
   const [openTime, setOpenTime] = useState("");
   const [description, setDescription] = useState("");
   const [closeTime, setCloseTime] = useState("");
   const [destination, setDestination] = useState(null);
-
   const [selectedImages, setSelectedImages] = useState([]);
   const [destinations, setDestinations] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // Loading state for form submission
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // Fetch destinations from API
@@ -37,41 +33,44 @@ const CreateLocation = () => {
     fetchDestinations();
   }, []);
 
-  // Handle image selection
+  
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setSelectedImages(files);
   };
 
-  // Handle form submission
+
+  const stripTags = (input) => {
+    return input.replace(/<\/?[^>]+(>|$)/g, "");
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     setError(null);
 
     const formData = new FormData();
-    console.log(destination);
-    // Append text fields to formData
 
+    // Append text fields to formData
     formData.append("name", name);
     formData.append("phone", phone);
     formData.append("address", address);
     formData.append("website", website);
     formData.append("email", "");
     formData.append("hours", `${openTime}am-${closeTime}pm`);
-    formData.append("description", description);
+
+    
+    const cleanDescription = stripTags(description);
+    formData.append("description", cleanDescription);
+
     formData.append("destination_id", destination);
-    // formData.append("attachments", selectedImages);
-    // Append images to formData (as attachments)
+
     selectedImages.forEach((image) => {
       formData.append("attachments", image);
     });
-    console.log(selectedImages);
+
     try {
-      // const response = await fetch("/api/locations/new", {
-      //   method: "POST",
-      //   body: formData,
-      // });
       const response = await axios.post(
         `${BASE_URL}/api/locations/new`,
         formData,
@@ -82,17 +81,15 @@ const CreateLocation = () => {
           },
         }
       );
-      console.log(response);
+
       if (!response?.data?.success) {
         throw new Error("Error uploading data");
       }
 
-      const result = await response?.data;
-      console.log("Location created:", result);
+      console.log("Location created:", response?.data);
       alert("Location created successfully!");
 
       // Reset form after successful submission
-
       setName("");
       setPhone("");
       setAddress("");
@@ -247,7 +244,6 @@ const InputField = ({ type, id, placeholder, value, onChange, label }) => (
 
 // SelectField component for reuse
 const SelectField = ({ id, value, onChange, options, placeholder }) => {
-  // console.log("SelectField", options);
   return (
     <select
       id={id}

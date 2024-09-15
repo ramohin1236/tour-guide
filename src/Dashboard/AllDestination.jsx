@@ -20,7 +20,7 @@ const AllDestination = () => {
     const fetchDestinations = async () => {
       try {
         const data = await findAllDestination();
-        // console.log(data.result);
+        console.log("allll des",data.result);
         setDestinations(data.result);
         setLoading(false);
       } catch (error) {
