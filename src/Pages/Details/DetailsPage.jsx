@@ -2,8 +2,7 @@
 import {  FaMapMarkerAlt} from "react-icons/fa"
 import Doc from "../../Components/Doc/Doc"
 import { useState } from "react";
-import PopularCard from "../../Components/Home/PopularSpots/PopularCard";
-
+import { Link } from "react-router-dom";
 const DetailsPage = () => {
     const {jinguShrine} =Doc()
     const [showMore, setShowMore] = useState(false);
@@ -80,6 +79,14 @@ const DetailsPage = () => {
               <a href="https://omohara.tokyu-plaza.com" className="text-indigo-500 hover:underline">
                 omohara.tokyu-plaza.com
               </a>
+            </div>
+
+            <div className="mt-5 mr-7 md:mr-20 ml-7 md:ml-5">
+              <Link to="/booking">
+                <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
+                 Book Now
+                </button>
+              </Link>
             </div>
           </div>
         </div>
