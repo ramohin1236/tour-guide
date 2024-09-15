@@ -1,5 +1,3 @@
-
-
 const Contact = () => {
   return (
     <>
@@ -93,11 +91,11 @@ const Contact = () => {
                   Email Address
                 </h4>
                 <p className="text-base text-dark">
-                sumiyaenterprise85@gmail.com
+                  sumiyaenterprise85@gmail.com
                 </p>
               </div>
             </div>
-          </div> 
+          </div>
 
           <div className="relative w-full lg:w-1/2 rounded-lg p-5 lg:p-20 shadow-lg">
             <form>
@@ -123,12 +121,14 @@ const Contact = () => {
                 defaultValue=""
               />
               <div>
-                <button
-                  type="submit"
-                  className="w-full rounded bg-[#A04747] p-3 text-white transition"
-                >
-                  Send Message
-                </button>
+                <a href="mailto:sumiyaenterprise85@gmail.com">
+                  <button
+              
+                    className="w-full rounded bg-[#A04747] p-3 text-white transition"
+                  >
+                    Send Message
+                  </button>
+                </a>
               </div>
             </form>
           </div>

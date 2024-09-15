@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Doc from "../Components/Doc/Doc";
+import { IoPersonOutline } from "react-icons/io5";
 
 const Navbar = () => {
   const { logo4 } = Doc();
@@ -101,23 +102,21 @@ const Navbar = () => {
                 </button>
               </Link>
             ) : (
-              <img
-                src="https://readymadeui.com/profile_2.webp"
-                onClick={togglePopover}
-                className="w-14 h-14 rounded-full mx-auto focus:outline-none"
-              />
+              <IoPersonOutline
+              onClick={togglePopover}
+              size={40} />
             )}
             {isLoggedin && isPopoverOpen && (
-              <div className="absolute right-0 top-12 mt-10 w-48 bg-white rounded-lg shadow-lg py-5">
-                <a href="/profile" className="block px-4 py-2 text-[#A04747]">
+              <div className="absolute text-xl font-semibold right-0 top-12 mt-16 w-52 bg-white rounded-lg shadow-lg p-5">
+                <a href="/profile" className="block text-[#A04747]">
                   Profile
                 </a>
-                <button
-                  className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out"
+                <p
+                  className=" text-[#A04747] font-semibold"
                   onClick={handleLogout}
                 >
                   Logout
-                </button>
+                </p>
               </div>
             )}
           </div>
@@ -133,7 +132,7 @@ const Navbar = () => {
         <div
           className={`${
             menu ? "translate-x-0" : "-translate-x-full"
-          } lg:hidden flex flex-col absolute text-[#A04747] bg-white  left-0 top-20 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
+          } lg:hidden flex flex-col absolute text-[#A04747] bg-white  left-0 top-16 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
         >
           <Link
             to="/destination"
