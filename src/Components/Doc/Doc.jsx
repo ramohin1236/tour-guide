@@ -1,6 +1,6 @@
 import nav3 from "../../../public/nav3.jpg";
-
 import logo4 from "../../../public/logo4.png";
+import signup from "../../../public/signup.jpg";
 
 import tokoyoTower from "/public/tokyo tower.jpg";
 import meijiJinguGaien from "/public/meiji-jingu-gaien.jpg";
@@ -40,6 +40,7 @@ const Doc = () => {
     camping,
     exploring,
     bird_art,
+    signup,
   };
 };
 
