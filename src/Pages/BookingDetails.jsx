@@ -4,7 +4,7 @@ const BookingDetails = () => {
   return (
     <div>
     {/* Main Content */}
-    <main className="container mx-auto mt-10 pt-40 bg-white rounded-lg shadow-lg">
+    <main className="container mx-auto px-[20px] md:px-[100px]  pt-32 bg-white rounded-lg shadow-lg">
       {/* Booking and Payment Details Section */}
       <section className="mb-10">
         <h2 className="text-2xl font-semibold mb-4">
@@ -82,8 +82,8 @@ const BookingDetails = () => {
 
       {/* Thank You Message */}
       <section className="text-center mt-10">
-        <h3 className="text-xl font-semibold">
-          Thank you for choosing JAPAN TRAVEL & TOUR!
+        <h3 className="text-xl ">
+          Thank you for choosing <span className="font-semibold">JAPAN TRAVEL AGENCY & TOUR!</span>
         </h3>
         <p className="mt-3">
           We look forward to making your travel experience unforgettable.

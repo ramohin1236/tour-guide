@@ -33,7 +33,7 @@ const CreateDestination = () => {
     toast.success("Destination Create Successful!")
     navigate("/dashboard/alldestination")
   } catch (error) {
-    console.error('Error creating destination:', error);
+    toast.error('Error creating destination:', error);
   }
 };
 

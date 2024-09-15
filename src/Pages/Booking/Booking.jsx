@@ -31,7 +31,7 @@ const Booking = () => {
     const fetchDestinations = async () => {
       try {
         const response = await findAllDestination();
-        console.log("Fetched response:", response.result);
+       
 
         if (Array.isArray(response.result)) {
           const formattedDestinations = response.result.map((item) => ({
@@ -75,7 +75,7 @@ const Booking = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("sdfsadfsadfsdf", formData);
+   
     const bookingData = {
       address: "Dhaka, Bangladesh",
       booking_status: "pending",

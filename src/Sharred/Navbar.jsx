@@ -11,7 +11,7 @@ const Navbar = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-   console.log(currentUser);
+   
    useEffect(() => {
     const token = localStorage.getItem("authToken");
     if (token) {
@@ -52,7 +52,7 @@ const Navbar = () => {
       <div>
         <div className="flex flex-row justify-between items-center md:py-3 py-3">
           <div className="flex flex-row items-center cursor-pointer">
-            <Link to="/" spy={true} smooth={true} duration={500}>
+            <Link to="/"  duration={500}>
               <div className="flex justify-center text-center items-center">
                 <img
                   src={logo4}
@@ -69,8 +69,7 @@ const Navbar = () => {
           <nav className="font-semibold hidden lg:flex flex-row items-center text-xl gap-8">
             <Link
               to="/destination"
-              spy={true}
-              smooth={true}
+             
               duration={500}
               className="text-[#A04747] cursor-pointer"
             >
@@ -78,8 +77,7 @@ const Navbar = () => {
             </Link>
             <Link
               to="/booking"
-              spy={true}
-              smooth={true}
+             
               duration={500}
               className="text-[#A04747] cursor-pointer"
             >
@@ -90,8 +88,7 @@ const Navbar = () => {
             {currentUser?.isAdmin && (
               <Link
                 to="/dashboard/alldestination"
-                spy={true}
-                smooth={true}
+              
                 duration={500}
                 className="text-[#A04747] cursor-pointer"
               >
@@ -101,8 +98,7 @@ const Navbar = () => {
 
             <Link
               to="/contact"
-              spy={true}
-              smooth={true}
+             
               duration={500}
               className="text-[#A04747] cursor-pointer"
             >
@@ -154,8 +150,7 @@ const Navbar = () => {
         >
           <Link
             to="/destination"
-            spy={true}
-            smooth={true}
+            
             duration={500}
             onClick={closeMenu}
           >
@@ -163,8 +158,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/booking"
-            spy={true}
-            smooth={true}
+            
             duration={500}
             onClick={closeMenu}
           >
@@ -175,8 +169,7 @@ const Navbar = () => {
           {currentUser?.isAdmin && (
             <Link
               to="/dashboard/alldestination"
-              spy={true}
-              smooth={true}
+             
               duration={500}
               onClick={closeMenu}
               className="text-[#A04747] cursor-pointer"
@@ -187,8 +180,7 @@ const Navbar = () => {
 
           <Link
             to="/contact"
-            spy={true}
-            smooth={true}
+           
             duration={500}
             className="text-[#A04747] cursor-pointer"
           >

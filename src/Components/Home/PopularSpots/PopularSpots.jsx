@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import PopularTab from "./PopularTab";
 import PopularPlace from "./PopularPlace";
 import { findAllDestination } from "../../../common/api/destinationApi";
+import { getAllLocations } from "../../../common/api/locationApi";
 
 const PopularSpots = () => {
 
@@ -30,8 +31,8 @@ const PopularSpots = () => {
         };
         const fetchLocation = async () => {
           try {
-            const data = await findAllDestination();
-            console.log("allll des",data.result);
+            const data = await getAllLocations();
+
             setLocation(data.result);
             setLoading(false);
           } catch (error) {

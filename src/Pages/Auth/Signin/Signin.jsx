@@ -21,17 +21,16 @@ const Signin = () => {
 
     try {
       const data = await userSignIn(email, password);
-      console.log("token", data.result.accessToken);
+     
       if (data?.result?.accessToken) {
         localStorage.setItem("authToken", data?.result?.accessToken);
 
         const profileData = await userProfile();
-        console.log(profileData);
+        
         localStorage.setItem("userId", profileData.id);
 
         toast.success("Sign in successful!");
         window.location.replace("/");
-        console.log("Sign in successful:", data);
       }
     } catch (err) {
       setError(err.message || "Failed to sign in");

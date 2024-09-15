@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef, useState } from "react";
 import { IoMdApps } from "react-icons/io";
-import { FaUserAlt } from "react-icons/fa";
+import { FaRegBookmark, FaUserAlt } from "react-icons/fa";
 import { IoHomeOutline } from "react-icons/io5";
 
 import { Link, useLocation } from "react-router-dom";
@@ -157,7 +157,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   fontFamily: "",
                 }}
               >
-                <CiLocationOn />
+               <FaRegBookmark />
                  Bookings
               </Link>
             </li>

@@ -20,7 +20,6 @@ const AllDestination = () => {
     const fetchDestinations = async () => {
       try {
         const data = await findAllDestination();
-        console.log("allll des",data.result);
         setDestinations(data.result);
         setLoading(false);
       } catch (error) {
@@ -72,9 +71,9 @@ const AllDestination = () => {
 
   return (
     <div>
-      <div className="flex justify-between py-6">
-        <p className="text-3xl font-semibold">
-          {destinations?.length} Destination
+      <div className="flex flex-col md:flex-row gap-5 justify-between py-5">
+        <p className="text-3xl font-semibold text-[#a04747]">
+          All Destinations
         </p>
         <Link to="/dashboard/createdestination">
           <button className="hover:bg-[#a04747] hover:text-white text-[#a04747] w-36 h-12 rounded-lg font-bold bg-white shadow-lg">
@@ -85,7 +84,7 @@ const AllDestination = () => {
 
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
         <table className="min-w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-xl text-gray-700 uppercase bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3">
                 SL
@@ -93,13 +92,13 @@ const AllDestination = () => {
               <th scope="col" className="px-6 py-3">
                 Destination Name
               </th>
-              <th scope="col" className="px-8 py-3">
+              <th scope="col" className="px-6 py-3">
                 Destination Location
               </th>
-              <th scope="col" className="px-8 py-3">
+              <th scope="col" className="px-6 py-3">
                 Description
               </th>
-              <th scope="col" className="px-16 py-3">
+              <th scope="col" className="px-6 py-3">
                 Action
               </th>
             </tr>
