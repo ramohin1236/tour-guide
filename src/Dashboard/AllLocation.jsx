@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { getAllLocations } from "../common/api/locationApi";
+import { deleteLocation, getAllLocations } from "../common/api/locationApi";
 import UserPagination from "../Components/Sharred/Pagination";
 
 const AllLocation = () => {
@@ -11,49 +11,67 @@ const AllLocation = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [locationsPerPage] = useState(10);
   const [error, setError] = useState(null);
-
+  const [refetch, setRefetch] = useState(true);
 
   useEffect(() => {
-    const fetchLocations = async () => {
-      try {
-        const response = await getAllLocations();
-        console.log(response.result);
-        setLocations(response.result);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message || "Failed to fetch bookings");
-        setLoading(false);
-      }
-    };
-    fetchLocations();
-  }, []);
-  
-//   useEffect(() => {
-//     const fetchLocations = async () => {
-//         try {
-//           const response = await getAllLocations();
-//           console.log("Data from API:", response);
-//           if (Array.isArray(response)) {
-//             setLocations(response);
-//           } else if (response && Array.isArray(response.locations)) {
-//             setLocations(response.locations);
-//           } else {
-//             throw new Error("Data format is incorrect");
-//           }
-//         } catch (err) {
-//           setError(err.message || "Failed to fetch locations");
-//         } finally {
-//           setLoading(false);
-//         }
-        
-//       };
-//     fetchLocations();
-//   }, []);
+    if (refetch) {
+      const fetchLocations = async () => {
+        try {
+          const response = await getAllLocations();
+          console.log(response.result);
+          setLocations(response.result);
+          setLoading(false);
+          setRefetch(false);
+        } catch (err) {
+          setError(err.message || "Failed to fetch bookings");
+          setLoading(false);
+        }
+      };
+      fetchLocations();
+    }
+  }, [refetch]);
+
+  //   useEffect(() => {
+  //     const fetchLocations = async () => {
+  //         try {
+  //           const response = await getAllLocations();
+  //           console.log("Data from API:", response);
+  //           if (Array.isArray(response)) {
+  //             setLocations(response);
+  //           } else if (response && Array.isArray(response.locations)) {
+  //             setLocations(response.locations);
+  //           } else {
+  //             throw new Error("Data format is incorrect");
+  //           }
+  //         } catch (err) {
+  //           setError(err.message || "Failed to fetch locations");
+  //         } finally {
+  //           setLoading(false);
+  //         }
+
+  //       };
+  //     fetchLocations();
+  //   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteLocation(id);
+      setLocations((prevLocations) =>
+        prevLocations.filter((location) => location.id !== id)
+      );
+      setRefetch(true);
+    } catch (error) {
+      console.error("Error deleting location:", error);
+    }
+  };
 
   // Pagination logic
   const indexOfLastLocation = currentPage * locationsPerPage;
   const indexOfFirstLocation = indexOfLastLocation - locationsPerPage;
-  const currentLocations = locations.slice(indexOfFirstLocation, indexOfLastLocation);
+  const currentLocations = locations.slice(
+    indexOfFirstLocation,
+    indexOfLastLocation
+  );
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -75,14 +93,30 @@ const AllLocation = () => {
         <table className="min-w-full text-sm text-left text-gray-500">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 py-3">SL</th>
-              <th scope="col" className="px-6 py-3">Location Name</th>
-              <th scope="col" className="px-6 py-3">Email</th>
-              <th scope="col" className="px-8 py-3">Phone</th>
-              <th scope="col" className="px-8 py-3">Address</th>
-              <th scope="col" className="px-8 py-3">Hours</th>
-              <th scope="col" className="px-8 py-3">Website</th>
-              <th scope="col" className="px-16 py-3">Action</th>
+              <th scope="col" className="px-6 py-3">
+                SL
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Location Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Email
+              </th>
+              <th scope="col" className="px-8 py-3">
+                Phone
+              </th>
+              <th scope="col" className="px-8 py-3">
+                Address
+              </th>
+              <th scope="col" className="px-8 py-3">
+                Hours
+              </th>
+              <th scope="col" className="px-8 py-3">
+                Website
+              </th>
+              <th scope="col" className="px-16 py-3">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -109,14 +143,21 @@ const AllLocation = () => {
                     {location.hours}
                   </td>
                   <td className="px-6 py-4 font-medium dark:text-white">
-                   <a href={location.website} className="underline">{location.website}</a> 
+                    <a href={location.website} className="underline">
+                      {location.website}
+                    </a>
                   </td>
                   <td className="px-6 py-4 flex gap-3 hover:underline hover:cursor-pointer">
                     <div>
-                      <MdDelete className="text-3xl hover:text-red-500" />
+                      <MdDelete
+                        className="text-3xl hover:text-red-500"
+                        onClick={() => handleDelete(location.location_id)}
+                      />
                     </div>
                     <div>
-                      <Link to={`/dashboard/updatedestination/${location._id}`}>
+                      <Link
+                        to={`/dashboard/updatedestination/${location.location_id}`}
+                      >
                         <FaEdit className="text-3xl hover:text-teal-500" />
                       </Link>
                     </div>

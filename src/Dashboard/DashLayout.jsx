@@ -2,16 +2,15 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
 
-
 const DashLayout = () => {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <div className="flex h-screen overflow-hidden">
-    <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-    <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-[#f2f2f2]">
-      <header
-        className={`sticky top-0 z-999 flex w-full bg-white py-2 px-6 h-[70px] dark:bg-boxdark border-b`}
-      >
+      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-[#f2f2f2]">
+        <header
+          className={`sticky top-0 z-999 flex w-full bg-white py-2 px-6 h-[70px] dark:bg-boxdark border-b`}
+        >
           <button
             onClick={(e) => {
               e.stopPropagation();
@@ -48,21 +47,20 @@ const DashLayout = () => {
               />
             </svg>
           </button>
-      </header>
+        </header>
 
-      <main>
-        <div
-          className={`mx-auto max-w-screen px-[24px] py-[15px] ${
-            sidebarOpen &&
-            "bg-black opacity-40 fixed h-screen w-screen no-scrollbar"
-          }`}
-        >
-          <Outlet />
-        </div>
-      </main>
+        <main>
+          <div
+            className={`mx-auto max-w-screen px-[24px] py-[15px] ${
+              sidebarOpen && " fixed h-screen w-screen no-scrollbar"
+            }`}
+          >
+            <Outlet />
+          </div>
+        </main>
+      </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default DashLayout
+export default DashLayout;

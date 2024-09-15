@@ -1,172 +1,199 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
-import { findAllDestination } from '../common/api/destinationApi';
+import { findAllDestination } from "../common/api/destinationApi";
+// import { createLocation } from "../common/api/locationApi";
+import { BASE_URL } from "../common/constant/constant";
+import axios from "axios";
 
 const CreateLocation = () => {
-  const [formData, setFormData] = useState({
-    title: '',
-    name: '',
-    phone: '',
-    address: '',
-    email: '',
-    openTime: '',
-    description: '',
-    closeTime: '',
-    destination: '',
-  });
-  
-  const [destinations, setDestinations] = useState([]);
+  // Individual states for each property
 
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [website, setWebsite] = useState("");
+
+  const [openTime, setOpenTime] = useState("");
+  const [description, setDescription] = useState("");
+  const [closeTime, setCloseTime] = useState("");
+  const [destination, setDestination] = useState(null);
+
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [destinations, setDestinations] = useState([]);
+  const [isLoading, setIsLoading] = useState(false); // Loading state for form submission
+  const [error, setError] = useState(null);
+
+  // Fetch destinations from API
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
         const data = await findAllDestination();
         setDestinations(data);
       } catch (error) {
-        console.error('Error fetching destinations:', error);
+        setError("Failed to fetch destinations");
+        console.error("Error fetching destinations:", error);
       }
     };
     fetchDestinations();
   }, []);
 
-  // Handle form field changes
-  const handleChange = (e) => {
-    if (e.target) {
-      setFormData({
-        ...formData,
-        [e.target.id]: e.target.value,
-      });
+  // Handle image selection
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    setSelectedImages(files);
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setError(null);
+
+    const formData = new FormData();
+    console.log(destination);
+    // Append text fields to formData
+
+    formData.append("name", name);
+    formData.append("phone", phone);
+    formData.append("address", address);
+    formData.append("website", website);
+    formData.append("email", "");
+    formData.append("hours", `${openTime}am-${closeTime}pm`);
+    formData.append("description", description);
+    formData.append("destination_id", destination);
+    // formData.append("attachments", selectedImages);
+    // Append images to formData (as attachments)
+    selectedImages.forEach((image) => {
+      formData.append("attachments", image);
+    });
+    console.log(selectedImages);
+    try {
+      // const response = await fetch("/api/locations/new", {
+      //   method: "POST",
+      //   body: formData,
+      // });
+      const response = await axios.post(
+        `${BASE_URL}/api/locations/new`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        }
+      );
+      console.log(response);
+      if (!response?.data?.success) {
+        throw new Error("Error uploading data");
+      }
+
+      const result = await response?.data;
+      console.log("Location created:", result);
+      alert("Location created successfully!");
+
+      // Reset form after successful submission
+
+      setName("");
+      setPhone("");
+      setAddress("");
+      setOpenTime("");
+      setDescription("");
+      setCloseTime("");
+      setDestination("");
+      setSelectedImages([]);
+    } catch (error) {
+      setError("Failed to create location");
+      console.error("Error creating location:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Handle ReactQuill changes
-  const handleQuillChange = (value) => {
-    setFormData({
-      ...formData,
-      description: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Data:', formData);
-  };
-
   return (
-    <div className='p-4 max-w-4xl mx-auto min-h-screen'>
-      <h1 className='text-center text-3xl my-7 font-semibold text-[#a04747]'>
+    <div className="p-4 max-w-4xl mx-auto min-h-screen">
+      <h1 className="text-center text-3xl my-7 font-semibold text-[#a04747]">
         Create a Location
       </h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-6'>
+
+      {/* Display error message if any */}
+      {error && <p className="text-red-600 text-center">{error}</p>}
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         {/* Title and Destination */}
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-          <input
-            type='text'
-            id='title'
-            placeholder='Title'
-            value={formData.title}
-            onChange={handleChange}
-            required
-            className='p-2 border border-gray-300 rounded-md w-full'
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <InputField
+            type="text"
+            id="name"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-          <select
-            id='destination'
-            onChange={handleChange}
-            value={formData.destination}
-            className='p-2 border border-gray-300 rounded-md w-full'
-          >
-            <option value=''>Select a Destination</option>
-            {destinations?.result?.length > 0 ? (
-              destinations?.result?.map((dest) => (
-                <option key={dest.name} value={dest.name}>
-                  {dest.name}
-                </option>
-              ))
-            ) : (
-              <option disabled>No destinations available</option>
-            )}
-          </select>
+          <SelectField
+            id="destination"
+            value={destination}
+            onChange={(e) => setDestination(e.target.value)}
+            options={destinations?.result}
+            placeholder="Select a Destination"
+          />
         </div>
 
         {/* Other input fields */}
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-          <input
-            type='text'
-            id='name'
-            placeholder='Name'
-            value={formData.name}
-            onChange={handleChange}
-            required
-            className='p-2 border border-gray-300 rounded-md w-full'
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <InputField
+            type="text"
+            id="phone"
+            placeholder="Phone number"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            required={false}
           />
-          <input
-            type='text'
-            id='phone'
-            placeholder='Phone number'
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            className='p-2 border border-gray-300 rounded-md w-full'
+          <InputField
+            type="text"
+            id="address"
+            placeholder="Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
           />
-          <input
-            type='text'
-            id='address'
-            placeholder='Address'
-            value={formData.address}
-            onChange={handleChange}
-            required
-            className='p-2 border border-gray-300 rounded-md w-full'
-          />
-          <input
-            type='email'
-            id='email'
-            placeholder='Email'
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className='p-2 border border-gray-300 rounded-md w-full'
+          <InputField
+            type="website"
+            id="website"
+            placeholder="Website"
+            value={website}
+            onChange={(e) => setWebsite(e.target.value)}
+            required={false}
           />
         </div>
 
         {/* Open and Close Time */}
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-          <div className='flex flex-col'>
-            <label htmlFor='openTime' className='mb-2 font-medium'>
-              Open Time
-            </label>
-            <input
-              type='time'
-              id='openTime'
-              value={formData.openTime}
-              onChange={handleChange}
-              className='p-2 border border-gray-300 rounded-md'
-            />
-          </div>
-          <div className='flex flex-col'>
-            <label htmlFor='closeTime' className='mb-2 font-medium'>
-              Close Time
-            </label>
-            <input
-              type='time'
-              id='closeTime'
-              value={formData.closeTime}
-              onChange={handleChange}
-              className='p-2 border border-gray-300 rounded-md'
-            />
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <InputField
+            type="time"
+            id="openTime"
+            label="Open Time"
+            value={openTime}
+            onChange={(e) => setOpenTime(e.target.value)}
+          />
+          <InputField
+            type="time"
+            id="closeTime"
+            label="Close Time"
+            value={closeTime}
+            onChange={(e) => setCloseTime(e.target.value)}
+          />
         </div>
 
-        {/* File upload section */}
-        <div className='grid grid-cols-1 md:grid-cols-3 gap-4 items-center border-4 border-[#a04747] border-dotted p-3'>
+        {/* Image upload section */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center border-4 border-[#a04747] border-dotted p-3">
           <input
             multiple
-            type='file'
-            accept='image/*'
-            className='col-span-2 p-2 border border-gray-300 rounded-md'
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="col-span-2 p-2 border border-gray-300 rounded-md"
           />
           <button
-            type='button'
-            className='px-4 py-2 bg-[#c75f5f] font-bold text-white hover:bg-[#a04747]  rounded-md w-full'
+            type="button"
+            className="px-4 py-2 bg-[#c75f5f] font-bold text-white hover:bg-[#a04747]  rounded-md w-full"
           >
             Upload Images
           </button>
@@ -174,22 +201,71 @@ const CreateLocation = () => {
 
         {/* ReactQuill for description */}
         <ReactQuill
-          theme='snow'
-          value={formData.description}
-          onChange={handleQuillChange}
-          placeholder='Write something...'
-          className='h-72 mb-12'
+          theme="snow"
+          value={description}
+          onChange={(value) => setDescription(value)}
+          placeholder="Write something..."
+          className="h-72 mb-12"
         />
 
         {/* Publish button */}
         <button
-          type='submit'
-          className='px-4 py-2 bg-gradient-to-r bg-[#c75f5f] font-bold text-white hover:bg-[#a04747] rounded-md shadow-2xl'
+          type="submit"
+          className={`px-4 py-2 font-bold text-white rounded-md shadow-2xl ${
+            isLoading
+              ? "bg-gray-400"
+              : "bg-gradient-to-r bg-[#c75f5f] hover:bg-[#a04747]"
+          }`}
+          disabled={isLoading || destination === null ? true : false}
         >
-          Publish
+          {isLoading ? "Publishing..." : "Publish"}
         </button>
       </form>
     </div>
+  );
+};
+
+// InputField component for reuse
+const InputField = ({ type, id, placeholder, value, onChange, label }) => (
+  <div className="flex flex-col">
+    {label && (
+      <label htmlFor={id} className="mb-2 font-medium">
+        {label}
+      </label>
+    )}
+    <input
+      type={type}
+      id={id}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      className="p-2 border border-gray-300 rounded-md w-full"
+      required
+    />
+  </div>
+);
+
+// SelectField component for reuse
+const SelectField = ({ id, value, onChange, options, placeholder }) => {
+  // console.log("SelectField", options);
+  return (
+    <select
+      id={id}
+      value={value}
+      onChange={onChange}
+      className="p-2 border border-gray-300 rounded-md w-full"
+    >
+      <option value="">{placeholder}</option>
+      {options?.length > 0 ? (
+        options.map((option) => (
+          <option key={option.name} value={option.destination_id}>
+            {option.name}
+          </option>
+        ))
+      ) : (
+        <option disabled>No destinations available</option>
+      )}
+    </select>
   );
 };
 

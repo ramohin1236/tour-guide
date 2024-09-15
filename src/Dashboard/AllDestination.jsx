@@ -20,7 +20,7 @@ const AllDestination = () => {
     const fetchDestinations = async () => {
       try {
         const data = await findAllDestination();
-        console.log(data.result);
+        // console.log(data.result);
         setDestinations(data.result);
         setLoading(false);
       } catch (error) {
@@ -41,12 +41,11 @@ const AllDestination = () => {
     if (confirmDelete) {
       try {
         await deleteDestination(id);
-        toast.success("Delete Successful!")
+        toast.success("Delete Successful!");
         setDestinations(
           destinations.filter(
             (destination) => destination.destination_id !== id
           )
-          
         );
       } catch (error) {
         console.error("Error deleting destination:", error);
@@ -74,7 +73,9 @@ const AllDestination = () => {
   return (
     <div>
       <div className="flex justify-between py-6">
-        <p className="text-3xl font-semibold">{destinations?.length} Destination</p>
+        <p className="text-3xl font-semibold">
+          {destinations?.length} Destination
+        </p>
         <Link to="/dashboard/createdestination">
           <button className="hover:bg-[#a04747] hover:text-white text-[#a04747] w-36 h-12 rounded-lg font-bold bg-white shadow-lg">
             Add Destination
