@@ -3,18 +3,18 @@
 const Contact = () => {
   return (
     <>
-      <section className="pt-32 relative z-10 overflow-hidden py-10 px-[10px] md:px-[200px] font-mono">
-        <div className="pb-5 md:pb-20 ">
-          <p className="mb-2 block text-xl md:text-5xl font-bold text-center md:text-start ">
+      <section className="pt-32 relative z-10 overflow-hidden py-10 px-[20px] md:px-[200px]">
+        <div className="pb-5 md:pb-20 text-start">
+          <p className="mb-2 block text-xl md:text-5xl font-bold text-start">
             Contact Us
           </p>
-          <p className="md:text-xl font-bold text-[#A04747]  text-center md:text-start">
+          <p className="md:text-xl font-bold text-[#A04747] text-start">
             Get In Touch With Us
           </p>
         </div>
-        <div className="flex flex-col lg:flex-row gap-5 md:gap-10 justify-between items-start md:items-center ">
-          <div className="md:p-5 md:w-1/2 mt-4">
-            <div className="mb-10 flex gap-2 justify-between items-center  ml-20 md:ml-0 lg:ml-0">
+        <div className="flex flex-col md:flex-row gap-5 justify-between text-start items-center">
+          <div className="md:p-5 w-full md:w-1/2 mt-5">
+            <div className="mb-10 flex gap-2 justify-between items-center">
               <div className="">
                 <svg
                   width="32"
@@ -36,7 +36,7 @@ const Contact = () => {
                 <p className="text-base text-dark">Tokyo,Japan.</p>
               </div>
             </div>
-            <div className="mb-10 flex gap-2 justify-between items-center  ml-20 md:ml-0 lg:ml-0">
+            <div className="mb-10 flex gap-2 justify-between items-center">
               <div>
                 <svg
                   width="32"
@@ -73,7 +73,7 @@ const Contact = () => {
                 <p className="text-base text-dark">+818041364488</p>
               </div>
             </div>
-            <div className="mb-10 flex gap-2 justify-between items-center  ml-20 md:ml-0 lg:ml-0">
+            <div className="mb-10 flex gap-2 justify-between items-center">
               <div>
                 <svg
                   width="32"
@@ -97,7 +97,7 @@ const Contact = () => {
                 </p>
               </div>
             </div>
-          </div>
+          </div> 
 
           <div className="relative w-full lg:w-1/2 rounded-lg p-5 lg:p-20 shadow-lg">
             <form>

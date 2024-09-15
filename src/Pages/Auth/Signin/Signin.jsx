@@ -42,7 +42,7 @@ const Signin = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 py-12">
-      <div className="bg-white shadow-lg rounded-lg flex flex-col-reverse lg:flex-row max-w-6xl p-8 lg:p-12 h-auto lg:h-[700px] mt-16">
+      <div className="bg-white shadow-lg rounded-lg flex flex-col-reverse lg:flex-row max-w-6xl p-5 md:p-0 h-auto lg:h-[700px] mt-16">
         {/* Left Image Section */}
         <div className="lg:flex w-full lg:w-1/2 items-center justify-center mb-8 lg:mb-0">
           <div className="relative w-full h-64 lg:h-full">
@@ -55,45 +55,50 @@ const Signin = () => {
         </div>
 
         {/* Signup Form Section */}
-        <div className="w-full lg:w-1/2 px-6 lg:px-8 py-6">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-            Sign In
-          </h2>
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
-              required
-            />
+        <div className="flex flex-col justify-center">
+          <div className="w-full px-6 lg:px-8 py-6 ">
+         
+            <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+              Sign In
+            </h2>
+            <form className="space-y-6" onSubmit={handleSubmit}>
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
+                required
+              />
 
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
-              required
-            />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
+                required
+              />
 
-            <button
-              type="submit"
-              className="w-full bg-[#A04747] text-white py-2 rounded-lg font-semibold  transition-colors duration-300"
-              disabled={loading}
-            >
-              {loading ? "Signing In..." : "Sign In"}
-            </button>
+              <button
+                type="submit"
+                className="w-full bg-[#A04747] text-white py-2 rounded-lg font-semibold  transition-colors duration-300"
+                disabled={loading}
+              >
+                {loading ? "Signing In..." : "Sign In"}
+              </button>
 
-            {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-          </form>
-          <p className="mt-4 text-gray-600 text-center">
-            Don't have an account?
-            <Link to="/signup" className="text-[#A04747] font-semibold">
-              Sign Up
-            </Link>
-          </p>
+              {error && (
+                <p className="text-red-500 text-center mt-4">{error}</p>
+              )}
+            </form>
+            <p className="mt-4 text-gray-600 text-center">
+              <span className="mr-2">Don't have an account?</span>
+              <Link to="/signup" className="text-[#A04747] font-semibold">
+                Sign Up
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

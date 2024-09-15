@@ -86,7 +86,7 @@ const SignUp = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100 py-12">
-            <div className="bg-white shadow-lg rounded-lg flex flex-col-reverse lg:flex-row max-w-6xl p-8 lg:p-12 h-auto lg:h-[700px] mt-16">
+            <div className="bg-white shadow-lg rounded-lg flex flex-col-reverse lg:flex-row max-w-6xl p-5 lg:p-0 h-auto lg:h-[700px] mt-16">
                 {/* Left Image Section */}
                 <div className="lg:flex w-full lg:w-1/2 items-center justify-center mb-8 lg:mb-0">
                     <div className="relative w-full h-64 lg:h-full">
@@ -99,7 +99,7 @@ const SignUp = () => {
                 </div>
 
                 {/* Signup Form Section */}
-                <div className="w-full lg:w-1/2 px-6 lg:px-8 py-6">
+                <div className="w-full lg:w-1/2 px-6 lg:px-8 py-6 md:mt-20">
                     <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
                         Create an Account
                     </h2>
@@ -174,7 +174,7 @@ const SignUp = () => {
                         </button>
                     </form>
                     <p className="mt-4 text-gray-600 text-center">
-                        Already have an account?{" "}
+                       <span className="mr-2">Already have an account?</span>
                         <Link to="/signin" className="text-[#A04747] font-semibold">
                             Sign In
                         </Link>
