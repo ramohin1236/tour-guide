@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+
 
 import { Link } from "react-router-dom";
 import Doc from "../Doc/Doc";
@@ -62,7 +62,7 @@ const MustVisitDestination = () => {
                 <p className="mt-4 text-base text-black leading-relaxed">
                   {spot.description}
                 </p>
-                <Link to="/details/:id">
+                <Link to="/destination">
                   <button
                     type="button"
                     className="mt-6 px-5 py-3 rounded-lg text-white text-base tracking-wider border-none outline-none relative overflow-hidden transition-all duration-300 group"

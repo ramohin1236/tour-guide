@@ -4,7 +4,7 @@
 
 const PopularTab = ({destinations, activeTab, setActiveTab }) => {
     
-   console.log(activeTab);
+
      
    const handleClick =(id)=>{
 

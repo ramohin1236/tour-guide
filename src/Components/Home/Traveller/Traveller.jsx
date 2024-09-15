@@ -3,12 +3,12 @@ import Doc from "../../Doc/Doc";
 const Traveller = () => {
   const { naraPark, fuziMountain, omotesando } = Doc();
   return (
-    <div className="mx-auto px-[20px] md:px-[100px] mb-10">
+    <div className="mx-auto max-w-6xl   mb-10">
       <div className="text-center">
-        <h2 className="text-xl md:text-6xl font-bold text-[#A04747]">
+        <h2 className="text-xl md:text-5xl font-bold text-[#A04747]">
           BEST TRAVELER SHARED PHOTO
         </h2>
-        <p className="mt-5 text-center px-[20px] md:px-[200px] pb-10">
+        <p className="mt-5 text-center px-[20px] pb-10">
           Excellent opportunity to sample local cuisine and culture while seeing
           the main attractions. A good mix of modern, traditional, and
           historical sights or experiences. RYOKOU handled the transportation
@@ -16,30 +16,30 @@ const Traveller = () => {
           and nations.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 mx-auto px-[20px] md:px-[100px]">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-5  mx-auto px-[20px] ">
         <div>
           <img
             src={fuziMountain}
             alt="Travelers in Kyoto"
-            className="rounded shadow-lg h-[250px] w-[400px] md:h-[350px] md:w-[500px]"
+            className="rounded-lg shadow-lg "
           />
         </div>
         <div className="">
           <img
             src={omotesando}
             alt="Travelers in Tokyo"
-            className="rounded shadow-lg  h-[250px] w-[400px] md:h-[350px] md:w-[500px]"
+            className="rounded-lg shadow-lg  "
           />
         </div>
         <div className="">
           <img
             src={naraPark}
             alt="Travelers in Osaka"
-            className="rounded shadow-lg h-[250px] w-[400px] md:h-[350px] md:w-[500px]"
+            className="rounded-lg shadow-lg "
           />
         </div>
       </div>
-      <div className="mt-10 mx-auto px-[20px] md:px-[100px] md:pr-[130px]">
+      <div className="mt-10 mx-auto max-w-6xl px-[20px] ">
         <div>
           <iframe
             width="100%"

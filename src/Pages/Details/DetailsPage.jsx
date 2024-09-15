@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getLocationById } from "../../common/api/locationApi";
 import config from "../../config/config";
+import toast from "react-hot-toast";
 
 const DetailsPage = () => {
 
     const [currentLocation, setCurrentLocation]=useState({})
-    console.log(currentLocation);
+    
     const [, setLoading]=useState(true)
     
      const params =useParams()
@@ -18,19 +19,28 @@ const DetailsPage = () => {
     useEffect(() => {
         const fetchLocationById = async () => {
           try {
-            const response = await getLocationById(params.id); 
-           
-            setCurrentLocation(response.result);
+            const response = await getLocationById(params?.id); 
+            
+            setCurrentLocation(response?.result);
             setLoading(false);
           } catch (err) {
-            console.log(err.message || "Failed to fetch users");
+            toast.error(err.message || "Failed to fetch users");
             setLoading(false);
           }
         };
         fetchLocationById();
       }, [params.id]);
       
-      const {name,default_image,description,phone,website,hours,address}=currentLocation
+    //   const {name,default_image,description,phone,website,hours,address}=currentLocation
+    const {
+        name = "Unknown Name",
+        default_image = "default.jpg", // A placeholder image
+        description = "No description available.",
+        phone = "N/A",
+        website = "N/A",
+        hours = "Not available",
+        address = "No address provided",
+      } = currentLocation;
     
     
   return (

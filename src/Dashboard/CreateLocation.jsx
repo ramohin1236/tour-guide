@@ -86,7 +86,7 @@ const CreateLocation = () => {
         throw new Error("Error uploading data");
       }
 
-      console.log("Location created:", response?.data);
+   
       alert("Location created successfully!");
 
       // Reset form after successful submission
@@ -180,20 +180,15 @@ const CreateLocation = () => {
         </div>
 
         {/* Image upload section */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center border-4 border-[#a04747] border-dotted p-3">
+        <div className=" items-center border-4 border-[#a04747] border-dotted p-3">
           <input
             multiple
             type="file"
             accept="image/*"
             onChange={handleImageChange}
-            className="col-span-2 p-2 border border-gray-300 rounded-md"
+            className=" p-2 border w-full border-gray-300 rounded-md"
           />
-          <button
-            type="button"
-            className="px-4 py-2 bg-[#c75f5f] font-bold text-white hover:bg-[#a04747]  rounded-md w-full"
-          >
-            Upload Images
-          </button>
+         
         </div>
 
         {/* ReactQuill for description */}

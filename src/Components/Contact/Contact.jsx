@@ -122,12 +122,11 @@ const Contact = () => {
               />
               <div>
                 <a href="mailto:sumiyaenterprise85@gmail.com">
-                  <button
-              
-                    className="w-full rounded bg-[#A04747] p-3 text-white transition"
+                  <p
+                    className="w-full text-center rounded bg-[#A04747] p-3 text-white "
                   >
                     Send Message
-                  </button>
+                  </p>
                 </a>
               </div>
             </form>

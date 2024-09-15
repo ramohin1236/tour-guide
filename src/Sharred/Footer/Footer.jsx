@@ -5,7 +5,7 @@ const Footer = () => {
         <ul className="flex flex-wrap justify-center gap-x-7 gap-4">
           <li>
             <a
-              href="javascript:void(0)"
+              href="/"
               className="text-xl hover:text-gray-400"
             >
               <svg
@@ -29,7 +29,7 @@ const Footer = () => {
 
           <li>
             <a
-              href="javascript:void(0)"
+              href="/"
               className="text-xl hover:text-gray-400"
             >
               <svg
@@ -57,7 +57,7 @@ const Footer = () => {
 
           <li>
             <a
-              href="javascript:void(0)"
+              href="/"
               className="text-xl hover:text-gray-400"
             >
               <svg
@@ -94,7 +94,7 @@ const Footer = () => {
 
           <li>
             <a
-              href="javascript:void(0)"
+              href="/"
               className="text-xl hover:text-gray-400"
             >
               <svg

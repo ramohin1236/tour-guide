@@ -1,7 +1,7 @@
-/* eslint-disable no-unused-vars */
+
 import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
-import { Link } from "react-router-dom";
+
 import { deleteBooking, findAllBookings } from "../common/api/bookingApi";
 import moment from 'moment';
 import UserPagination from "../Components/Sharred/Pagination";
@@ -13,13 +13,12 @@ const AllBookings = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [bookingsPerPage] = useState(10); 
   const [error, setError] = useState(null);
-  const [users, setUsers] = useState([]);
-  console.log(users);
+
+
   useEffect(() => {
     const fetchBookings = async () => {
       try {
         const response = await findAllBookings(); 
-        console.log(response.result);
         setBookings(response.result);
         setLoading(false);
       } catch (err) {
@@ -31,7 +30,6 @@ const AllBookings = () => {
   }, []);
 
   const handleDelete = async (userId) => {
-    console.log(userId);
     if (!userId) {
       toast.error("User ID is not provided");
       return;
@@ -44,8 +42,7 @@ const AllBookings = () => {
   
       toast.success("Booking deleted successfully!");
     } catch (error) {
-      console.error("Failed to delete booking:", error);
-      toast.error("Failed to delete booking");
+      toast.error(error.message);
     }
   };
   // Pagination logic
@@ -63,24 +60,24 @@ const AllBookings = () => {
   return (
     <div>
       <div className="flex justify-between py-6">
-        <p className="text-3xl font-semibold text-[#a04747]">Total {bookings?.length} Bookings</p>
+        <p className="text-3xl font-semibold text-[#a04747]">All Bookings</p>
         
       </div>
 
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
         <table className="min-w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-xl text-gray-700 uppercase bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3">SL</th>
-              <th scope="col" className="px-10 py-3">Booking ID</th>
+              <th scope="col" className="px-6 py-3">Booking ID</th>
               <th scope="col" className="px-6 py-3">User Name</th>
-              <th scope="col" className="px-32 py-3">Email</th>
-              <th scope="col" className="px-10 py-3">Phone</th>
+              <th scope="col" className="px-6 py-3">Email</th>
+              <th scope="col" className="px-6 py-3">Phone</th>
               <th scope="col" className="px-6 py-3">Booking Start </th>
               <th scope="col" className="px-6 py-3">Booking End </th>
               <th scope="col" className="px-6 py-3">Country From </th>
               <th scope="col" className="px-6 py-3">Status </th>
-              <th scope="col" className="px-16 py-3">Action</th>
+              <th scope="col" className="px-6 py-3">Action</th>
             </tr>
           </thead>
           <tbody>

@@ -6,9 +6,10 @@ import { allUsers } from "../common/api/ApiKit";
 import { useEffect } from "react";
 
 const MainLayout = () => {
+    
   const getAllUsers = async () => {
     const users = await allUsers();
-    // console.log(users);
+
     
   };
   useEffect(() => {

@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import PopularCard from "./PopularCard";
 import { getAllLocations } from "../../../common/api/locationApi";
+import toast from "react-hot-toast";
   
 const PopularPlace = ({ id }) => {
+ 
     const [location, setLocation] = useState([]);
    
     const [, setLoading]= useState(true)
@@ -12,11 +14,11 @@ const PopularPlace = ({ id }) => {
         const fetchLocation = async () => {
           try {
             const data = await getAllLocations();
-           
+          
             setLocation(data.result);
             setLoading(false);
           } catch (error) {
-           console.log(error.message)
+           toast.error(error.message)
           } finally {
             setLoading(false);
           }
@@ -32,7 +34,7 @@ const PopularPlace = ({ id }) => {
       className="flex flex-wrap flex-col md:flex-row gap-5 justify-center mx-auto max-w-screen-xl"
     >
      {
-        location?.filter((loc)=>loc?.destination_id === id )?.map((loc)=><PopularCard key={loc?.destination_id}
+        location?.filter((loc)=>loc?.destination_id === id )?.map((loc)=><PopularCard key={loc?.location_id}
          loc={loc}
         />)
      }

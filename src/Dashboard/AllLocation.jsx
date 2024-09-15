@@ -13,8 +13,8 @@ const AllLocation = () => {
   const [locationsPerPage] = useState(10);
   const [error, setError] = useState(null);
   const [refetch, setRefetch] = useState(true);
-  const [attachments,setAttachments] = useState(null)
-  console.log(attachments);
+  const [,setAttachments] = useState(null)
+
 
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const AllLocation = () => {
       const fetchLocations = async () => {
         try {
           const response = await getAllLocations();
-          console.log(response.result);
+         
           setLocations(response.result);
           setLoading(false);
           setRefetch(false);
@@ -45,28 +45,6 @@ const AllLocation = () => {
       fetchAttachments();
     }
   }, [refetch]);
-
-  //   useEffect(() => {
-  //     const fetchLocations = async () => {
-  //         try {
-  //           const response = await getAllLocations();
-  //           console.log("Data from API:", response);
-  //           if (Array.isArray(response)) {
-  //             setLocations(response);
-  //           } else if (response && Array.isArray(response.locations)) {
-  //             setLocations(response.locations);
-  //           } else {
-  //             throw new Error("Data format is incorrect");
-  //           }
-  //         } catch (err) {
-  //           setError(err.message || "Failed to fetch locations");
-  //         } finally {
-  //           setLoading(false);
-  //         }
-
-  //       };
-  //     fetchLocations();
-  //   }, []);
 
   const handleDelete = async (id) => {
     try {
@@ -96,9 +74,9 @@ const AllLocation = () => {
   return (
     <div>
       <div className="flex justify-between py-6">
-        <p className="text-3xl font-semibold">All Locations</p>
+        <p className="text-3xl font-semibold text-[#a04747]">All Locations</p>
         <Link to="/dashboard/createlocation">
-          <button className="bg-[#c75f5f] font-bold text-white hover:bg-[#a04747] w-36 h-12 rounded-lg">
+        <button className="hover:bg-[#a04747] hover:text-white text-[#a04747] w-36 h-12 rounded-lg font-bold bg-white shadow-lg">
             Add Location
           </button>
         </Link>
@@ -106,7 +84,7 @@ const AllLocation = () => {
 
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
         <table className="min-w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <thead className="text-xl text-gray-700 uppercase bg-gray-50">
             <tr>
               <th scope="col" className="px-6 py-3">
                 SL
@@ -117,19 +95,19 @@ const AllLocation = () => {
               <th scope="col" className="px-6 py-3">
                 Email
               </th>
-              <th scope="col" className="px-8 py-3">
+              <th scope="col" className="px-6 py-3">
                 Phone
               </th>
-              <th scope="col" className="px-8 py-3">
+              <th scope="col" className="px-6 py-3">
                 Address
               </th>
-              <th scope="col" className="px-8 py-3">
+              <th scope="col" className="px-6 py-3">
                 Hours
               </th>
-              <th scope="col" className="px-8 py-3">
+              <th scope="col" className="px-6 py-3">
                 Website
               </th>
-              <th scope="col" className="px-16 py-3">
+              <th scope="col" className="px-6 py-3">
                 Action
               </th>
             </tr>
