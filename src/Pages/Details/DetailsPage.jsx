@@ -31,10 +31,9 @@ const DetailsPage = () => {
         fetchLocationById();
       }, [params.id]);
       
-    //   const {name,default_image,description,phone,website,hours,address}=currentLocation
     const {
         name = "Unknown Name",
-        default_image = "default.jpg", // A placeholder image
+        default_image = "default.jpg", 
         description = "No description available.",
         phone = "N/A",
         website = "N/A",

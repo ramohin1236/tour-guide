@@ -21,6 +21,7 @@ const PrivateRoute = ({ children }) => {
         setLoading(false)
     }
     callBackCurrentUser()
+    setLoading(true)
   }, []);
 
   if (loading) {
