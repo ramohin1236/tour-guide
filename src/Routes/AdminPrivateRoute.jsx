@@ -8,7 +8,7 @@ const AdminPrivateRoute = ({children}) => {
     const [loading, setLoading] = useState(true);
     const location = useLocation();
     
-console.log(currentUser?.isAdmin);
+
     const getCurrentUsers = async () => {
         setLoading(true);
         const user = await userProfile();

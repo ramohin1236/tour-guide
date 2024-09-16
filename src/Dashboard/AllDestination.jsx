@@ -127,7 +127,9 @@ const AllDestination = () => {
                     onClick={() => handleDelete(post.destination_id)}
                   />
                   <Link
+
                     to={`/dashboard/updatedestination/${post.destination_id}`}
+                    state={post}
                   >
                     <FaEdit className="text-3xl hover:text-teal-500" />
                   </Link>

@@ -6,11 +6,10 @@ import { IoPersonOutline } from "react-icons/io5";
 import { AuthContext } from "../Pages/Auth/AuthProvider/AuthProvider";
 
 const Navbar = () => {
-  const { user, loading, signOut } = useContext(AuthContext); // Destructure the user and signOut from useAuth
+  const { user, loading, signOut } = useContext(AuthContext); 
   const { logo4 } = Doc();
   const [menu, setMenu] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  console.log(user);
   const navigate = useNavigate();
 
   const togglePopover = () => {
@@ -64,6 +63,16 @@ const Navbar = () => {
               </Link>
             )}
 
+           
+
+            <Link
+              to="/contact"
+              duration={500}
+              className="text-[#A04747] cursor-pointer"
+            >
+              Contact Us
+            </Link>
+
             {user?.isAdmin && (
               <>
                 <Link
@@ -75,16 +84,8 @@ const Navbar = () => {
                 </Link>
               </>
             )}
-
-            <Link
-              to="/contact"
-              duration={500}
-              className="text-[#A04747] cursor-pointer"
-            >
-              Contact Us
-            </Link>
           </nav>
-
+         
           <div className="hidden lg:flex flex-row justify-between items-center gap-5">
             {!user ? (
               <Link to="/signin">
@@ -133,6 +134,15 @@ const Navbar = () => {
             </Link>
           )}
 
+          
+
+          <Link
+            to="/contact"
+            duration={500}
+            className="text-[#A04747] cursor-pointer"
+          >
+            Contact Us
+          </Link>
           {user?.isAdmin && (
             <Link
               to="/dashboard/alldestination"
@@ -143,15 +153,6 @@ const Navbar = () => {
               Dashboard
             </Link>
           )}
-
-          <Link
-            to="/contact"
-            duration={500}
-            className="text-[#A04747] cursor-pointer"
-          >
-            Contact Us
-          </Link>
-
           {!user && (
             <div className="lg:hidden flex justify-center items-center gap-5">
               <Link to="/signin">

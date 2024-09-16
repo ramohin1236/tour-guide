@@ -37,12 +37,12 @@ axiosInstance.interceptors.response.use(
       const { status } = error.response;
       if (status === 401) {
         // Handle 401 Unauthorized: perhaps redirect to login
-        console.log("Unauthorized, redirecting to login...");
+        
         window.location.href = "/signin";
       }
       if (status === 500) {
         // Handle 500 Internal Server Error: show an error message
-        console.log("Internal Server Error, please try again later.");
+       
       }
     } else if (error.request) {
       // The request was made but no response was received

@@ -28,8 +28,8 @@ const CreateDestination = () => {
   };
 
   try {
-    const response = await createDestination(destinationData);
-    console.log('Destination created successfully:', response);
+     await createDestination(destinationData);
+   
     toast.success("Destination Create Successful!")
     navigate("/dashboard/alldestination")
   } catch (error) {
