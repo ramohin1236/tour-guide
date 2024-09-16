@@ -3,7 +3,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { deleteLocation, getAllLocations } from "../common/api/locationApi";
-import UserPagination from "../Components/Sharred/Pagination";
+import UserPagination from "../Sharred/Pagination";
 import { getAllAttachments } from "../common/api/attachmentApi";
 
 const AllLocation = () => {
@@ -13,16 +13,14 @@ const AllLocation = () => {
   const [locationsPerPage] = useState(10);
   const [error, setError] = useState(null);
   const [refetch, setRefetch] = useState(true);
-  const [,setAttachments] = useState(null)
-
-
+  const [, setAttachments] = useState(null);
 
   useEffect(() => {
     if (refetch) {
       const fetchLocations = async () => {
         try {
           const response = await getAllLocations();
-         
+
           setLocations(response.result);
           setLoading(false);
           setRefetch(false);
@@ -35,7 +33,7 @@ const AllLocation = () => {
       const fetchAttachments = async () => {
         try {
           const response = await getAllAttachments();
-          setAttachments(response); 
+          setAttachments(response);
         } catch (error) {
           console.error("Failed to fetch attachments", error);
         }
@@ -76,7 +74,7 @@ const AllLocation = () => {
       <div className="flex justify-between py-6">
         <p className="text-3xl font-semibold text-[#a04747]">All Locations</p>
         <Link to="/dashboard/createlocation">
-        <button className="hover:bg-[#a04747] hover:text-white text-[#a04747] w-36 h-12 rounded-lg font-bold bg-white shadow-lg">
+          <button className="hover:bg-[#a04747] hover:text-white text-[#a04747] w-36 h-12 rounded-lg font-bold bg-white shadow-lg">
             Add Location
           </button>
         </Link>

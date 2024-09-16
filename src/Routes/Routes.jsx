@@ -20,101 +20,135 @@ import Profile from "../Components/Components/Profile/Profile";
 import TermsOfService from "../Pages/Terms/Terms";
 import PrivacyPolicy from "../Pages/Privacy/Privacy";
 import BookingDetails from "../Pages/BookingDetails";
-import PrivateRoute from './PrivateRoute';
+import PrivateRoute from "./PrivateRoute";
 import AdminPrivateRoute from "./AdminPrivateRoute";
-
-
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout/>,
+    element: <MainLayout />,
     children: [
       {
         path: "/",
-        element: <Home/>,
+        element: <Home />,
       },
       {
         path: "/destination",
-        element: <PopularSpots/>
+        element: <PopularSpots />,
       },
       {
         path: "/details/:id",
-        element: <PrivateRoute> <DetailsPage/></PrivateRoute>
+        element: <DetailsPage />,
       },
       {
-        path: '/booking',
-        element: <PrivateRoute> <Booking/></PrivateRoute>
+        path: "/booking",
+        element: (
+          <PrivateRoute>
+            {" "}
+            <Booking />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/contact",
-        element: <Contact/>,
+        element: <Contact />,
       },
       {
         path: "/payment",
-        element: <Payment/>,
+        element: <Payment />,
       },
       {
         path: "/signup",
-        element: <SignUp/>,
+        element: <SignUp />,
       },
       {
         path: "/signin",
-        element: <Signin/>,
+        element: <Signin />,
       },
       {
         path: "/profile",
-        element: <Profile/>
+        element: <Profile />,
       },
       {
         path: "/terms",
-        element: <TermsOfService />
+        element: <TermsOfService />,
       },
       {
         path: "/privacy",
-        element: <PrivacyPolicy/>
+        element: <PrivacyPolicy />,
       },
       {
         path: "/bookingDetails",
-        element: <BookingDetails/>
+        element: <BookingDetails />,
       },
-     
     ],
   },
 
   {
-    path: '/dashboard',
-    element: <AdminPrivateRoute><DashLayout/></AdminPrivateRoute>,
-    children:[
-        {
-            path: 'alluser',
-            element:<AdminPrivateRoute><AllUser/></AdminPrivateRoute> 
-        },
-        {
-            path: 'bookings',
-            element: <AdminPrivateRoute><AllBooking/></AdminPrivateRoute> 
-        },
-        {
-            path: 'alldestination',
-            element: <AdminPrivateRoute><AllDestination/> </AdminPrivateRoute> 
-        },
-        {
-            path: 'createdestination',
-            element:  <AdminPrivateRoute><CreateDestination/> </AdminPrivateRoute> 
-        },
-        {
-            path: 'allocation',
-            element: <AdminPrivateRoute><AllLocation/> </AdminPrivateRoute> 
-        },
-        {
-            path: 'createlocation',
-            element: <AdminPrivateRoute><CreateLocation/></AdminPrivateRoute>  
-        },
-        
-        {
-            path: "updatedestination/:id",
-            element: <AdminPrivateRoute><UpdateDestination/></AdminPrivateRoute> ,
-          },
-    ]
-  }
+    path: "/dashboard",
+    element: (
+      <AdminPrivateRoute>
+        <DashLayout />
+      </AdminPrivateRoute>
+    ),
+    children: [
+      {
+        path: "alluser",
+        element: (
+          <AdminPrivateRoute>
+            <AllUser />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: "bookings",
+        element: (
+          <AdminPrivateRoute>
+            <AllBooking />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: "alldestination",
+        element: (
+          <AdminPrivateRoute>
+            <AllDestination />{" "}
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: "createdestination",
+        element: (
+          <AdminPrivateRoute>
+            <CreateDestination />{" "}
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: "allocation",
+        element: (
+          <AdminPrivateRoute>
+            <AllLocation />{" "}
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: "createlocation",
+        element: (
+          <AdminPrivateRoute>
+            <CreateLocation />
+          </AdminPrivateRoute>
+        ),
+      },
+
+      {
+        path: "updatedestination/:id",
+        element: (
+          <AdminPrivateRoute>
+            <UpdateDestination />
+          </AdminPrivateRoute>
+        ),
+      },
+    ],
+  },
 ]);

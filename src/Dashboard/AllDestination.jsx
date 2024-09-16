@@ -6,7 +6,7 @@ import {
   deleteDestination,
   findAllDestination,
 } from "../common/api/destinationApi";
-import UserPagination from "../Components/Sharred/Pagination";
+import UserPagination from "../Sharred/Pagination";
 import toast from "react-hot-toast";
 
 const AllDestination = () => {

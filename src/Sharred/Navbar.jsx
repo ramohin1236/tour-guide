@@ -1,28 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import Doc from "../Components/Doc/Doc";
 import { IoPersonOutline } from "react-icons/io5";
-import { userProfile } from '../common/api/authApi';
+import { AuthContext } from "../Pages/Auth/AuthProvider/AuthProvider";
 
 const Navbar = () => {
+  const { user, loading, signOut } = useContext(AuthContext); // Destructure the user and signOut from useAuth
   const { logo4 } = Doc();
   const [menu, setMenu] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const [isLoggedin, setIsLoggedin] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
- console.log(currentUser);
-
-    const navigate = useNavigate()
-  
- useEffect(() => {
-     const token = localStorage.getItem("authToken");
-    if (token) {
-      setIsLoggedin(true);
-    } else {
-      setIsLoggedin(false);
-    }
-  }, []);
+  console.log(user);
+  const navigate = useNavigate();
 
   const togglePopover = () => {
     setIsPopoverOpen(!isPopoverOpen);
@@ -37,25 +26,16 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    setIsLoggedin(false);
-    navigate("/signin", { replace: true }); 
+    signOut();
+    navigate("/signin", { replace: true });
   };
-  const getCurrentusers = async () => {
-    const user = await userProfile();
-    setCurrentUser(user?.result);
-  };
-
-  useEffect(() => {
-    getCurrentusers();
-  }, []);
-
+  if (loading) return <p>Loading...</p>;
   return (
     <div className="z-40 fixed w-full md:px-[100px] px-[20px] bg-white text-[#A04747]">
       <div>
         <div className="flex flex-row justify-between items-center md:py-3 py-3">
           <div className="flex flex-row items-center cursor-pointer">
-            <Link to="/"  duration={500}>
+            <Link to="/" duration={500}>
               <div className="flex justify-center text-center items-center">
                 <img
                   src={logo4}
@@ -72,45 +52,32 @@ const Navbar = () => {
           <nav className="font-semibold hidden lg:flex flex-row items-center text-xl gap-8">
             <Link
               to="/destination"
-             
               duration={500}
               className="text-[#A04747] cursor-pointer"
             >
               Destination
             </Link>
-            
-            {currentUser && (
-             <Link
-             to="/booking"
-             
-             duration={500}
-             onClick={closeMenu}
-           >
-             Booking
-           </Link>
-          )}
-         
-           
 
-           
-            {currentUser?.isAdmin && <>
-               
-            <Link
-                to="/dashboard/alldestination"
-              
-                duration={500}
-                className="text-[#A04747] cursor-pointer"
-              >
-                Dashboard
+            {user && (
+              <Link to="/booking" duration={500} onClick={closeMenu}>
+                Booking
               </Link>
-            </>
-                
-             
-            }
+            )}
+
+            {user?.isAdmin && (
+              <>
+                <Link
+                  to="/dashboard/alldestination"
+                  duration={500}
+                  className="text-[#A04747] cursor-pointer"
+                >
+                  Dashboard
+                </Link>
+              </>
+            )}
 
             <Link
               to="/contact"
-             
               duration={500}
               className="text-[#A04747] cursor-pointer"
             >
@@ -119,19 +86,16 @@ const Navbar = () => {
           </nav>
 
           <div className="hidden lg:flex flex-row justify-between items-center gap-5">
-            {!isLoggedin ? (
+            {!user ? (
               <Link to="/signin">
                 <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
                   Sign In
                 </button>
               </Link>
             ) : (
-              <IoPersonOutline
-                onClick={togglePopover}
-                size={40}
-              />
+              <IoPersonOutline onClick={togglePopover} size={40} />
             )}
-            {isLoggedin && isPopoverOpen && (
+            {user && isPopoverOpen && (
               <div className="absolute text-xl font-semibold right-0 top-12 mt-16 w-52 bg-white rounded-lg shadow-lg p-5">
                 <a href="/profile" className="block text-[#A04747]">
                   Profile
@@ -160,31 +124,18 @@ const Navbar = () => {
             menu ? "translate-x-0" : "-translate-x-full"
           } lg:hidden flex flex-col absolute text-[#A04747] bg-white left-0 top-16 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
         >
-          <Link
-            to="/destination"
-            
-            duration={500}
-            onClick={closeMenu}
-          >
+          <Link to="/destination" duration={500} onClick={closeMenu}>
             Destination
           </Link>
-          {currentUser && (
-             <Link
-             to="/booking"
-             
-             duration={500}
-             onClick={closeMenu}
-           >
-             Booking
-           </Link>
+          {user && (
+            <Link to="/booking" duration={500} onClick={closeMenu}>
+              Booking
+            </Link>
           )}
-         
 
-         
-          {currentUser?.isAdmin && (
+          {user?.isAdmin && (
             <Link
               to="/dashboard/alldestination"
-             
               duration={500}
               onClick={closeMenu}
               className="text-[#A04747] cursor-pointer"
@@ -195,14 +146,13 @@ const Navbar = () => {
 
           <Link
             to="/contact"
-           
             duration={500}
             className="text-[#A04747] cursor-pointer"
           >
             Contact Us
           </Link>
 
-          {!isLoggedin && (
+          {!user && (
             <div className="lg:hidden flex justify-center items-center gap-5">
               <Link to="/signin">
                 <button className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out">
@@ -211,7 +161,7 @@ const Navbar = () => {
               </Link>
             </div>
           )}
-          {isLoggedin && (
+          {user && (
             <div className="lg:hidden flex justify-center items-center gap-5">
               <button
                 className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out"
