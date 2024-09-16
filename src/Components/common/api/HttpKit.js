@@ -1,6 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "../constant/constant";
-import Cookies from "js-cookie";
+
 
 // Create an instance of axios
 const axiosInstance = axios.create({
@@ -14,14 +14,13 @@ const axiosInstance = axios.create({
 // Request interceptor for attaching tokens, logging, etc.
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Get the XSRF-TOKEN cookie
-    const xsrfToken = Cookies.get("XSRF-TOKEN");
-    console.log("XSRF-TOKEN:", xsrfToken);
+    
+    
     // Add auth token or other headers to the request
     const token = localStorage.getItem("authToken");
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
-      config.headers["X-CSRF-Token"] = xsrfToken;
+      
     }
     return config;
   },

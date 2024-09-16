@@ -65,7 +65,7 @@ const SignUp = () => {
         setLoading(true); 
       
         try {
-            const result = await userSignUp({
+             await userSignUp({
                 firstName: formData.firstName,
                 lastName: formData.lastName,
                 email: formData.email,
@@ -73,7 +73,6 @@ const SignUp = () => {
                 password: formData.password,
             });
 
-            console.log("User signed up successfully:", result);
             toast.success("User signed up successfully!");
             navigate("/signin");
         } catch (err) {

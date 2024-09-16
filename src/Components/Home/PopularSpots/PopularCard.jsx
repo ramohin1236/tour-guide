@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
 import config from "../../config/config";
-import { useState } from "react";
+
 
 const PopularCard = ({ loc }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  
   const { apiUrl } = config;
   const { default_image, name, description, location_id } = loc;
 
-  // Truncate the description to 300 characters
-  const truncatedDescription = description.length > 300
-    ? `${description.substring(0, 300)}...`
+
+  const truncatedDescription = description.length > 100
+    ? `${description.substring(0, 100)} ...`
     : description;
 
   return (
@@ -27,18 +27,12 @@ const PopularCard = ({ loc }) => {
         </h3>
         {/* Tooltip for full description */}
         <div
-        //   className="relative"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+        
         >
           <p className="mt-4 text-base text-black leading-relaxed">
             {truncatedDescription}
           </p>
-          {isHovered && description.length > 300 && (
-            <div className="absolute top-0 left-0 mt-10 z-10 w-full p-3 bg-[#A04747] text-white rounded-lg shadow-lg text-sm leading-normal">
-              {description}
-            </div>
-          )}
+          
         </div>
 
         <Link to={`/details/${location_id}`}>

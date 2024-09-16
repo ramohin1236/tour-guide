@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 import {  updateDestination } from '../common/api/destinationApi'; 
 import toast from 'react-hot-toast';
 
 const UpdateDestination = () => {
+
   const { id } = useParams(); 
   const navigate = useNavigate();
   
@@ -15,7 +16,18 @@ const UpdateDestination = () => {
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(true);
 
+  const location =useLocation().state
+  const {name,airport: existinAirport,description: existingDescription}= location
+
+  useEffect(()=>{
+   setTitle(name)
+    setAirport(existinAirport)
+    setDescription(existingDescription)
+
+  },[location,existinAirport,existingDescription,name])
   
+  console.log(location);
+
   const stripHtmlTags = (html) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;
@@ -48,8 +60,7 @@ const UpdateDestination = () => {
     };
 
     try {
-      const response = await updateDestination(id, updatedData);
-      console.log('Destination updated successfully:', response);
+       await updateDestination(id, updatedData);
       toast.success('Destination Updated Successfully!');
       navigate('/dashboard/alldestination'); 
     } catch (error) {
@@ -72,6 +83,7 @@ const UpdateDestination = () => {
             placeholder='Title'
             required
             value={title}
+            defaultValue={name}
             onChange={(e) => setTitle(e.target.value)}
             className='p-2 border border-gray-300 rounded-md w-full'
           />
@@ -79,6 +91,7 @@ const UpdateDestination = () => {
             type='text'
             placeholder='Your Airport name'
             required
+            defaultValue={existinAirport}
             value={airport}
             onChange={(e) => setAirport(e.target.value)}
             className='p-2 border border-gray-300 rounded-md w-full'
@@ -87,7 +100,8 @@ const UpdateDestination = () => {
 
         <ReactQuill
           theme='snow'
-          value={description}
+         
+          defaultValue={existingDescription}
           onChange={setDescription}
           className='h-72 mb-12'
           placeholder='Write something...'

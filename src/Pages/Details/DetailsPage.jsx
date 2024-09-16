@@ -99,7 +99,7 @@ const DetailsPage = () => {
               </a>
             </div>
 
-            <div className="mt-5 mr-7 md:mr-20 ml-7 md:ml-5">
+            <div className="mt-5 mr-7 md:mr-20  ">
               <button
                 className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out"
                 onClick={handleUser}
