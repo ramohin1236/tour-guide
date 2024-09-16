@@ -1,107 +1,106 @@
-/* eslint-disable react/no-unescaped-entities */
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Doc from "../../../Components/Doc/Doc";
 import { userProfile, userSignIn } from "../../../common/api/authApi";
 import toast from "react-hot-toast";
 
 const Signin = () => {
-  const { signup } = Doc();
+    const { signup } = Doc();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+    
+    const from =location.state?.pathname || '/' 
+console.log(from);
+    
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+  
+        try {
+            const data = await userSignIn(email, password);
+            if (data?.result?.accessToken) {
+                localStorage.setItem("authToken", data?.result?.accessToken);
+  
+                const profileData = await userProfile();
+                localStorage.setItem("userId", profileData.id);
+  
+                toast.success("Sign in successful!");
+                navigate(from, { replace: true });
+            }
+        } catch (err) {
+            setError(err.message || "Failed to sign in");
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError(null);
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 py-32">
+            <div className="bg-white shadow-lg rounded-lg flex flex-col-reverse lg:flex-row max-w-6xl p-5 md:p-0 h-auto lg:h-[700px] mt-16">
+                {/* Left Image Section */}
+                <div className="lg:flex w-full lg:w-1/2 items-center justify-center mb-8 lg:mb-0">
+                    <div className="relative w-full h-64 lg:h-full">
+                        <img
+                            src={signup}
+                            alt="Sign In Illustration"
+                            className="rounded-lg shadow-lg object-cover w-full h-full transition-transform duration-500 ease-in-out hover:scale-105"
+                        />
+                    </div>
+                </div>
 
-    try {
-      const data = await userSignIn(email, password);
-     
-      if (data?.result?.accessToken) {
-        localStorage.setItem("authToken", data?.result?.accessToken);
+                {/* Sign In Form Section */}
+                <div className="flex flex-col justify-center w-full lg:w-1/2 px-6 lg:px-8 py-6">
+                    <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
+                        Sign In
+                    </h2>
+                    <form className="space-y-6" onSubmit={handleSubmit}>
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
+                            required
+                        />
 
-        const profileData = await userProfile();
-        
-        localStorage.setItem("userId", profileData.id);
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
+                            required
+                        />
 
-        toast.success("Sign in successful!");
-        window.location.replace("/");
-      }
-    } catch (err) {
-      setError(err.message || "Failed to sign in");
-    } finally {
-      setLoading(false);
-    }
-  };
+                        <button
+                            type="submit"
+                            className="w-full bg-[#A04747] text-white py-2 rounded-lg font-semibold transition-colors duration-300"
+                            disabled={loading}
+                        >
+                            {loading ? "Signing In..." : "Sign In"}
+                        </button>
 
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 py-32">
-      <div className="bg-white shadow-lg rounded-lg flex flex-col-reverse lg:flex-row max-w-6xl p-5 md:p-0 h-auto lg:h-[700px] mt-16">
-        {/* Left Image Section */}
-        <div className="lg:flex w-full lg:w-1/2 items-center justify-center mb-8 lg:mb-0">
-          <div className="relative w-full h-64 lg:h-full">
-            <img
-              src={signup}
-              alt="Sign In Illustration"
-              className="rounded-lg shadow-lg object-cover w-full h-full transition-transform duration-500 ease-in-out hover:scale-105"
-            />
-          </div>
+                        {error && (
+                            <p className="text-red-500 text-center mt-4">{error}</p>
+                        )}
+                    </form>
+
+                    <p className="mt-4 text-gray-600 text-center">
+                        <span className="mr-2">Dont have an account?</span>
+                        <Link to="/signup" className="text-[#A04747] font-semibold">
+                            Sign Up
+                        </Link>
+                    </p>
+                </div>
+            </div>
         </div>
-
-        {/* Signup Form Section */}
-        <div className="flex flex-col justify-center">
-          <div className="w-full px-6 lg:px-8 py-6 ">
-         
-            <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
-              Sign In
-            </h2>
-            <form className="space-y-6" onSubmit={handleSubmit}>
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
-                required
-              />
-
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A04747]"
-                required
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-[#A04747] text-white py-2 rounded-lg font-semibold  transition-colors duration-300"
-                disabled={loading}
-              >
-                {loading ? "Signing In..." : "Sign In"}
-              </button>
-
-              {error && (
-                <p className="text-red-500 text-center mt-4">{error}</p>
-              )}
-            </form>
-            <p className="mt-4 text-gray-600 text-center">
-              <span className="mr-2">Don't have an account?</span>
-              <Link to="/signup" className="text-[#A04747] font-semibold">
-                Sign Up
-              </Link>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Signin;

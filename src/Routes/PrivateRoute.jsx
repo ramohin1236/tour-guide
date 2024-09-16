@@ -1,22 +1,40 @@
-/* eslint-disable react/prop-types */
-import { useContext } from "react";
+import { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { AuthContext } from "../Pages/Auth/AuthProvider/AuthProvider";
+import { userProfile } from "../common/api/authApi";
 
+const PrivateRoute = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  
 
-const PrivateRoute = ({children}) => {
-    const {user,loading}= useContext(AuthContext)
-    const location=useLocation();
-    
-    if(loading){
-        return <progress className="progress progress-secondary w-56" value="100" max="100"></progress>
+  const getCurrentUsers = async () => {
+    setLoading(true);
+    const user = await userProfile();
+    setCurrentUser(user?.result);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    const callBackCurrentUser = async ()=>{
+       await getCurrentUsers();
+        setLoading(false)
     }
+    callBackCurrentUser()
+  }, []);
 
+  if (loading) {
+    return (
+      <progress className="progress progress-secondary w-56" value="100" max="100"></progress>
+    );
+  }
 
-    if(user){
-        return children
-    }
-    return <Navigate to="/signin" state={{from:location}} replace></Navigate>
-}
+  if (!currentUser) {
+  
+    return <Navigate to="/signin" state={{ from: location }} replace />;
+  }
 
-export default PrivateRoute
+  return children;
+};
+
+export default PrivateRoute;
