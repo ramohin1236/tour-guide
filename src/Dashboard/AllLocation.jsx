@@ -71,7 +71,7 @@ const AllLocation = () => {
 
   return (
     <div>
-      <div className="flex justify-between py-6">
+      <div className="flex flex-col md:flex-row gap-5 justify-between py-5">
         <p className="text-3xl font-semibold text-[#a04747]">All Locations</p>
         <Link to="/dashboard/createlocation">
           <button className="hover:bg-[#a04747] hover:text-white text-[#a04747] w-36 h-12 rounded-lg font-bold bg-white shadow-lg">
@@ -89,9 +89,6 @@ const AllLocation = () => {
               </th>
               <th scope="col" className="px-6 py-3">
                 Location Name
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Email
               </th>
               <th scope="col" className="px-6 py-3">
                 Phone
@@ -119,35 +116,33 @@ const AllLocation = () => {
                 >
                   <td className="px-6 py-4">{index + 1}</td>
                   <td className="px-6 py-4">
-                    <p>{location.name}</p>
-                  </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    {location.email}
+                    <p>{location?.name}</p>
                   </td>
                   <td className="px-6 py-4 font-medium dark:text-white">
-                    {location.phone}
+                    {location?.phone}
                   </td>
                   <td className="px-6 py-4 font-medium dark:text-white">
-                    {location.address}
+                    {location?.address}
                   </td>
                   <td className="px-6 py-4 font-medium dark:text-white">
-                    {location.hours}
+                    {location?.hours}
                   </td>
                   <td className="px-6 py-4 font-medium dark:text-white">
-                    <a href={location.website} className="underline">
-                      {location.website}
+                    <a href={location?.website} className="underline">
+                      {location?.website}
                     </a>
                   </td>
                   <td className="px-6 py-4 flex gap-3 hover:underline hover:cursor-pointer">
                     <div>
                       <MdDelete
                         className="text-3xl hover:text-red-500"
-                        onClick={() => handleDelete(location.location_id)}
+                        onClick={() => handleDelete(location?.location_id)}
                       />
                     </div>
                     <div>
                       <Link
-                        to={`/dashboard/updatedestination/${location.location_id}`}
+                        to={`/dashboard/updatelocation/${location?.location_id}`}
+                        state={location}
                       >
                         <FaEdit className="text-3xl hover:text-teal-500" />
                       </Link>
@@ -166,11 +161,11 @@ const AllLocation = () => {
         </table>
       </div>
 
-      {locations.length > 0 && (
+      {locations?.length > 0 && (
         <div className="mt-8 flex justify-end p-4">
           <UserPagination
             usersPerPage={locationsPerPage}
-            totalUsers={locations.length}
+            totalUsers={locations?.length}
             paginate={paginate}
           />
         </div>

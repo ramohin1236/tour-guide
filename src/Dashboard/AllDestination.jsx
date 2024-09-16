@@ -20,7 +20,7 @@ const AllDestination = () => {
     const fetchDestinations = async () => {
       try {
         const data = await findAllDestination();
-        setDestinations(data.result);
+        setDestinations(data?.result);
         setLoading(false);
       } catch (error) {
         setError(error.message);
@@ -106,29 +106,29 @@ const AllDestination = () => {
           <tbody>
             {currentDestinations?.map((post, index) => (
               <tr
-                key={post._id}
+                key={post?._id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xl font-medium"
               >
                 <td className="px-6 py-4">
                   {indexOfFirstDestination + index + 1}
                 </td>
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                  <Link to={`/details/${post._id}`}>{post.name}</Link>
+                  <Link to={`/details/${post?._id}`}>{post?.name}</Link>
                 </td>
                 <td className="px-6 py-4 font-medium dark:text-white">
-                  {post.airport}
+                  {post?.airport}
                 </td>
                 <td className="px-6 py-4 font-medium dark:text-white">
-                  {post.description}
+                  {post?.description}
                 </td>
                 <td className="px-6 py-4 flex gap-3">
                   <MdDelete
                     className="text-3xl hover:text-red-500 cursor-pointer"
-                    onClick={() => handleDelete(post.destination_id)}
+                    onClick={() => handleDelete(post?.destination_id)}
                   />
                   <Link
 
-                    to={`/dashboard/updatedestination/${post.destination_id}`}
+                    to={`/dashboard/updatedestination/${post?.destination_id}`}
                     state={post}
                   >
                     <FaEdit className="text-3xl hover:text-teal-500" />
