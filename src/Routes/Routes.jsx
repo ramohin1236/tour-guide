@@ -20,7 +20,10 @@ import Profile from "../Components/Components/Profile/Profile";
 import TermsOfService from "../Pages/Terms/Terms";
 import PrivacyPolicy from "../Pages/Privacy/Privacy";
 import BookingDetails from "../Pages/BookingDetails";
-// import PrivateRoute from './PrivateRoute';
+import PrivateRoute from './PrivateRoute';
+import AdminPrivateRoute from "./AdminPrivateRoute";
+
+
 
 export const router = createBrowserRouter([
   {
@@ -41,7 +44,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/booking',
-        element: <Booking/>
+        element: <PrivateRoute> <Booking/></PrivateRoute>
       },
       {
         path: "/contact",
@@ -81,36 +84,36 @@ export const router = createBrowserRouter([
 
   {
     path: '/dashboard',
-    element: <DashLayout/>,
+    element: <AdminPrivateRoute><DashLayout/></AdminPrivateRoute>,
     children:[
         {
             path: 'alluser',
-            element: <AllUser/>
+            element:<AdminPrivateRoute><AllUser/></AdminPrivateRoute> 
         },
         {
             path: 'bookings',
-            element: <AllBooking/>
+            element: <AdminPrivateRoute><AllBooking/></AdminPrivateRoute> 
         },
         {
             path: 'alldestination',
-            element: <AllDestination/>
+            element: <AdminPrivateRoute><AllDestination/> </AdminPrivateRoute> 
         },
         {
             path: 'createdestination',
-            element: <CreateDestination/>
+            element:  <AdminPrivateRoute><CreateDestination/> </AdminPrivateRoute> 
         },
         {
             path: 'allocation',
-            element: <AllLocation/>
+            element: <AdminPrivateRoute><AllLocation/> </AdminPrivateRoute> 
         },
         {
             path: 'createlocation',
-            element: <CreateLocation/>
+            element: <AdminPrivateRoute><CreateLocation/></AdminPrivateRoute>  
         },
         
         {
             path: "updatedestination/:id",
-            element: <UpdateDestination/>,
+            element: <AdminPrivateRoute><UpdateDestination/></AdminPrivateRoute> ,
           },
     ]
   }

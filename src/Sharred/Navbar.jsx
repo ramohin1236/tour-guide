@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Doc from "../Components/Doc/Doc";
 import { IoPersonOutline } from "react-icons/io5";
 import { userProfile } from '../common/api/authApi';
@@ -11,9 +11,12 @@ const Navbar = () => {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-   
-   useEffect(() => {
-    const token = localStorage.getItem("authToken");
+ console.log(currentUser);
+
+    const navigate = useNavigate()
+  
+ useEffect(() => {
+     const token = localStorage.getItem("authToken");
     if (token) {
       setIsLoggedin(true);
     } else {
@@ -36,8 +39,8 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     setIsLoggedin(false);
+    navigate("/signin", { replace: true }); 
   };
-
   const getCurrentusers = async () => {
     const user = await userProfile();
     setCurrentUser(user?.result);
@@ -75,18 +78,24 @@ const Navbar = () => {
             >
               Destination
             </Link>
-            <Link
-              to="/booking"
+            
+            {currentUser && (
+             <Link
+             to="/booking"
              
-              duration={500}
-              className="text-[#A04747] cursor-pointer"
-            >
-              Booking
-            </Link>
+             duration={500}
+             onClick={closeMenu}
+           >
+             Booking
+           </Link>
+          )}
+         
+           
 
-            {/* Admin চেক করে Dashboard লিংক দেখাবে */}
-            {currentUser?.isAdmin && (
-              <Link
+           
+            {currentUser?.isAdmin && <>
+               
+            <Link
                 to="/dashboard/alldestination"
               
                 duration={500}
@@ -94,7 +103,10 @@ const Navbar = () => {
               >
                 Dashboard
               </Link>
-            )}
+            </>
+                
+             
+            }
 
             <Link
               to="/contact"
@@ -156,16 +168,19 @@ const Navbar = () => {
           >
             Destination
           </Link>
-          <Link
-            to="/booking"
-            
-            duration={500}
-            onClick={closeMenu}
-          >
-            Booking
-          </Link>
+          {currentUser && (
+             <Link
+             to="/booking"
+             
+             duration={500}
+             onClick={closeMenu}
+           >
+             Booking
+           </Link>
+          )}
+         
 
-          {/* Admin চেক করে Dashboard লিংক দেখাবে */}
+         
           {currentUser?.isAdmin && (
             <Link
               to="/dashboard/alldestination"
