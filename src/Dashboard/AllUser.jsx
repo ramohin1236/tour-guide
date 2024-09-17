@@ -84,16 +84,16 @@ const AllUser = () => {
           <tbody>
             {currentUsers.map((user, index) => (
               <tr
-                key={user.user_id}
+                key={user?.user_id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xl font-medium"
               >
                 <td className="px-6 py-4">{index + 1}</td>
 
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                  {`${user.firstName} ${user.lastName}`}
+                  {`${user?.firstName} ${user?.lastName}`}
                 </td>
                 <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                  {user.email}
+                  {user?.email}
                 </td>
                 <td className="px-6 py-4 font-medium dark:text-white text-gray-900">
                   {user?.phoneNumber}
@@ -102,7 +102,7 @@ const AllUser = () => {
                   <MdDelete
                     className="text-3xl hover:text-red-600"
                     onClick={() => {
-                      handleDelete(user.user_id);
+                      handleDelete(user?.user_id);
                     }}
                   />
                 </td>

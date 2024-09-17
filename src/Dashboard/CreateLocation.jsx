@@ -5,7 +5,6 @@ import { BASE_URL } from "../common/constant/constant";
 import axios from "axios";
 
 const CreateLocation = () => {
-  // Individual states for each property
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -19,7 +18,6 @@ const CreateLocation = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch destinations from API
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
@@ -53,21 +51,21 @@ const CreateLocation = () => {
     const formData = new FormData();
 
     // Append text fields to formData
-    formData.append("name", name);
-    formData.append("phone", phone);
-    formData.append("address", address);
-    formData.append("website", website);
-    formData.append("email", "");
-    formData.append("hours", `${openTime}am-${closeTime}pm`);
+    formData?.append("name", name);
+    formData?.append("phone", phone);
+    formData?.append("address", address);
+    formData?.append("email", "");
+    formData?.append("website", website);
+    formData?.append("hours", `${openTime}am-${closeTime}pm`);
 
     
     const cleanDescription = stripTags(description);
-    formData.append("description", cleanDescription);
+    formData?.append("description", cleanDescription);
 
-    formData.append("destination_id", destination);
+    formData?.append("destination_id", destination);
 
-    selectedImages.forEach((image) => {
-      formData.append("attachments", image);
+    selectedImages?.forEach((image) => {
+      formData?.append("attachments", image);
     });
 
     try {
@@ -89,7 +87,6 @@ const CreateLocation = () => {
    
       alert("Location created successfully!");
 
-      // Reset form after successful submission
       setName("");
       setPhone("");
       setAddress("");
@@ -247,10 +244,10 @@ const SelectField = ({ id, value, onChange, options, placeholder }) => {
       className="p-2 border border-gray-300 rounded-md w-full"
     >
       <option value="">{placeholder}</option>
-      {options?.length > 0 ? (
-        options.map((option) => (
-          <option key={option.name} value={option.destination_id}>
-            {option.name}
+      {options.length > 0 ? (
+        options?.map((option) => (
+          <option key={option?.name} value={option?.destination_id}>
+            {option?.name}
           </option>
         ))
       ) : (

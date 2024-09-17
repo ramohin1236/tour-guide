@@ -22,6 +22,7 @@ import PrivacyPolicy from "../Pages/Privacy/Privacy";
 import BookingDetails from "../Pages/BookingDetails";
 import PrivateRoute from "./PrivateRoute";
 import AdminPrivateRoute from "./AdminPrivateRoute";
+import UpdateLocation from "../Dashboard/UpdateLocation";
 
 export const router = createBrowserRouter([
   {
@@ -146,6 +147,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminPrivateRoute>
             <UpdateDestination />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: "updatelocation/:id",
+        element: (
+          <AdminPrivateRoute>
+            <UpdateLocation/>
           </AdminPrivateRoute>
         ),
       },
