@@ -165,7 +165,6 @@ const AllLocation = () => {
         <div className="mt-8 flex justify-end p-4">
           <UserPagination
             usersPerPage={locationsPerPage}
-            totalUsers={locations?.length}
             paginate={paginate}
           />
         </div>
