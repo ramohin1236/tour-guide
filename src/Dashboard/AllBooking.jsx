@@ -3,8 +3,8 @@ import { MdDelete } from "react-icons/md";
 
 import { deleteBooking, findAllBookings } from "../common/api/bookingApi";
 import moment from "moment";
-import UserPagination from "../Sharred/Pagination";
 import toast from "react-hot-toast";
+import Pagination from "../Sharred/Pagination";
 
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -154,9 +154,10 @@ const AllBookings = () => {
       {/* Pagination */}
       {bookings.length > 0 && (
         <div className="mt-8 flex justify-end p-4">
-          <UserPagination
+          <Pagination
             usersPerPage={bookingsPerPage}
             totalUsers={bookings.length}
+            currentPage={currentPage}
             paginate={paginate}
           />
         </div>

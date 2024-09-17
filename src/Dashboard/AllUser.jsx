@@ -117,6 +117,7 @@ const AllUser = () => {
         <Pagination
           usersPerPage={usersPerPage}
           totalUsers={users.length}
+          currentPage={currentPage}
           paginate={paginate}
         />
       </div>

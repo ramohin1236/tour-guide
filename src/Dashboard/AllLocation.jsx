@@ -171,6 +171,7 @@ const AllLocation = () => {
           <UserPagination
             usersPerPage={locationsPerPage}
             totalUsers={locations.length}
+            currentPage={currentPage}
             paginate={paginate}
           />
         </div>
