@@ -3,7 +3,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import Doc from "../../../Components/Doc/Doc";
 import { userProfile, userSignIn } from "../../../common/api/authApi";
 import toast from "react-hot-toast";
-
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Signin = () => {
@@ -23,25 +22,27 @@ const Signin = () => {
     }
   }, [navigate]);
 
-  const from = location.state?.pathname || "/";
+  const from = location?.state?.pathname || "/";
   
-  const handleSubmit = async (e) => {
+  const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-
+  
     try {
       const data = await userSignIn(email, password);
       if (data?.result?.accessToken) {
-        localStorage.setItem("authToken", data.result.accessToken);
-
+        localStorage.setItem("authToken", data?.result?.accessToken);
+  
         const profileData = await userProfile();
-
+  
         // Dispatch the login action
         dispatch({ type: "LOGIN", payload: profileData.result });
-
+  
         toast.success("Sign in successful!");
         navigate(from, { replace: true });
+      } else {
+        setError("Invalid login credentials");
       }
     } catch (err) {
       setError(err.message || "Failed to sign in");
@@ -68,7 +69,7 @@ const Signin = () => {
           <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">
             Sign In
           </h2>
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={handleSignIn}>
             <input
               type="email"
               placeholder="Email"

@@ -1,4 +1,5 @@
 
+import Whatsapp from './../Social/WhatsApp';
 
 const BookingDetails = () => {
   return (
@@ -90,6 +91,7 @@ const BookingDetails = () => {
         </p>
       </section>
     </main>
+    <Whatsapp/>
   </div>
 
   )

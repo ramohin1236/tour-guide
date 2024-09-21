@@ -1,3 +1,5 @@
+import WhatsApp from "../../Social/WhatsApp";
+
 const Contact = () => {
   return (
     <>
@@ -168,7 +170,9 @@ const Contact = () => {
               </div>
             </form>
           </div>
+          <WhatsApp/>
         </div>
+     
       </section>
     </>
   );

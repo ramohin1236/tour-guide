@@ -133,14 +133,14 @@ const CreateLocation = () => {
 
         {/* Other input fields */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <InputField
+          {/* <InputField
             type="text"
             id="phone"
             placeholder="Phone number"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             required={false}
-          />
+          /> */}
           <InputField
             type="text"
             id="address"
@@ -148,14 +148,14 @@ const CreateLocation = () => {
             value={address}
             onChange={(e) => setAddress(e.target.value)}
           />
-          <InputField
+          {/* <InputField
             type="website"
             id="website"
             placeholder="Website"
             value={website}
             onChange={(e) => setWebsite(e.target.value)}
             required={false}
-          />
+          /> */}
         </div>
 
         {/* Open and Close Time */}
@@ -244,7 +244,7 @@ const SelectField = ({ id, value, onChange, options, placeholder }) => {
       className="p-2 border border-gray-300 rounded-md w-full"
     >
       <option value="">{placeholder}</option>
-      {options.length > 0 ? (
+      {options?.length > 0 ? (
         options?.map((option) => (
           <option key={option?.name} value={option?.destination_id}>
             {option?.name}

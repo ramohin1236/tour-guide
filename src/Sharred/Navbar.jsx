@@ -42,7 +42,7 @@ const Navbar = () => {
                   alt="logo"
                 />
                 <h1 className="text-xl md:text-2xl font-semibold text-[#A04747]">
-                  Japan Travels & Tours
+                JAPAN TRAVEL <br /> agency & tour
                 </h1>
               </div>
             </Link>

@@ -85,19 +85,19 @@ const DetailsPage = () => {
               <p>{hours}</p>
             </div>
 
-            {/* Phone Number */}
+            {/* Phone Number
             <div className=" text-[#404040]">
               <h3 className="font-semibold text-xl">Phone Number:</h3>
               <p>{phone} </p>
-            </div>
+            </div> */}
 
             {/* Website */}
-            <div className="text-gray-700">
+            {/* <div className="text-gray-700">
               <h3 className="font-semibold">Website:</h3>
               <a href={website} className="text-indigo-500 hover:underline">
                 {website}
               </a>
-            </div>
+            </div> */}
 
             <div className="mt-5 mr-7 md:mr-20  ">
               <button

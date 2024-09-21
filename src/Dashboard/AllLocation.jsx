@@ -90,18 +90,14 @@ const AllLocation = () => {
               <th scope="col" className="px-6 py-3">
                 Location Name
               </th>
-              <th scope="col" className="px-6 py-3">
-                Phone
-              </th>
+              
               <th scope="col" className="px-6 py-3">
                 Address
               </th>
               <th scope="col" className="px-6 py-3">
                 Hours
               </th>
-              <th scope="col" className="px-6 py-3">
-                Website
-              </th>
+              
               <th scope="col" className="px-6 py-3">
                 Action
               </th>
@@ -118,20 +114,14 @@ const AllLocation = () => {
                   <td className="px-6 py-4">
                     <p>{location?.name}</p>
                   </td>
-                  <td className="px-6 py-4 font-medium dark:text-white">
-                    {location?.phone}
-                  </td>
+                  
                   <td className="px-6 py-4 font-medium dark:text-white">
                     {location?.address}
                   </td>
                   <td className="px-6 py-4 font-medium dark:text-white">
                     {location?.hours}
                   </td>
-                  <td className="px-6 py-4 font-medium dark:text-white">
-                    <a href={location?.website} className="underline">
-                      {location?.website}
-                    </a>
-                  </td>
+                  
                   <td className="px-6 py-4 flex gap-3 hover:underline hover:cursor-pointer">
                     <div>
                       <MdDelete
@@ -164,8 +154,11 @@ const AllLocation = () => {
       {locations?.length > 0 && (
         <div className="mt-8 flex justify-end p-4">
           <UserPagination
+           
             usersPerPage={locationsPerPage}
-            paginate={paginate}
+          totalUsers={locations?.length}
+          currentPage={currentPage}
+          paginate={paginate}
           />
         </div>
       )}
