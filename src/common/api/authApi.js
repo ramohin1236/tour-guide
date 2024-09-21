@@ -22,28 +22,47 @@ export const userSignIn = async (email, password) => {
         email,
         password
       });
+
+      if (response.status !== 200) {
+        throw new Error("Failed to sign in");
+      }
+  
       return response.data;
     } catch (error) {
       throw error.response ? error.response.data : new Error("An error occurred");
     }
   };
-
+  
 // password update
 // complete
 
-export const userPasswordUpdate = async (email, password) => {
+export const userPasswordUpdate = async (email, currentPassword, newPassword) => {
     try {
-      
       const response = await axiosInstance.post('/api/auth/change_password', {
         email,
-        password,
+        oldPassword: currentPassword,
+        newPassword,
       });
       return response.data; 
     } catch (error) {
-      
+      console.error("API error response:", error.response);
       throw error.response ? error.response.data : new Error('An error occurred');
     }
   };
+
+// export const userPasswordUpdate = async (email, password) => {
+//     try {
+      
+//       const response = await axiosInstance.post('/api/auth/change_password', {
+//         email,
+//         password,
+//       });
+//       return response.data; 
+//     } catch (error) {
+      
+//       throw error.response ? error.response.data : new Error('An error occurred');
+//     }
+//   };
 
 //   user profile
 export const userProfile = async () => {
