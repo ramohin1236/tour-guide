@@ -44,11 +44,19 @@ export const uploadLocationVideo = async (locationVideo) => {
 
   export const deleteLocationVideo = async (id) => {
     try {
-      const response = await axiosInstance.delete(`/api/location_vids/location/${id}`);
+      const response =  await axiosInstance.delete(`/api/location_vids/video/${id}`);
       return response.data;
     } catch (error) {
-      throw error.response
-        ? error.response.data
-        : new Error("An error occurred while deleting the location");
+      throw error.response ? error.response.data : new Error('An error occurred while deleting the attachment');
     }
   };
+ 
+
+//   export const deleteAllLocationAttachments = async (locationId) => {
+//     try {
+//       const response = await axiosInstance.delete(`/api/attachments/location/delete/${locationId}`);
+//       return response.data;
+//     } catch (error) {
+//       throw error.response ? error.response.data : new Error('An error occurred while deleting all attachments for the location');
+//     }
+//   };
