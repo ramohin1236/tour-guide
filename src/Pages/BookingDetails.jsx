@@ -183,13 +183,13 @@ const BookingDetails = () => {
             Phone:
             <a href="tel:+818041364488" className="text-blue-500">
               {" "}
-              +81 80 4136 4488
+              +81 80-7962-4964
             </a>
           </li>
           <li>
             <p>
               <strong>WhatsApp:</strong>
-              +81 80 4136 4488
+              +81 80-7962-4964
             </p>
           </li>
         </ul>
