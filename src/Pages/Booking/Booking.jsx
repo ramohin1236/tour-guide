@@ -32,8 +32,8 @@ const Booking = () => {
     const fetchDestinations = async () => {
       try {
         const response = await findAllDestination();
-        if (Array.isArray(response.result)) {
-          const formattedDestinations = response.result.map((item) => ({
+        if (Array.isArray(response?.result)) {
+          const formattedDestinations = response?.result?.map((item) => ({
             id: item.destination_id,
             name: item.name,
             locations: item.locations,
