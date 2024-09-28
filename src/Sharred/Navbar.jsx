@@ -38,12 +38,16 @@ const Navbar = () => {
               <div className="flex justify-center text-center items-center">
                 <img
                   src={logo4}
-                  className="w-12 md:w-24 h-12 md:h-24 object-cover"
+                  className="w-16 md:w-24 h-12 md:h-24 object-cover"
                   alt="logo"
                 />
-                <h1 className="text-xl md:text-2xl font-semibold text-[#A04747]">
-                JAPAN TRAVEL <br /> agency & tour
-                </h1>
+                <div>
+                <p className="text-sm md:text-2xl font-semibold text-[#A04747]">
+                JAPAN TRAVEL AGENCY  
+                </p>
+                <p className="text-sm  text-start font-semibold uppercase"> and tour</p>
+                </div>
+                
               </div>
             </Link>
           </div>
@@ -98,9 +102,12 @@ const Navbar = () => {
             )}
             {user && isPopoverOpen && (
               <div className="absolute text-xl font-semibold right-0 top-12 mt-16 w-52 bg-white rounded-lg shadow-lg p-5">
-                <a href="/profile" className="block text-[#A04747]">
+                <Link to="/profile" className="block text-[#A04747]">
                   Profile
-                </a>
+                </Link>
+                <Link to="/userbookings" className="block text-[#A04747]">
+                  My Bookings
+                </Link>
                 <p
                   className="text-[#A04747] font-semibold"
                   onClick={handleLogout}

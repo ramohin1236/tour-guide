@@ -10,7 +10,6 @@ const CreateDestination = () => {
   const [airport, setAirport] = useState('');
   const [description, setDescription] = useState('');
  const navigate =useNavigate()
-
  const stripHtmlTags = (html) => {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = html;

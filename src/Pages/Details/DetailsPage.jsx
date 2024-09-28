@@ -4,11 +4,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getLocationById } from "../../common/api/locationApi";
 import config from "../../config/config";
 import toast from "react-hot-toast";
+import { getLocationAttachments } from "../../common/api/attachmentApi";
+import { getAllLocationsVideoById } from "../../common/api/locationVideoApi";
 
 const DetailsPage = () => {
   const navigate = useNavigate();
   const [currentLocation, setCurrentLocation] = useState({});
-
+  const [attachments, setAttachments]=useState(null)
+  const [videos, setVideos]=useState(null)
+ console.log(videos);
   const [, setLoading] = useState(true);
 
   const params = useParams();
@@ -18,7 +22,6 @@ const DetailsPage = () => {
     const fetchLocationById = async () => {
       try {
         const response = await getLocationById(params?.id);
-
         setCurrentLocation(response?.result);
         setLoading(false);
       } catch (err) {
@@ -28,6 +31,36 @@ const DetailsPage = () => {
     };
     fetchLocationById();
   }, [params.id]);
+
+  useEffect(() => {
+    const fetchLocationAttachmentById = async () => {
+      try {
+        const response = await getLocationAttachments(params?.id);
+        setAttachments(response?.result);
+        setLoading(false);
+      } catch (err) {
+        toast.error(err.message || "Failed to fetch users");
+        setLoading(false);
+      }
+    };
+    fetchLocationAttachmentById();
+  }, [params.id]);
+
+  useEffect(() => {
+    const fetchLocationVideoById = async () => {
+      try {
+        const response = await getAllLocationsVideoById(params?.id);
+        setVideos(response?.result);
+        // setAttachments(response?.result);
+        setLoading(false);
+      } catch (err) {
+        toast.error(err.message || "Failed to fetch users");
+        setLoading(false);
+      }
+    };
+    fetchLocationVideoById();
+  }, [params.id]);
+
 
   const {
     name = "Unknown Name",
@@ -55,11 +88,42 @@ const DetailsPage = () => {
             <h1 className="text-3xl font-bold mb-4">{name}</h1>
 
             {/* Image */}
+            
             <img
               src={`${apiUrl}/${default_image}`}
               alt="Tokyu Plaza"
-              className="w-full h-auto rounded-lg mb-4"
+              className="w-full md:h-[500px] object-cover rounded-lg mb-4"
             />
+
+            <div className="grid grid-cols-2 gap-10">
+           {
+                attachments?.map((pic)=> <img key={pic?.location_attachments_id}
+                src={`${apiUrl}/${pic?.attachment_url}`}
+                alt="Tokyu Plaza"
+                className="md:w-full md:h-96 object-cover  rounded-lg mb-4"
+              />)
+            }
+           </div>
+
+           {videos?.length > 0 && (
+  <div>
+    <p className="text-xl font-semibold my-4">Videos</p>
+    <div className="grid grid-cols-2 gap-6">
+      {videos.map((vid) => (
+        <video
+          key={vid?.location_vids_id}
+          autoPlay
+          controls
+          loop
+          muted
+          src={`${apiUrl}/${vid?.vid_url}`}
+          className="w-full h-64 object-cover rounded-lg"
+        ></video>
+      ))}
+    </div>
+  </div>
+)}
+
 
             {/* Description */}
             <p className="text-gray-600 mb-4">{description}</p>

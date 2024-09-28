@@ -4,7 +4,7 @@ import { BASE_URL } from "../constant/constant";
 // Create an instance of axios
 const axiosInstance = axios.create({
   baseURL: `${BASE_URL}`, // Base URL for all requests,
-  timeout: 5000, // Timeout after 5 seconds
+  timeout: 1000000, // Timeout after 5 seconds
   headers: {
     "Content-Type": "application/json", // Default headers
   },

@@ -5,7 +5,7 @@ const Footer = () => {
         <ul className="flex flex-wrap justify-center gap-x-7 gap-4">
           <li>
             <a
-              href="/"
+              href="https://www.facebook.com/japan.travel.agency.2024?mibextid=LQQJ4d&rdid=YmD5fNl3m98diElZ&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2FZydXHN38Tv4rtDeL%2F%3Fmibextid%3DLQQJ4d"
               className="text-xl hover:text-gray-400"
             >
               <svg

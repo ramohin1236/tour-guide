@@ -69,3 +69,26 @@ export const deleteLocation = async (id) => {
       : new Error("An error occurred while deleting the location");
   }
 };
+
+
+// Default Image Update
+
+export const updateLocationDefaultImage = async (id, locationData) => {
+    try {
+      const response = await axiosInstance.put(
+        `/api/locations/update_image/${id}`,
+        locationData, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+      );
+      return response.data;
+    } catch (error) {
+      throw error.response
+        ? error.response.data
+        : new Error("An error occurred while updating default image.");
+    }
+  };
+
+

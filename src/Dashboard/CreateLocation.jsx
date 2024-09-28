@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+/* eslint-disable no-unused-vars */
+import { useState, useEffect} from "react";
 import ReactQuill from "react-quill";
 import { findAllDestination } from "../common/api/destinationApi";
 import { BASE_URL } from "../common/constant/constant";
@@ -17,7 +18,7 @@ const CreateLocation = () => {
   const [destinations, setDestinations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  
   useEffect(() => {
     const fetchDestinations = async () => {
       try {
@@ -190,7 +191,7 @@ const CreateLocation = () => {
 
         {/* ReactQuill for description */}
         <ReactQuill
-          theme="snow"
+        theme="snow"
           value={description}
           onChange={(value) => setDescription(value)}
           placeholder="Write something..."
@@ -226,7 +227,8 @@ const InputField = ({ type, id, placeholder, value, onChange, label }) => (
       type={type}
       id={id}
       placeholder={placeholder}
-      value={value}
+      value={value || ''}
+     
       onChange={onChange}
       className="p-2 border border-gray-300 rounded-md w-full"
       required
@@ -239,7 +241,7 @@ const SelectField = ({ id, value, onChange, options, placeholder }) => {
   return (
     <select
       id={id}
-      value={value}
+      value={value ?? ""}
       onChange={onChange}
       className="p-2 border border-gray-300 rounded-md w-full"
     >
