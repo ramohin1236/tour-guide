@@ -23,6 +23,7 @@ import BookingDetails from "../Pages/BookingDetails";
 import PrivateRoute from "./PrivateRoute";
 import AdminPrivateRoute from "./AdminPrivateRoute";
 import UpdateLocation from "../Dashboard/UpdateLocation";
+import UserBookings from "../Components/UserBookings/UserBookings";
 
 export const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ export const router = createBrowserRouter([
       {
         path: "/payment",
         element: <Payment />,
+      },
+      {
+        path: "/userbookings",
+        element: <UserBookings />,
       },
       {
         path: "/signup",

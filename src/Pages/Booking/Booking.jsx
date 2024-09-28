@@ -15,13 +15,14 @@ const Booking = () => {
     email: "",
     phone: "",
     destination: "",
-    // location: "",
     checkIn: "",
     checkOut: "",
     totalPersons: "",
     totalDays: "",
+     servent_service: null,
+    japaneese_translator: null,
+    travel_companion: null,
   });
-
   const [destinations, setDestinations] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
 
@@ -31,8 +32,6 @@ const Booking = () => {
     const fetchDestinations = async () => {
       try {
         const response = await findAllDestination();
-        
-
         if (Array.isArray(response.result)) {
           const formattedDestinations = response.result.map((item) => ({
             id: item.destination_id,
@@ -58,24 +57,26 @@ const Booking = () => {
   useEffect(() => {
     getCurrentusers();
   }, []);
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
-  const handleDestinationChange = (e) => {
-    const selectedDestination = destinations.find(
-      (dest) => dest.id.toString() === e.target.value
-    );
-    setFormData({
-      ...formData,
-      destination: selectedDestination ? selectedDestination.id : "",
-      location: "",
-    });
+  const handleChange = (e) => {
+    const { name, value, type } = e.target;
+
+    if (type === "radio") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value === "yes" ? true : false,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const bookingData = {
       address: "Dhaka, Bangladesh",
       booking_status: "pending",
@@ -88,11 +89,16 @@ const Booking = () => {
       trip_ends: new Date(formData.checkOut).toISOString(),
       trip_starts: new Date(formData.checkIn).toISOString(),
       user_id: currentUser?.user_id,
+      total_persons: formData.totalPersons,
+      total_days: formData.totalDays,
+      servent_service: formData. servent_service,
+    japaneese_translator: formData.japaneese_translator,
+      travel_companion: formData.travel_companion,
     };
 
     try {
       await userNewBooking(bookingData);
-      toast.success("Your Booking is Successfull!");
+      toast.success("Your Booking is Successful!");
       navigate("/bookingDetails");
     } catch (error) {
       console.error("Booking failed:", error);
@@ -100,9 +106,9 @@ const Booking = () => {
   };
 
   return (
-    <div className="pt-28 pb-0">
+    <div className="pt-20 pb-0">
       <div
-        className="relative h-screen bg-cover bg-center"
+        className="relative  bg-cover bg-center"
         style={{ backgroundImage: `url(${bird_art})` }}
       >
         <div className="absolute inset-0 bg-black opacity-10"></div>
@@ -174,7 +180,7 @@ const Booking = () => {
                 <select
                   name="destination"
                   value={formData.destination}
-                  onChange={handleDestinationChange} // Updated handler
+                  onChange={handleChange}
                   required
                   className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
                 >
@@ -188,32 +194,6 @@ const Booking = () => {
                   ))}
                 </select>
               </div>
-
-              {/* Location */}
-              {/* <div>
-                <label className="block text-gray-600">Your Location</label>
-                <select
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                  required
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A04747]"
-                  disabled={!formData.destination}
-                >
-                  <option value="" disabled>
-                    {formData.destination
-                      ? "Select a location"
-                      : "Select a destination first"}
-                  </option>
-                  {formData.destination &&
-                    Array.isArray(destinations[formData.destination]) &&
-                    destinations[formData.destination]?.map((location) => (
-                      <option key={location} value={location}>
-                        {location}
-                      </option>
-                    ))}
-                </select>
-              </div> 
 
               {/* Check-in and Check-out Dates */}
               <div className="grid grid-cols-2 gap-4">
@@ -269,13 +249,101 @@ const Booking = () => {
                 />
               </div>
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full bg-[#A04747] text-white py-2 rounded-md hover:bg-[#A04747] focus:outline-none focus:ring-2 focus:ring-[#A04747]"
-              >
-                Submit
-              </button>
+              {/* Travel Guide */}
+              <div className="flex justify-between">
+                <label className="block text-gray-600">Travel Guide</label>
+                <div className="flex gap-5">
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="servent_service"
+                      value="yes"
+                      checked={formData.servent_service === true}
+                      onChange={handleChange}
+                      className="w-4"
+                    />
+                    <label className="text-sm ml-4">Yes</label>
+                  </div>
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="servent_service"
+                      value="no"
+                      checked={formData.servent_service === false}
+                      onChange={handleChange}
+                      className="w-4"
+                    />
+                    <label className="text-sm ml-4">No</label>
+                  </div>
+                </div>
+              </div>
+
+              {/* Travel Helper */}
+              <div className="flex justify-between">
+                <label className="block text-gray-600">Travel Helper</label>
+                <div className="flex gap-5">
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="japaneese_translator"
+                      value="yes"
+                      checked={formData.japaneese_translator === true}
+                      onChange={handleChange}
+                      className="w-4"
+                    />
+                    <label className="text-sm ml-4">Yes</label>
+                  </div>
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="japaneese_translator"
+                      value="no"
+                      checked={formData.japaneese_translator === false}
+                      onChange={handleChange}
+                      className="w-4"
+                    />
+                    <label className="text-sm ml-4">No</label>
+                  </div>
+                </div>
+              </div>
+
+              {/* Travel Companion */}
+              <div className="flex justify-between">
+                <label className="block text-gray-600">Travel Companion</label>
+                <div className="flex gap-5">
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="travel_companion"
+                      value="yes"
+                      checked={formData.travel_companion === true}
+                      onChange={handleChange}
+                      className="w-4"
+                    />
+                    <label className="text-sm ml-4">Yes</label>
+                  </div>
+                  <div className="flex">
+                    <input
+                      type="radio"
+                      name="travel_companion"
+                      value="no"
+                      checked={formData.travel_companion === false}
+                      onChange={handleChange}
+                      className="w-4"
+                    />
+                    <label className="text-sm ml-4">No</label>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button
+                  type="submit"
+                  className="w-full bg-[#A04747] text-white py-2 px-4 rounded-md hover:bg-[#A04747] focus:outline-none focus:ring-2 focus:ring-[#A04747]"
+                >
+                  Book Now
+                </button>
+              </div>
             </form>
           </div>
         </div>

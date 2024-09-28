@@ -1,14 +1,128 @@
 
+import { useContext, useEffect, useState } from 'react';
 import Whatsapp from './../Social/WhatsApp';
+import { AuthContext } from './Auth/AuthProvider/AuthProvider';
+import { getSingleBooking } from '../common/api/bookingApi';
+import moment from 'moment';
+import { MdDelete } from 'react-icons/md';
 
 const BookingDetails = () => {
+    const [userData, setUserData]=useState(null)
+    console.log(userData);
+    const { user } = useContext(AuthContext); 
+
+    useEffect(() => {
+        const fetchAttachments = async () => {
+          try {
+            const userInfo = await getSingleBooking(user?.user_id);
+            setUserData(userInfo?.result)
+    
+        
+          } catch (err) {
+            console.log(err);
+          }
+        };
+    
+        fetchAttachments();
+      }, [user?.user_id]);
   return (
-    <div>
+    <div className='pt-32 '>
+        {/* user Information */}
+        <div className='pb-10 px-[20px] md:px-[100px]'>
+      <div className="flex justify-between py-6">
+        <p className="text-3xl font-semibold text-[#a04747]">My Bookings</p>
+      </div>
+
+      <div className="overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="min-w-full text-sm text-left text-gray-500">
+          <thead className="text-xl text-gray-700 uppercase bg-gray-50">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                SL
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Booking ID
+              </th>
+              <th scope="col" className="px-6 py-3">
+                User Name
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Email
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Phone
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Booking Start{" "}
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Booking End{" "}
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Country From{" "}
+              </th>
+             
+              <th scope="col" className="px-6 py-3">
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {userData?.length > 0 ? (
+              userData?.map((booking, index) => (
+                <tr
+                  key={booking?.booking_id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xl font-medium"
+                >
+                  <td className="px-6 py-4">{index + 1}</td>
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                    {booking?.booking_id}
+                  </td>
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                    {booking?.first_name} {booking?.last_name}
+                  </td>
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                    {booking?.email}
+                  </td>
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                    {booking?.phone}
+                  </td>
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                    {moment(booking?.trip_starts).format("MMMM Do, YYYY")}
+                  </td>
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                    {moment(booking?.trip_ends).format("MMMM Do, YYYY")}
+                  </td>
+                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                    {booking?.country}
+                  </td>
+                 
+                  <td className="px-6 py-4 flex gap-3 hover:cursor-pointer">
+                    <MdDelete
+                     
+                      className="text-3xl hover:text-red-600"
+                    />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" className="text-center text-gray-500 py-6">
+                  No Bookings Available
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+     
+    </div>
     {/* Main Content */}
-    <main className="container mx-auto px-[20px] md:px-[100px]  pt-32 bg-white rounded-lg shadow-lg">
+    <main className=" mx-auto px-[20px] md:px-[100px]  pt-32 bg-white rounded-lg shadow-lg">
       {/* Booking and Payment Details Section */}
       <section className="mb-10">
-        <h2 className="text-2xl font-semibold mb-4">
+        <h2 className="text-3xl font-semibold text-[#a04747] mb-4 ">
           Booking & Payment Details
         </h2>
         <p>
@@ -49,7 +163,7 @@ const BookingDetails = () => {
 
       {/* Contact Us Section */}
       <section className="mb-10">
-        <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
+        <h2 className="text-3xl font-semibold text-[#a04747] mb-4">Contact Us</h2>
         <p>
           If you have any questions regarding your booking, feel free to reach
           out to us at:

@@ -9,7 +9,6 @@ import toast from "react-hot-toast";
 const UpdateDestination = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [name, setName] = useState("");
   const [airport, setAirport] = useState("");
   const [description, setDescription] = useState("");
@@ -82,6 +81,7 @@ const UpdateDestination = () => {
         </div>
 
         <ReactQuill
+      
           theme="snow"
           defaultValue={existingDescription}
           onChange={setDescription}

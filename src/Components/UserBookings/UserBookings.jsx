@@ -1,65 +1,53 @@
-import { useEffect, useState } from "react";
-import { MdDelete } from "react-icons/md";
-
-import { deleteBooking, findAllBookings } from "../common/api/bookingApi";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../Pages/Auth/AuthProvider/AuthProvider";
+import { deleteBooking, getSingleBooking } from "../../common/api/bookingApi";
 import moment from "moment";
+import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
-import Pagination from "../Sharred/Pagination";
 
-const AllBookings = () => {
-  const [bookings, setBookings] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [bookingsPerPage] = useState(10);
-  const [error, setError] = useState(null);
+const UserBookings = () => {
+    const [userData, setUserData]=useState(null)
+    const { user } = useContext(AuthContext); 
+   
+    console.log(userData);
 
-  useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const response = await findAllBookings();
-        setBookings(response.result);
-        setLoading(false);
-      } catch (err) {
-        setError(err.message || "Failed to fetch bookings");
-        setLoading(false);
-      }
-    };
-    fetchBookings();
-  }, []);
+    useEffect(() => {
+        const fetchAttachments = async () => {
+          try {
+            const userInfo = await getSingleBooking(user?.user_id);
+            setUserData(userInfo?.result)
+    
+        
+          } catch (err) {
+            console.log(err);
+          }
+        };
+    
+        fetchAttachments();
+      }, [user?.user_id]);
 
-  const handleDelete = async (userId) => {
-    if (!userId) {
-      toast.error("User ID is not provided");
-      return;
-    }
-
-    try {
-      await deleteBooking(userId);
-
-      setBookings(bookings.filter((booking) => booking.booking_id !== userId)); 
-
-      toast.success("Booking deleted successfully!");
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
-  // Pagination logic
-  const indexOfLastBooking = currentPage * bookingsPerPage;
-  const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
-  const currentBookings = bookings.slice(
-    indexOfFirstBooking,
-    indexOfLastBooking
-  );
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
-
+      const handleDelete = async (bookingId) => {
+        console.log(bookingId);
+        if (!bookingId) {
+          toast.error("User ID is not provided");
+          return;
+        }
+    
+        try {
+          await deleteBooking(bookingId);
+    
+          setUserData(userData.filter((booking) => booking.booking_id !== bookingId)); 
+    
+          toast.success("Booking deleted successfully!");
+        } catch (error) {
+          toast.error(error.message);
+        }
+      };
   return (
-    <div>
+    <div className="pt-32">
+         <div className='pb-10 px-[20px] md:px-[100px]'>
       <div className="flex justify-between py-6">
-        <p className="text-3xl font-semibold text-[#a04747]">All Bookings</p>
+        <p className="text-3xl font-semibold text-[#a04747]">My Bookings</p>
       </div>
 
       <div className="overflow-x-auto shadow-md sm:rounded-lg">
@@ -90,17 +78,15 @@ const AllBookings = () => {
               <th scope="col" className="px-6 py-3">
                 Country From{" "}
               </th>
-              <th scope="col" className="px-6 py-3">
-                Status{" "}
-              </th>
+             
               <th scope="col" className="px-6 py-3">
                 Action
               </th>
             </tr>
           </thead>
           <tbody>
-            {currentBookings.length > 0 ? (
-              currentBookings.map((booking, index) => (
+            {userData?.length > 0 ? (
+              userData?.map((booking, index) => (
                 <tr
                   key={booking?.booking_id}
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xl font-medium"
@@ -127,14 +113,10 @@ const AllBookings = () => {
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
                     {booking?.country}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    <button>{booking?.booking_status}</button>
-                  </td>
+                 
                   <td className="px-6 py-4 flex gap-3 hover:cursor-pointer">
                     <MdDelete
-                      onClick={() => {
-                        handleDelete(booking?.booking_id);
-                      }} 
+                      onClick={() => handleDelete(booking?.booking_id)}
                       className="text-3xl hover:text-red-600"
                     />
                   </td>
@@ -151,20 +133,10 @@ const AllBookings = () => {
         </table>
       </div>
 
-      {/* Pagination */}
-      {bookings.length > 0 && (
-        <div className="mt-8 flex justify-end p-4">
-          <Pagination
-            usersPerPage={bookingsPerPage}
-          totalUsers={bookings.length}
-            currentPage={currentPage}
-
-            paginate={paginate}
-          />
-        </div>
-      )}
+     
     </div>
-  );
-};
+    </div>
+  )
+}
 
-export default AllBookings;
+export default UserBookings
