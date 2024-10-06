@@ -45,7 +45,7 @@ export const findAllBookings = async () => {
   };
 // get Booking Data
 // complete
-  export default async (bookingId) => {
+  export const getUserSingleBooking = async (bookingId) => {
     try {
       
         const response = await axiosInstance.get(`/api/bookings/booking_data/${bookingId}`);

@@ -27,6 +27,7 @@ import UserBookings from "../Components/UserBookings/UserBookings";
 import Cart from "../Components/Cart/Cart";
 import Wishlist from "../Components/Wishlist/Wishlist";
 import ChangePassword from "../Components/ChangePassword/ChangePassword";
+import SingleBookingDetails from "../Pages/SignleBookingDetails/SingleBookingDetails";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/details/:id",
         element: <DetailsPage />,
+      },
+      {
+        path: "/singleBookingDetails/:id",
+        element: <PrivateRoute><SingleBookingDetails /></PrivateRoute> ,
       },
       {
         path: "/booking",

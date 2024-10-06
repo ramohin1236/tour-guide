@@ -4,8 +4,9 @@ import Whatsapp from './../Social/WhatsApp';
 import { AuthContext } from './Auth/AuthProvider/AuthProvider';
 // import { getUBooking } from '../common/api/bookingApi';
 import moment from 'moment';
-import { MdDelete } from 'react-icons/md';
-import { getUserBooking } from '../common/api/bookingApi';
+import {  MdEdit } from 'react-icons/md';
+import {  getUserBooking } from '../common/api/bookingApi';
+import { Link } from 'react-router-dom';
 
 const BookingDetails = () => {
     const [userData, setUserData]=useState(null)
@@ -28,23 +29,7 @@ const BookingDetails = () => {
         fetchAttachments();
       }, [user?.user_id]);
 
-      const handleDelete = async (bookingId) => {
-        console.log(bookingId);
-        if (!bookingId) {
-          toast.error("User ID is not provided");
-          return;
-        }
-    
-        try {
-          await deleteBooking(bookingId);
-    
-          setUserData(userData.filter((booking) => booking.booking_id !== bookingId)); 
-    
-          toast.success("Booking deleted successfully!");
-        } catch (error) {
-          toast.error(error.message);
-        }
-      };
+   
   return (
     <div className='pt-32 '>
         {/* user Information */}
@@ -118,10 +103,14 @@ const BookingDetails = () => {
                   </td>
                  
                   <td className="px-6 py-4 flex gap-3 hover:cursor-pointer">
-                    <MdDelete
-                      onClick={() => handleDelete(booking?.booking_id)}
-                      className="text-3xl hover:text-red-600"
-                    />
+                  <Link 
+                     to={`/singleBookingDetails/${booking?.booking_id}`}
+                     >
+                     <MdEdit
+                       className="text-3xl hover:text-green-600"
+                     />
+                     </Link>
+                    
                   </td>
                 </tr>
               ))

@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Pages/Auth/AuthProvider/AuthProvider";
-import { deleteBooking, getUserBooking } from "../../common/api/bookingApi";
+import {  getUserBooking } from "../../common/api/bookingApi";
 import moment from "moment";
-import { MdDelete } from "react-icons/md";
-import toast from "react-hot-toast";
+import {  MdEdit } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const UserBookings = () => {
   const [userData, setUserData] = useState(null);
@@ -21,25 +21,6 @@ const UserBookings = () => {
     fetchAttachments();
   }, [user?.user_id]);
 
-  const handleDelete = async (bookingId) => {
-    console.log(bookingId);
-    if (!bookingId) {
-      toast.error("User ID is not provided");
-      return;
-    }
-
-    try {
-      await deleteBooking(bookingId);
-
-      setUserData(
-        userData.filter((booking) => booking.booking_id !== bookingId)
-      );
-
-      toast.success("Booking deleted successfully!");
-    } catch (error) {
-      toast.error(error.message);
-    }
-  };
   return (
         <div className="overflow-x-auto shadow-md sm:rounded-lg">
           <table className="min-w-full text-sm text-left text-gray-500">
@@ -106,10 +87,13 @@ const UserBookings = () => {
                     </td>
 
                     <td className="px-6 py-4 flex gap-3 hover:cursor-pointer">
-                      <MdDelete
-                        onClick={() => handleDelete(booking?.booking_id)}
-                        className="text-3xl hover:text-red-600"
-                      />
+                     <Link 
+                     to={`/singleBookingDetails/${booking?.booking_id}`}
+                     >
+                     <MdEdit
+                       className="text-3xl hover:text-green-600"
+                     />
+                     </Link>
                     </td>
                   </tr>
                 ))
