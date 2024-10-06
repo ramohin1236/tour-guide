@@ -2,20 +2,22 @@
 import { useContext, useEffect, useState } from 'react';
 import Whatsapp from './../Social/WhatsApp';
 import { AuthContext } from './Auth/AuthProvider/AuthProvider';
-import { getSingleBooking } from '../common/api/bookingApi';
+// import { getUBooking } from '../common/api/bookingApi';
 import moment from 'moment';
 import { MdDelete } from 'react-icons/md';
+import { getUserBooking } from '../common/api/bookingApi';
 
 const BookingDetails = () => {
     const [userData, setUserData]=useState(null)
-    console.log(userData);
+    // console.log(userData);
     const { user } = useContext(AuthContext); 
 
     useEffect(() => {
         const fetchAttachments = async () => {
           try {
-            const userInfo = await getSingleBooking(user?.user_id);
+            const userInfo = await getUserBooking(user?.user_id);
             setUserData(userInfo?.result)
+            console.log(userInfo)
     
         
           } catch (err) {
