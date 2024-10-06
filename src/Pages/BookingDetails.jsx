@@ -2,21 +2,22 @@
 import { useContext, useEffect, useState } from 'react';
 import Whatsapp from './../Social/WhatsApp';
 import { AuthContext } from './Auth/AuthProvider/AuthProvider';
-import { deleteBooking, getSingleBooking } from '../common/api/bookingApi';
+// import { getUBooking } from '../common/api/bookingApi';
 import moment from 'moment';
 import { MdDelete } from 'react-icons/md';
-import toast from 'react-hot-toast';
+import { getUserBooking } from '../common/api/bookingApi';
 
 const BookingDetails = () => {
     const [userData, setUserData]=useState(null)
-    console.log(userData);
+    // console.log(userData);
     const { user } = useContext(AuthContext); 
 
     useEffect(() => {
         const fetchAttachments = async () => {
           try {
-            const userInfo = await getSingleBooking(user?.user_id);
+            const userInfo = await getUserBooking(user?.user_id);
             setUserData(userInfo?.result)
+            console.log(userInfo)
     
         
           } catch (err) {
@@ -202,13 +203,13 @@ const BookingDetails = () => {
             Phone:
             <a href="tel:+818041364488" className="text-blue-500">
               {" "}
-              +81 80 4136 4488
+              +81 80-7962-4964
             </a>
           </li>
           <li>
             <p>
               <strong>WhatsApp:</strong>
-              +81 80 4136 4488
+              +81 80-7962-4964
             </p>
           </li>
         </ul>

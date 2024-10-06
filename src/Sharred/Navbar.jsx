@@ -6,7 +6,7 @@ import { IoPersonOutline } from "react-icons/io5";
 import { AuthContext } from "../Pages/Auth/AuthProvider/AuthProvider";
 
 const Navbar = () => {
-  const { user, loading, signOut } = useContext(AuthContext); 
+  const { user, loading, signOut } = useContext(AuthContext);
   const { logo4 } = Doc();
   const [menu, setMenu] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -42,12 +42,14 @@ const Navbar = () => {
                   alt="logo"
                 />
                 <div>
-                <p className="text-sm md:text-2xl font-semibold text-[#A04747]">
-                JAPAN TRAVEL AGENCY  
-                </p>
-                <p className="text-sm  text-start font-semibold uppercase"> and tour</p>
+                  <p className="text-sm md:text-2xl font-semibold text-[#A04747]">
+                    JAPAN TRAVEL AGENCY
+                  </p>
+                  <p className="text-sm  text-start font-semibold uppercase">
+                    {" "}
+                    and tour
+                  </p>
                 </div>
-                
               </div>
             </Link>
           </div>
@@ -66,8 +68,6 @@ const Navbar = () => {
                 Booking
               </Link>
             )}
-
-           
 
             <Link
               to="/contact"
@@ -89,7 +89,7 @@ const Navbar = () => {
               </>
             )}
           </nav>
-         
+
           <div className="hidden lg:flex flex-row justify-between items-center gap-5">
             {!user ? (
               <Link to="/signin">
@@ -105,8 +105,14 @@ const Navbar = () => {
                 <Link to="/profile" className="block text-[#A04747]">
                   Profile
                 </Link>
-                <Link to="/userbookings" className="block text-[#A04747]">
-                  My Bookings
+                <Link to="/changePassword" className="block text-[#A04747]">
+                  Change Password
+                </Link>
+                <Link to="/wishlist" className="block text-[#A04747]">
+                  Wishlist
+                </Link>
+                <Link to="/cart" className="block text-[#A04747]">
+                  Cart
                 </Link>
                 <p
                   className="text-[#A04747] font-semibold"
@@ -140,8 +146,6 @@ const Navbar = () => {
               Booking
             </Link>
           )}
-
-          
 
           <Link
             to="/contact"

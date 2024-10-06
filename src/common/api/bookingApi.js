@@ -31,11 +31,11 @@ export const findAllBookings = async () => {
   };
 // find Single Booking
 // complete
-  export const getSingleBooking = async (userId) => {
+  export const getUserBooking = async (userId) => {
     try {
       
       const response = await axiosInstance.get(`/api/bookings/user_bookings/${userId}`);
-      
+      console.log(response)
  
       return response.data;
     } catch (error) {
