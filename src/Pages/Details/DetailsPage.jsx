@@ -10,9 +10,9 @@ import { getAllLocationsVideoById } from "../../common/api/locationVideoApi";
 const DetailsPage = () => {
   const navigate = useNavigate();
   const [currentLocation, setCurrentLocation] = useState({});
-  const [attachments, setAttachments]=useState(null)
-  const [videos, setVideos]=useState(null)
- console.log(videos);
+  const [attachments, setAttachments] = useState(null);
+  const [videos, setVideos] = useState(null);
+  console.log(videos);
   const [, setLoading] = useState(true);
 
   const params = useParams();
@@ -61,7 +61,6 @@ const DetailsPage = () => {
     fetchLocationVideoById();
   }, [params.id]);
 
-
   const {
     name = "Unknown Name",
     default_image = "default.jpg",
@@ -88,47 +87,16 @@ const DetailsPage = () => {
             <h1 className="text-3xl font-bold mb-4">{name}</h1>
 
             {/* Image */}
-            
+
             <img
               src={`${apiUrl}/${default_image}`}
               alt="Tokyu Plaza"
-              className="w-full md:h-[500px] object-cover rounded-lg mb-4"
+              className="w-full md:h-[450px] object-cover rounded-lg mb-4"
             />
 
-            <div className="grid grid-cols-2 gap-10">
-           {
-                attachments?.map((pic)=> <img key={pic?.location_attachments_id}
-                src={`${apiUrl}/${pic?.attachment_url}`}
-                alt="Tokyu Plaza"
-                className="md:w-full md:h-96 object-cover  rounded-lg mb-4"
-              />)
-            }
-           </div>
-
-           {videos?.length > 0 && (
-  <div>
-    <p className="text-xl font-semibold my-4">Videos</p>
-    <div className="grid grid-cols-2 gap-6">
-      {videos.map((vid) => (
-        <video
-          key={vid?.location_vids_id}
-          autoPlay
-          controls
-          loop
-          muted
-          src={`${apiUrl}/${vid?.vid_url}`}
-          className="w-full h-64 object-cover rounded-lg"
-        ></video>
-      ))}
-    </div>
-  </div>
-)}
-
-
-            {/* Description */}
-            <p className="text-gray-600 mb-4">{description}</p>
+           
           </div>
-
+                
           {/* Right section with overview details */}
           <div className="  rounded-lg p-6 space-y-4  md:mt-12">
             <h2 className="text-2xl md:text-4xl font-semibold">Overview</h2>
@@ -173,6 +141,41 @@ const DetailsPage = () => {
             </div>
           </div>
         </div>
+
+        <div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {attachments?.map((pic) => (
+                <img
+                  key={pic?.location_attachments_id}
+                  src={`${apiUrl}/${pic?.attachment_url}`}
+                  alt="Tokyu Plaza"
+                  className="md:w-[540px] md:h-[288px] object-cover  rounded-lg mb-4"
+                />
+              ))}
+            </div>
+
+            {videos?.length > 0 && (
+              <div>
+                <p className="text-xl font-semibold my-4">Videos</p>
+                <div className="grid grid-cols-2 gap-6">
+                  {videos.map((vid) => (
+                    <video
+                      key={vid?.location_vids_id}
+                      autoPlay
+                      controls
+                      loop
+                      muted
+                      src={`${apiUrl}/${vid?.vid_url}`}
+                      className="w-full h-64 object-cover rounded-lg"
+                    ></video>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Description */}
+            <p className="text-gray-600 mb-4">{description}</p>
+                </div>
       </div>
     </div>
   );
