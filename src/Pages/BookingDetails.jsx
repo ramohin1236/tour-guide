@@ -2,9 +2,10 @@
 import { useContext, useEffect, useState } from 'react';
 import Whatsapp from './../Social/WhatsApp';
 import { AuthContext } from './Auth/AuthProvider/AuthProvider';
-import { getSingleBooking } from '../common/api/bookingApi';
+import { deleteBooking, getSingleBooking } from '../common/api/bookingApi';
 import moment from 'moment';
 import { MdDelete } from 'react-icons/md';
+import toast from 'react-hot-toast';
 
 const BookingDetails = () => {
     const [userData, setUserData]=useState(null)
@@ -25,6 +26,24 @@ const BookingDetails = () => {
     
         fetchAttachments();
       }, [user?.user_id]);
+
+      const handleDelete = async (bookingId) => {
+        console.log(bookingId);
+        if (!bookingId) {
+          toast.error("User ID is not provided");
+          return;
+        }
+    
+        try {
+          await deleteBooking(bookingId);
+    
+          setUserData(userData.filter((booking) => booking.booking_id !== bookingId)); 
+    
+          toast.success("Booking deleted successfully!");
+        } catch (error) {
+          toast.error(error.message);
+        }
+      };
   return (
     <div className='pt-32 '>
         {/* user Information */}
@@ -99,7 +118,7 @@ const BookingDetails = () => {
                  
                   <td className="px-6 py-4 flex gap-3 hover:cursor-pointer">
                     <MdDelete
-                     
+                      onClick={() => handleDelete(booking?.booking_id)}
                       className="text-3xl hover:text-red-600"
                     />
                   </td>
