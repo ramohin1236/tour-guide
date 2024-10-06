@@ -24,6 +24,9 @@ import PrivateRoute from "./PrivateRoute";
 import AdminPrivateRoute from "./AdminPrivateRoute";
 import UpdateLocation from "../Dashboard/UpdateLocation";
 import UserBookings from "../Components/UserBookings/UserBookings";
+import Cart from "../Components/Cart/Cart";
+import Wishlist from "../Components/Wishlist/Wishlist";
+import ChangePassword from "../Components/ChangePassword/ChangePassword";
 
 export const router = createBrowserRouter([
   {
@@ -46,7 +49,6 @@ export const router = createBrowserRouter([
         path: "/booking",
         element: (
           <PrivateRoute>
-            {" "}
             <Booking />
           </PrivateRoute>
         ),
@@ -54,6 +56,18 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/wishlist",
+        element: <Wishlist />,
+      },
+      {
+        path: "/changePassword",
+        element: <ChangePassword/>,
       },
       {
         path: "/payment",
@@ -159,7 +173,7 @@ export const router = createBrowserRouter([
         path: "updatelocation/:id",
         element: (
           <AdminPrivateRoute>
-            <UpdateLocation/>
+            <UpdateLocation />
           </AdminPrivateRoute>
         ),
       },
