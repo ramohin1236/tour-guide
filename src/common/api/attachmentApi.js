@@ -3,6 +3,7 @@ import axiosInstance from './HttpKit';
 // upload attachment
 
 export const uploadAttachment = async (formData) => {
+    console.log(formData);
     try {
       const response = await axiosInstance.post('/api/attachments/upload', formData, {
         headers: {

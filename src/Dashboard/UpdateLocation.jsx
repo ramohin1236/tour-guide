@@ -18,6 +18,7 @@ import {
   getAllLocationsVideoById,
   uploadLocationVideo,
 } from "../common/api/locationVideoApi";
+import { FaSpinner } from "react-icons/fa";
 
 function UpdateLocation() {
   const { id } = useParams();
@@ -36,6 +37,7 @@ function UpdateLocation() {
   const [attachment, setAttatchment] = useState(null);
   const [, setUploadedVideo] = useState(null);
   const [videos, setVideos] = useState(null);
+  const [loading, setLoading]=useState(false)
   console.log(videos);
   const { apiUrl } = config;
   const location = useLocation()?.state;
@@ -71,6 +73,7 @@ function UpdateLocation() {
     const videoFile = e.target.files[0];
     console.log(videoFile);
     if (videoFile) {
+        setLoading(true)
       const formData = new FormData();
       formData.append("video", videoFile);
       formData.append("location_id", location?.location_id);
@@ -79,6 +82,7 @@ function UpdateLocation() {
         console.log(response);
         setUploadedVideo(response?.videoUrl);
         toast.success("Video uploaded successfully!");
+        setLoading(false)
       } catch (error) {
         toast.error(error);
       }
@@ -317,7 +321,7 @@ function UpdateLocation() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
-        <div className="relative border-4 border-[#a04747] border-dotted p-3 my-5 w-64 h-64 flex flex-col justify-center items-center rounded-lg cursor-pointer">
+        {/* <div className="relative border-4 border-[#a04747] border-dotted p-3 my-5 w-64 h-64 flex flex-col justify-center items-center rounded-lg cursor-pointer">
           {selectedImage ? (
             <img
               src={selectedImage}
@@ -336,7 +340,7 @@ function UpdateLocation() {
             className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
             onChange={handleImageChange}
           />
-        </div>
+        </div> */}
         {attachment?.map((photo, idx) => (
           <div
             key={photo?.location_attachments_id}
@@ -371,7 +375,10 @@ function UpdateLocation() {
             />
           ) : (
             <div className="text-gray-400 flex flex-col justify-center items-center">
-              <AiOutlinePlus className="text-6xl" />
+                {
+                    loading ? <><FaSpinner className="animate-spin text-6xl" /></>:<> <AiOutlinePlus className="text-6xl" /></>
+                }
+             
               <p className="mt-2">Click to upload</p>
             </div>
           )}
