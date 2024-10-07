@@ -65,8 +65,6 @@ const DetailsPage = () => {
     name = "Unknown Name",
     default_image = "default.jpg",
     description = "No description available.",
-    phone = "N/A",
-    website = "N/A",
     hours = "Not available",
     address = "No address provided",
   } = currentLocation;
@@ -93,10 +91,8 @@ const DetailsPage = () => {
               alt="Tokyu Plaza"
               className="w-full md:h-[450px] object-cover rounded-lg mb-4"
             />
-
-           
           </div>
-                
+
           {/* Right section with overview details */}
           <div className="  rounded-lg p-6 space-y-4  md:mt-12">
             <h2 className="text-2xl md:text-4xl font-semibold">Overview</h2>
@@ -143,39 +139,39 @@ const DetailsPage = () => {
         </div>
 
         <div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {attachments?.map((pic) => (
-                <img
-                  key={pic?.location_attachments_id}
-                  src={`${apiUrl}/${pic?.attachment_url}`}
-                  alt="Tokyu Plaza"
-                  className="md:w-[540px] md:h-[288px] object-cover  rounded-lg mb-4"
-                />
-              ))}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {attachments?.map((pic) => (
+              <img
+                key={pic?.location_attachments_id}
+                src={`${apiUrl}/${pic?.attachment_url}`}
+                alt="Tokyu Plaza"
+                className="md:w-[540px] md:h-[288px] object-cover  rounded-lg mb-4"
+              />
+            ))}
+          </div>
 
-            {videos?.length > 0 && (
-              <div>
-                <p className="text-xl font-semibold my-4">Videos</p>
-                <div className="grid grid-cols-2 gap-6">
-                  {videos.map((vid) => (
-                    <video
-                      key={vid?.location_vids_id}
-                      autoPlay
-                      controls
-                      loop
-                      muted
-                      src={`${apiUrl}/${vid?.vid_url}`}
-                      className="w-full h-64 object-cover rounded-lg"
-                    ></video>
-                  ))}
-                </div>
+          {videos?.length > 0 && (
+            <div>
+              <p className="text-xl font-semibold my-4">Videos</p>
+              <div className="grid grid-cols-2 gap-6">
+                {videos.map((vid) => (
+                  <video
+                    key={vid?.location_vids_id}
+                    autoPlay
+                    controls
+                    loop
+                    muted
+                    src={`${apiUrl}/${vid?.vid_url}`}
+                    className="w-full h-64 object-cover rounded-lg"
+                  ></video>
+                ))}
               </div>
-            )}
+            </div>
+          )}
 
-            {/* Description */}
-            <p className="text-gray-600 mb-4">{description}</p>
-                </div>
+          {/* Description */}
+          <p className="text-gray-600 mb-4">{description}</p>
+        </div>
       </div>
     </div>
   );

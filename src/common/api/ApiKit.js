@@ -40,7 +40,12 @@ export const userImageUpdate = async (userId, updatedImage) => {
   try {
     const response = await axiosInstance.put(
       `/api/users/upload_pp/${userId}`,
-      updatedImage
+      updatedImage,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
     );
     return response.data;
   } catch (error) {
