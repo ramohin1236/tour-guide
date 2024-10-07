@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
-
 import { deleteBooking, findAllBookings } from "../common/api/bookingApi";
 import moment from "moment";
 import toast from "react-hot-toast";
@@ -12,6 +11,7 @@ const AllBookings = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [bookingsPerPage] = useState(10);
   const [error, setError] = useState(null);
+  const [refetch, setRefetch] = useState(true);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -23,9 +23,12 @@ const AllBookings = () => {
         setError(err.message || "Failed to fetch bookings");
         setLoading(false);
       }
+      setRefetch(false);
     };
-    fetchBookings();
-  }, []);
+    if (refetch) {
+      fetchBookings();
+    }
+  }, [refetch]);
 
   const handleDelete = async (userId) => {
     if (!userId) {
@@ -35,9 +38,7 @@ const AllBookings = () => {
 
     try {
       await deleteBooking(userId);
-
-      setBookings(bookings.filter((booking) => booking.booking_id !== userId)); 
-
+      setRefetch(true);
       toast.success("Booking deleted successfully!");
     } catch (error) {
       toast.error(error.message);
@@ -128,15 +129,23 @@ const AllBookings = () => {
                     {booking?.country}
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    <button>{booking?.booking_status}</button>
+                    {booking?.booking_status}
                   </td>
-                  <td className="px-6 py-4 flex gap-3 hover:cursor-pointer">
+                  <td className="px-6 py-4 flex justify-center items-center gap-3 hover:cursor-pointer">
                     <MdDelete
                       onClick={() => {
                         handleDelete(booking?.booking_id);
-                      }} 
+                      }}
                       className="text-3xl hover:text-red-600"
                     />
+                    {booking?.booking_status !== "Paid" && (
+                      <button
+                        type="button"
+                        className="px-5 py-2.5 rounded-lg text-white text-sm tracking-wider font-medium border border-current outline-none bg-[#a04747]"
+                      >
+                        Paid
+                      </button>
+                    )}
                   </td>
                 </tr>
               ))
@@ -156,9 +165,8 @@ const AllBookings = () => {
         <div className="mt-8 flex justify-end p-4">
           <Pagination
             usersPerPage={bookingsPerPage}
-          totalUsers={bookings.length}
+            totalUsers={bookings.length}
             currentPage={currentPage}
-
             paginate={paginate}
           />
         </div>
