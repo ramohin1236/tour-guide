@@ -6,11 +6,13 @@ import { findSingleDestination } from "../../common/api/destinationApi";
 
 const SingleBookingDetails = () => {
    const [bookingInfo, setBookingInfo] = useState(null);
+   
    const [destinationName, setDestinationName] = useState(null);
-   console.log(destinationName);
+
+   console.log(bookingInfo);
    console.log(bookingInfo?.booking_id);
    const params = useParams();
-   console.log(params?.id);
+   
 
   useEffect(() => {
     const fetchAttachments = async () => {
