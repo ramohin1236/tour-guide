@@ -4,15 +4,14 @@ import { FaPlus } from "react-icons/fa"; // Import Plus icon for image upload
 import { userImageUpdate } from "../../common/api/ApiKit";
 import toast from "react-hot-toast";
 import config from "../../config/config";
+import { userProfile } from "../../common/api/authApi";
 
 export default function ProfileDetails() {
-  const { user } = useContext(AuthContext);
+  const { user, dispatch } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState(null); // State to hold the uploaded image
-  console.log(user);
   // Function to handle image upload
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
-    console.log(file);
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -24,9 +23,11 @@ export default function ProfileDetails() {
 
     form.append("image", file);
     const res = await userImageUpdate(user?.user_id, form);
-    console.log(res);
     if (res.success) {
+      const profileData = await userProfile();
       toast.success("Image uploaded successfully");
+      // Dispatch the login action
+      dispatch({ type: "LOGIN", payload: profileData.result });
     } else {
       toast.error("Image upload failed");
     }
