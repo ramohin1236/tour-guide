@@ -32,9 +32,9 @@ const UserBookings = () => {
                 <th scope="col" className="px-6 py-3">
                   Booking ID
                 </th>
-                <th scope="col" className="px-6 py-3">
+                {/* <th scope="col" className="px-6 py-3">
                   User Name
-                </th>
+                </th> */}
                 <th scope="col" className="px-6 py-3">
                   Email
                 </th>
@@ -48,7 +48,7 @@ const UserBookings = () => {
                   Booking End{" "}
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Country From{" "}
+                  Status
                 </th>
 
                 <th scope="col" className="px-6 py-3">
@@ -67,9 +67,9 @@ const UserBookings = () => {
                     <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
                       {booking?.booking_id}
                     </td>
-                    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                    {/* <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
                       {booking?.first_name} {booking?.last_name}
-                    </td>
+                    </td> */}
                     <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
                       {booking?.email}
                     </td>
@@ -83,10 +83,10 @@ const UserBookings = () => {
                       {moment(booking?.trip_ends).format("MMMM Do, YYYY")}
                     </td>
                     <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                      {booking?.country}
+                      {booking?.payment_status}
                     </td>
 
-                    <td className="px-6 py-4 flex gap-3 hover:cursor-pointer">
+                    <td className="px-6 py-4 justify-center items-center flex gap-3 hover:cursor-pointer">
                      <Link 
                      to={`/singleBookingDetails/${booking?.booking_id}`}
                      >

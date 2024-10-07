@@ -177,7 +177,7 @@ export default function ChangePassword() {
       </div>
 
       <button
-        className="bg-blue-500 text-white py-2 px-6 mt-6 rounded hover:bg-blue-600 transition-shadow duration-300 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="bg-[#A04747] text-white py-2 px-6 mt-6 rounded hover:bg-[#c96161] transition-all duration-500 shadow-[#000022b6] shadow-md hover:shadow-[#000022b6] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         onClick={handleContinue}
       >
         Continue
