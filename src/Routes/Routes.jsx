@@ -43,6 +43,10 @@ export const router = createBrowserRouter([
         element: <PopularSpots />,
       },
       {
+        path: "/destination/:spotid",
+        element: <PopularSpots />,
+      },
+      {
         path: "/details/:id",
         element: <DetailsPage />,
       },
