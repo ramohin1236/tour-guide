@@ -181,7 +181,7 @@ const BookingDetails = () => {
             <li>
               <p>
                 <strong>WhatsApp:</strong>
-                +81 80-7962-4964
+                +81 80-4136-4488
               </p>
             </li>
           </ul>
