@@ -76,7 +76,7 @@ const DetailsPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 py-10 px-5">
+    <div className="bg-gray-100 py-10 px-[20px] md:px-[100px]">
       <div className="container mx-auto mt-16 md:mt-24">
         {/* Main grid container */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -112,21 +112,6 @@ const DetailsPage = () => {
               <h3 className="font-semibold text-xl">Hours:</h3>
               <p>{hours}</p>
             </div>
-
-            {/* Phone Number
-            <div className=" text-[#404040]">
-              <h3 className="font-semibold text-xl">Phone Number:</h3>
-              <p>{phone} </p>
-            </div> */}
-
-            {/* Website */}
-            {/* <div className="text-gray-700">
-              <h3 className="font-semibold">Website:</h3>
-              <a href={website} className="text-indigo-500 hover:underline">
-                {website}
-              </a>
-            </div> */}
-
             <div className="mt-5 mr-7 md:mr-20  ">
               <button
                 className="text-xl shadow-lg text-[#A04747] font-semibold hover:bg-[#A04747] hover:text-white  bg-white px-5 py-2 rounded-md transition duration-300 ease-in-out"
@@ -170,7 +155,7 @@ const DetailsPage = () => {
           )}
 
           {/* Description */}
-          <p className="text-gray-600 mb-4">{description}</p>
+          <p className="text-gray-600 mb-4 md:px-6">{description}</p>
         </div>
       </div>
     </div>
