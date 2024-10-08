@@ -8,9 +8,10 @@ import {
   deleteBooking,
   findAllBookings,
 } from "../common/api/bookingApi";
-import moment from "moment";
 import toast from "react-hot-toast";
 import Pagination from "../Sharred/Pagination";
+import { IoMdEye } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const AllBookings = () => {
   const [bookings, setBookings] = useState([]);
@@ -19,6 +20,7 @@ const AllBookings = () => {
   const [bookingsPerPage] = useState(10);
   const [error, setError] = useState(null);
   const [refetch, setRefetch] = useState(true);
+console.log(bookings);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -68,6 +70,8 @@ const AllBookings = () => {
       toast.error(error.message);
     }
   };
+
+
   // Pagination logic
   const indexOfLastBooking = currentPage * bookingsPerPage;
   const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
@@ -98,13 +102,7 @@ const AllBookings = () => {
                 User Name
               </th>
               <th scope="col" className="px-6 py-3">
-                Email
-              </th>
-              <th scope="col" className="px-6 py-3">
                 Phone
-              </th>
-              <th scope="col" className="px-6 py-3">
-                Booking Timeline{" "}
               </th>
               <th scope="col" className="px-6 py-3">
                 Booking Status{" "}
@@ -115,7 +113,7 @@ const AllBookings = () => {
               <th scope="col" className="px-6 py-3">
                 Payment Status{" "}
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="px-6 py-3 text-center">
                 Action
               </th>
             </tr>
@@ -133,22 +131,15 @@ const AllBookings = () => {
                     {booking?.first_name} {booking?.last_name}
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    {booking?.email}
-                  </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
                     {booking?.phone}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    {moment(booking?.trip_starts).format("MMMM Do, YYYY")}-
-                    {moment(booking?.trip_ends).format("MMMM Do, YYYY")}
-                  </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                  <td className="px-6 py-4 font-medium text-gray-900 text-center dark:text-white">
                     {booking?.booking_status}
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
                     {booking?.country}
                   </td>
-                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                  <td className="px-6 py-4 font-medium text-gray-900 text-center dark:text-white">
                     {booking?.payment_status}
                   </td>
                   <td className="px-6 py-4 flex justify-center items-center gap-3 hover:cursor-pointer">
@@ -193,6 +184,12 @@ const AllBookings = () => {
                         );
                       }}
                     />
+                    <Link to={`/dashboard/booking/${booking?.booking_id}`}>
+                    <IoMdEye
+                      className="text-3xl hover:text-green-600"
+                    />
+                    </Link>
+                  
                   </td>
                 </tr>
               ))

@@ -2,9 +2,9 @@ import { useContext, useEffect, useState } from "react";
 import Whatsapp from "./../Social/WhatsApp";
 import { AuthContext } from "./Auth/AuthProvider/AuthProvider";
 import moment from "moment";
-import { MdEdit } from "react-icons/md";
 import { getUserBooking } from "../common/api/bookingApi";
 import { Link } from "react-router-dom";
+import { IoMdEye } from "react-icons/io";
 
 const BookingDetails = () => {
   const [userData, setUserData] = useState(null);
@@ -92,7 +92,7 @@ const BookingDetails = () => {
 
                     <td className="px-6 py-4 flex justify-center gap-3 hover:cursor-pointer">
                       <Link to={`/singleBookingDetails/${booking?.booking_id}`}>
-                        <MdEdit className="text-3xl hover:text-green-600" />
+                        <IoMdEye className="text-3xl hover:text-green-600" />
                       </Link>
                     </td>
                   </tr>

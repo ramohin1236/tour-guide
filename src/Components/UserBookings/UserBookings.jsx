@@ -2,8 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Pages/Auth/AuthProvider/AuthProvider";
 import {  getUserBooking } from "../../common/api/bookingApi";
 import moment from "moment";
-import {  MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { IoMdEye } from "react-icons/io";
 
 const UserBookings = () => {
   const [userData, setUserData] = useState(null);
@@ -83,7 +83,7 @@ const UserBookings = () => {
                     <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
                       {moment(booking?.trip_ends).format("MMMM Do, YYYY")}
                     </td>
-                    <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                    <td className="px-6 py-4 text-center font-medium text-gray-900 dark:text-white">
                       {booking?.payment_status}
                     </td>
 
@@ -91,8 +91,8 @@ const UserBookings = () => {
                      <Link 
                      to={`/singleBookingDetails/${booking?.booking_id}`}
                      >
-                     <MdEdit
-                       className="text-3xl hover:text-green-600"
+                     <IoMdEye
+                       className="text-3xl text-green-600"
                      />
                      </Link>
                     </td>

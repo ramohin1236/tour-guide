@@ -28,6 +28,7 @@ import Cart from "../Components/Cart/Cart";
 import Wishlist from "../Components/Wishlist/Wishlist";
 import ChangePassword from "../Components/ChangePassword/ChangePassword";
 import SingleBookingDetails from "../Pages/SignleBookingDetails/SingleBookingDetails";
+import UserSingleBooking from "../Dashboard/UserSingleBooking";
 
 export const router = createBrowserRouter([
   {
@@ -134,6 +135,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminPrivateRoute>
             <AllBooking />
+          </AdminPrivateRoute>
+        ),
+      },
+      {
+        path: "booking/:id",
+        element: (
+          <AdminPrivateRoute>
+            <UserSingleBooking />
           </AdminPrivateRoute>
         ),
       },
