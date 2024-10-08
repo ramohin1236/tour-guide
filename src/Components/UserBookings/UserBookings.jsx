@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const UserBookings = () => {
   const [userData, setUserData] = useState(null);
+
   const { user } = useContext(AuthContext);
   useEffect(() => {
     const fetchAttachments = async () => {

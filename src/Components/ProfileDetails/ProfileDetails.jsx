@@ -10,6 +10,7 @@ export default function ProfileDetails() {
   const { user, dispatch } = useContext(AuthContext);
   const [selectedImage, setSelectedImage] = useState(null); // State to hold the uploaded image
   // Function to handle image upload
+
   const handleImageUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {

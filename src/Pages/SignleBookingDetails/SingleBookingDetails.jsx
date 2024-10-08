@@ -5,15 +5,8 @@ import moment from "moment";
 import { findSingleDestination } from "../../common/api/destinationApi";
 
 const SingleBookingDetails = () => {
-   const [bookingInfo, setBookingInfo] = useState(null);
-   
-   const [destinationName, setDestinationName] = useState(null);
-
-   console.log(bookingInfo);
-   console.log(bookingInfo?.booking_id);
-   const params = useParams();
-   
   const [bookingInfo, setBookingInfo] = useState(null);
+  console.log(bookingInfo);
   const [destinationName, setDestinationName] = useState(null);
   const params = useParams();
 
@@ -104,7 +97,7 @@ const SingleBookingDetails = () => {
                   Travel Companion
                 </th>
                 <td className="border px-4 py-2">
-                  {bookingInfo?.travel_companion === 1 ? "Yes" : "No"}
+                  {bookingInfo?.travel_companion === "1" ? "Yes" : "No"}
                 </td>
               </tr>
               <tr>
@@ -112,7 +105,7 @@ const SingleBookingDetails = () => {
                   Japanese Translator
                 </th>
                 <td className="border px-4 py-2">
-                  {bookingInfo?.japaneese_translator === 1 ? "Yes" : "No"}
+                  {bookingInfo?.japaneese_translator === "1" ? "Yes" : "No"}
                 </td>
               </tr>
               <tr>
@@ -120,7 +113,7 @@ const SingleBookingDetails = () => {
                   Servant Service
                 </th>
                 <td className="border px-4 py-2">
-                  {bookingInfo?.servent_service === 1 ? "Yes" : "No"}
+                  {bookingInfo?.servent_service === "1" ? "Yes" : "No"}
                 </td>
               </tr>
               <tr>
