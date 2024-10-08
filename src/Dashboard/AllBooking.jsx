@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
 import { IoCheckmarkDoneCircle } from "react-icons/io5";
 import { MdCancel } from "react-icons/md";
-import { FcPaid } from "react-icons/fc";
+import { FaCcAmazonPay } from "react-icons/fa";
 import {
   bookingUpdate,
   deleteBooking,
@@ -20,7 +20,7 @@ const AllBookings = () => {
   const [bookingsPerPage] = useState(10);
   const [error, setError] = useState(null);
   const [refetch, setRefetch] = useState(true);
-console.log(bookings);
+  console.log(bookings);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -70,7 +70,6 @@ console.log(bookings);
       toast.error(error.message);
     }
   };
-
 
   // Pagination logic
   const indexOfLastBooking = currentPage * bookingsPerPage;
@@ -150,8 +149,8 @@ console.log(bookings);
                       className="text-3xl text-red-600"
                     />
                     {booking?.payment_status !== "paid" && (
-                      <FcPaid
-                        className="text-3xl text-red-600"
+                      <FaCcAmazonPay
+                        className="text-3xl text-green-600"
                         onClick={(e) => {
                           e.preventDefault();
                           handleBookingUpdate(
@@ -185,11 +184,8 @@ console.log(bookings);
                       }}
                     />
                     <Link to={`/dashboard/booking/${booking?.booking_id}`}>
-                    <IoMdEye
-                      className="text-3xl hover:text-green-600"
-                    />
+                      <IoMdEye className="text-3xl hover:text-green-600" />
                     </Link>
-                  
                   </td>
                 </tr>
               ))

@@ -9,7 +9,7 @@ const DashLayout = () => {
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden bg-[#f2f2f2]">
         <header
-          className={`sticky top-0 z-999 flex w-full bg-white py-2 px-6 h-[70px] dark:bg-boxdark border-b`}
+          className={`sticky top-0 z-50 flex w-full bg-white py-2 px-6 h-[70px] dark:bg-boxdark border-b`}
         >
           <button
             onClick={(e) => {

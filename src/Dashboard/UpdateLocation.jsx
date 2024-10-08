@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import {
   deleteLocationAttachment,
   getLocationAttachments,
+  uploadAttachment,
 } from "../common/api/attachmentApi";
 import config from "../config/config";
 import { ImCross } from "react-icons/im";
@@ -32,15 +33,16 @@ function UpdateLocation() {
   const [destination, setDestination] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [defaultImage, setDefaultImage] = useState(null);
-  const [, setUploading] = useState(false);
   const [file, setFile] = useState(null);
   const [attachment, setAttatchment] = useState(null);
-  const [, setUploadedVideo] = useState(null);
   const [videos, setVideos] = useState(null);
-  const [loading, setLoading]=useState(false)
-  console.log(videos);
+  const [loading, setLoading] = useState(false);
+  const [getVideo, setGetVideo] = useState(true);
+  const [getAllAttachments, setGetAllAttachments] = useState(true);
   const { apiUrl } = config;
   const location = useLocation()?.state;
+  const [newAttachment, setNewAttachment] = useState(null);
+  const [attachmentPreview, setAttatchmentsPreview] = useState(null);
 
   const {
     name: existingName,
@@ -73,24 +75,24 @@ function UpdateLocation() {
     const videoFile = e.target.files[0];
     console.log(videoFile);
     if (videoFile) {
-        setLoading(true)
+      setLoading(true);
       const formData = new FormData();
       formData.append("video", videoFile);
       formData.append("location_id", location?.location_id);
       try {
         const response = await uploadLocationVideo(formData);
         console.log(response);
-        setUploadedVideo(response?.videoUrl);
+
         toast.success("Video uploaded successfully!");
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
         toast.error(error);
       }
+      setGetVideo(true);
     }
   };
 
   const handleUpload = async () => {
-    setUploading(true);
     const formData = new FormData();
     formData.append("attachment", file);
     try {
@@ -104,21 +106,54 @@ function UpdateLocation() {
     } catch (error) {
       toast.error("Failed to upload image.", error);
     } finally {
-      setUploading(false);
+      setSelectedImage(null);
     }
   };
+
+  const handleNewAttachment = (e) => {
+    const selectedFile = e.target?.files[0];
+
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setAttatchmentsPreview(reader.result);
+      };
+      reader.readAsDataURL(selectedFile);
+      setNewAttachment(selectedFile);
+    }
+  };
+
+  const handleUploadAttachment = async () => {
+    const formData = new FormData();
+    formData.append("image", newAttachment);
+    formData.append("location_id", id);
+    try {
+      const response = await uploadAttachment(formData);
+      if (response?.success) {
+        toast.success("Attachment uploaded successfully!");
+      }
+    } catch (error) {
+      toast.error("Failed to upload image.", error);
+    } finally {
+      setGetAllAttachments(true);
+      setAttatchmentsPreview(null);
+    }
+  };
+
   useEffect(() => {
     const fetchAttachments = async () => {
       try {
-        const Photos = await getLocationAttachments(id);
-        setAttatchment(Photos?.result);
+        const photos = await getLocationAttachments(id);
+
+        setAttatchment(photos?.result);
       } catch (err) {
-        console.log(err);
+        toast.error("Error getting attachments");
+      } finally {
+        setGetAllAttachments(false);
       }
     };
-
-    fetchAttachments();
-  }, [id]);
+    if (getAllAttachments) fetchAttachments();
+  }, [id, getAllAttachments]);
 
   useEffect(() => {
     setName(existingName);
@@ -141,14 +176,13 @@ function UpdateLocation() {
       try {
         const videos = await getAllLocationsVideoById(id); // Fetch videos by location ID
         setVideos(videos?.result); // Update the state with fetched videos
-        console.log("Fetched videos: ", videos?.result);
       } catch (err) {
         console.log("Error fetching videos: ", err);
       }
+      setGetVideo(false); // Only fetch videos once to save performance
     };
-  
-    fetchVideos();
-  }, [id]);
+    if (getVideo) fetchVideos();
+  }, [id, getVideo]);
 
   const stripHtmlTags = (html) => {
     const tempDiv = document.createElement("div");
@@ -192,10 +226,11 @@ function UpdateLocation() {
   };
   const handleRemoveVideo = async (videoId) => {
     try {
-    
-     await deleteLocationVideo(videoId);
-     setVideos((prevVideos) => prevVideos.filter((vid) => vid?.location_vids_id !== videoId));
-  
+      await deleteLocationVideo(videoId);
+      setVideos((prevVideos) =>
+        prevVideos.filter((vid) => vid?.location_vids_id !== videoId)
+      );
+
       toast.success("Video deleted successfully.");
     } catch (error) {
       console.error("Error deleting the video: ", error);
@@ -287,7 +322,7 @@ function UpdateLocation() {
           />
         </div>
 
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center ">
           <div className="relative border-4 border-[#a04747] border-dotted p-3 my-5 w-64 h-64 flex flex-col justify-center items-center rounded-lg cursor-pointer">
             {selectedImage ? (
               <img
@@ -296,7 +331,7 @@ function UpdateLocation() {
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : (
-              <div className="text-gray-400 flex flex-col justify-center items-center">
+              <div className="text-gray-400 flex flex-col justify-center items-center ">
                 <AiOutlinePlus className="text-6xl" />
                 <p className="mt-2">Click to upload</p>
               </div>
@@ -321,26 +356,6 @@ function UpdateLocation() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
-        {/* <div className="relative border-4 border-[#a04747] border-dotted p-3 my-5 w-64 h-64 flex flex-col justify-center items-center rounded-lg cursor-pointer">
-          {selectedImage ? (
-            <img
-              src={selectedImage}
-              alt="Selected"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          ) : (
-            <div className="text-gray-400 flex flex-col justify-center items-center">
-              <AiOutlinePlus className="text-6xl" />
-              <p className="mt-2">Click to upload</p>
-            </div>
-          )}
-          <input
-            type="file"
-            accept="image/*"
-            className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
-            onChange={handleImageChange}
-          />
-        </div> */}
         {attachment?.map((photo, idx) => (
           <div
             key={photo?.location_attachments_id}
@@ -362,26 +377,58 @@ function UpdateLocation() {
           </div>
         ))}
       </div>
+      <div className="flex flex-col justify-center ">
+        <div className="relative border-4 border-[#a04747] border-dotted p-3 my-5 w-64 h-64 flex flex-col justify-center items-center rounded-lg cursor-pointer">
+          {attachmentPreview ? (
+            <img
+              src={attachmentPreview}
+              alt="Selected"
+              className="w-full h-full object-cover rounded-lg"
+            />
+          ) : (
+            <div className="text-gray-400 flex flex-col justify-center items-center ">
+              <AiOutlinePlus className="text-6xl" />
+              <p className="mt-2">Click to upload</p>
+            </div>
+          )}
+          <input
+            type="file"
+            accept="image/*"
+            className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+            onChange={handleNewAttachment}
+          />
+        </div>
+      </div>
+
+      <div className="w-full flex justify-center mb-5">
+        <button
+          onClick={handleUploadAttachment}
+          className="bg-[#c75f5f] hover:bg-[#a04747] text-white px-4 py-2 rounded-md font-semibold w-full "
+        >
+          Upload Image
+        </button>
+      </div>
 
       {/* video upload section */}
       <p className="text-xl font-semibold ">Upload Video</p>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
         <div className="relative border-4 border-[#a04747] border-dotted p-3 my-5 w-64 h-64 flex flex-col justify-center items-center rounded-lg cursor-pointer">
-          {selectedImage ? (
-            <img
-              src={selectedImage}
-              alt="Selected"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          ) : (
-            <div className="text-gray-400 flex flex-col justify-center items-center">
-                {
-                    loading ? <><FaSpinner className="animate-spin text-6xl" /></>:<> <AiOutlinePlus className="text-6xl" /></>
-                }
-             
-              <p className="mt-2">Click to upload</p>
-            </div>
-          )}
+          <div className="text-gray-400 flex flex-col justify-center items-center">
+            {loading ? (
+              <>
+                <FaSpinner className="animate-spin text-6xl" />
+              </>
+            ) : (
+              <>
+                {" "}
+                <AiOutlinePlus className="text-6xl" />
+              </>
+            )}
+
+            <p className="mt-2">
+              {loading ? "Uploading Video" : `Click to upload`}
+            </p>
+          </div>
           <input
             type="file"
             accept="video/*"
@@ -390,26 +437,26 @@ function UpdateLocation() {
           />
         </div>
         {videos?.map((vid) => (
-      <div
-        key={vid?.location_vids_id}
-        className="relative w-full h-64 mt-5 overflow-hidden rounded-lg shadow-lg"
-      >
-        <button
-          onClick={() => handleRemoveVideo(vid?.location_vids_id)} // Call handleRemoveVideo on button click
-          className=""
-        >
-          <ImCross className="text-red-500" />
-        </button>
-        <video
-          autoPlay
-          controls
-          loop
-          muted
-          src={`${apiUrl}/${vid?.vid_url}`}
-          className="w-full h-64 object-cover rounded-lg"
-        ></video>
-      </div>
-    ))}
+          <div
+            key={vid?.location_vids_id}
+            className="relative w-full h-64 mt-5 overflow-hidden rounded-lg shadow-lg"
+          >
+            <button
+              onClick={() => handleRemoveVideo(vid?.location_vids_id)} // Call handleRemoveVideo on button click
+              className=""
+            >
+              <ImCross className="text-red-500" />
+            </button>
+            <video
+              autoPlay
+              controls
+              loop
+              muted
+              src={`${apiUrl}/${vid?.vid_url}`}
+              className="w-full h-64 object-cover rounded-lg"
+            ></video>
+          </div>
+        ))}
       </div>
     </div>
   );

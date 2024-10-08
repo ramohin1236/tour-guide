@@ -5,7 +5,7 @@ import { findSingleDestination } from "../common/api/destinationApi";
 import moment from "moment";
 
 const UserSingleBooking = () => {
-    const [bookingInfo, setBookingInfo] = useState(null);
+  const [bookingInfo, setBookingInfo] = useState(null);
   console.log(bookingInfo);
   const [destinationName, setDestinationName] = useState(null);
   const params = useParams();
@@ -39,10 +39,10 @@ const UserSingleBooking = () => {
     fetchDestinationName();
   }, [bookingInfo?.destination_id]);
   return (
-    <div className="min-h-screen pt-6 pb-20 px-[20px] md:px-[100px]">
-      <main className="mx-auto px-[20px] md:px-[100px] pt-32 rounded-lg shadow-lg">
+    <div className="min-h-screen -ml-[30px] md:ml-0 w-[100vw] md:w-[90%] pt-8 md:px-[100px]">
+      <main className="mx-auto px-[20px] md:px-[100px] py-16 bg-[#FFFFFF]">
         {/* Booking and Payment Details Section */}
-        <section className="mb-10">
+        <section className="">
           <h2 className="text-3xl font-semibold text-[#a04747] mb-4">
             {bookingInfo?.first_name} {bookingInfo?.last_name} Booking Details
           </h2>
@@ -55,11 +55,15 @@ const UserSingleBooking = () => {
               </tr>
               <tr>
                 <th className="border px-4 py-2 bg-gray-100">Payment Status</th>
-                <td className="border px-4 py-2">{bookingInfo?.payment_status}</td>
+                <td className="border px-4 py-2">
+                  {bookingInfo?.payment_status}
+                </td>
               </tr>
               <tr>
                 <th className="border px-4 py-2 bg-gray-100">Booking Status</th>
-                <td className="border px-4 py-2">{bookingInfo?.booking_status}</td>
+                <td className="border px-4 py-2">
+                  {bookingInfo?.booking_status}
+                </td>
               </tr>
               <tr>
                 <th className="border px-4 py-2 bg-gray-100">Email</th>
@@ -133,7 +137,7 @@ const UserSingleBooking = () => {
         </section>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default UserSingleBooking
+export default UserSingleBooking;
