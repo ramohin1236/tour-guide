@@ -136,7 +136,7 @@ const Navbar = () => {
         <div
           className={`${
             menu ? "translate-x-0" : "-translate-x-full"
-          } lg:hidden flex flex-col absolute text-[#A04747] bg-white left-0 top-16 font-semibold text-2xl text-center pt-8 pb-4 gap-8 w-full h-fit transition-transform duration-300`}
+          } lg:hidden flex flex-col absolute text-[#A04747] bg-white left-0 top-16 font-semibold text-2xl text-center pt-8 pb-4 gap-5 w-full h-fit transition-transform duration-300`}
         >
           <Link to="/destination" duration={500} onClick={closeMenu}>
             Destination
@@ -164,6 +164,27 @@ const Navbar = () => {
               Dashboard
             </Link>
           )}
+          {user && (
+            <Link to="/profile" className="block text-[#A04747]">
+              Profile
+            </Link>
+          )}
+          {user && (
+            <Link to="/changePassword" className="block text-[#A04747]">
+              Change Password
+            </Link>
+          )}
+          {user && (
+            <Link to="/wishlist" className="block text-[#A04747]">
+              Wishlist
+            </Link>
+          )}
+          {user && (
+            <Link to="/cart" className="block text-[#A04747]">
+              Cart
+            </Link>
+          )}
+
           {!user && (
             <div className="lg:hidden flex justify-center items-center gap-5">
               <Link to="/signin">
