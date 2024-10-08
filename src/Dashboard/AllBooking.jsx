@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { MdDelete } from "react-icons/md";
-import { deleteBooking, findAllBookings } from "../common/api/bookingApi";
+import { IoCheckmarkDoneCircle } from "react-icons/io5";
+import { MdCancel } from "react-icons/md";
+import { FcPaid } from "react-icons/fc";
+import {
+  bookingUpdate,
+  deleteBooking,
+  findAllBookings,
+} from "../common/api/bookingApi";
 import moment from "moment";
 import toast from "react-hot-toast";
 import Pagination from "../Sharred/Pagination";
@@ -29,6 +36,23 @@ const AllBookings = () => {
       fetchBookings();
     }
   }, [refetch]);
+
+  const handleBookingUpdate = async (bookingId, updateKey, value) => {
+    const updatedData = {};
+    if (updateKey === "payment_status") {
+      updatedData.payment_status = value;
+    }
+    if (updateKey === "booking_status") {
+      updatedData.booking_status = value;
+    }
+    try {
+      await bookingUpdate(bookingId, updatedData);
+      setRefetch(true);
+      toast.success("Booking payment status updated successfully!");
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   const handleDelete = async (userId) => {
     if (!userId) {
@@ -71,9 +95,6 @@ const AllBookings = () => {
                 SL
               </th>
               <th scope="col" className="px-6 py-3">
-                Booking ID
-              </th>
-              <th scope="col" className="px-6 py-3">
                 User Name
               </th>
               <th scope="col" className="px-6 py-3">
@@ -83,16 +104,16 @@ const AllBookings = () => {
                 Phone
               </th>
               <th scope="col" className="px-6 py-3">
-                Booking Start{" "}
+                Booking Timeline{" "}
               </th>
               <th scope="col" className="px-6 py-3">
-                Booking End{" "}
+                Booking Status{" "}
               </th>
               <th scope="col" className="px-6 py-3">
                 Country From{" "}
               </th>
               <th scope="col" className="px-6 py-3">
-                Status{" "}
+                Payment Status{" "}
               </th>
               <th scope="col" className="px-6 py-3">
                 Action
@@ -107,9 +128,7 @@ const AllBookings = () => {
                   className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 text-xl font-medium"
                 >
                   <td className="px-6 py-4">{index + 1}</td>
-                  <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    {booking?.booking_id}
-                  </td>
+
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
                     {booking?.first_name} {booking?.last_name}
                   </td>
@@ -120,32 +139,60 @@ const AllBookings = () => {
                     {booking?.phone}
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    {moment(booking?.trip_starts).format("MMMM Do, YYYY")}
+                    {moment(booking?.trip_starts).format("MMMM Do, YYYY")}-
+                    {moment(booking?.trip_ends).format("MMMM Do, YYYY")}
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    {moment(booking?.trip_ends).format("MMMM Do, YYYY")}
+                    {booking?.booking_status}
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
                     {booking?.country}
                   </td>
                   <td className="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                    {booking?.booking_status}
+                    {booking?.payment_status}
                   </td>
                   <td className="px-6 py-4 flex justify-center items-center gap-3 hover:cursor-pointer">
                     <MdDelete
                       onClick={() => {
                         handleDelete(booking?.booking_id);
                       }}
-                      className="text-3xl hover:text-red-600"
+                      className="text-3xl text-red-600"
                     />
-                    {booking?.booking_status !== "Paid" && (
-                      <button
-                        type="button"
-                        className="px-5 py-2.5 rounded-lg text-white text-sm tracking-wider font-medium border border-current outline-none bg-[#a04747]"
-                      >
-                        Paid
-                      </button>
+                    {booking?.payment_status !== "paid" && (
+                      <FcPaid
+                        className="text-3xl text-red-600"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleBookingUpdate(
+                            booking?.booking_id,
+                            "payment_status",
+                            "paid"
+                          );
+                        }}
+                      />
                     )}
+                    <IoCheckmarkDoneCircle
+                      className="text-3xl text-green-600"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleBookingUpdate(
+                          booking?.booking_id,
+                          "booking_status",
+                          "confirmed"
+                        );
+                      }}
+                    />
+                    <MdCancel
+                      className="text-3xl text-red-600"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleBookingUpdate(
+                          booking?.booking_id,
+                          "booking_status",
+                          "cancelled"
+                        );
+                      }}
+                    />
                   </td>
                 </tr>
               ))
