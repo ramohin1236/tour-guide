@@ -31,7 +31,7 @@ const PopularPlace = ({ id }) => {
   return (
     <div
       id={id}
-      className="flex flex-wrap flex-col md:flex-row gap-5 justify-center mx-auto max-w-screen-xl"
+      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 justify-center mx-auto"
     >
      {
         location?.filter((loc)=>loc?.destination_id === id )?.map((loc)=><PopularCard key={loc?.location_id}
