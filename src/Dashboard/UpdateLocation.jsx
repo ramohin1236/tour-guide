@@ -147,6 +147,7 @@ function UpdateLocation() {
 
         setAttatchment(photos?.result);
       } catch (err) {
+        if(err.message)
         toast.error("Error getting attachments");
       } finally {
         setGetAllAttachments(false);
@@ -313,7 +314,7 @@ function UpdateLocation() {
         </button>
       </form>
 
-      <div className="flex gap-20 justify-center items-center pt-10 pb-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3   gap-20 pt-10 pb-5">
         <div className="">
           <img
             src={`${apiUrl}/${defaultImage}`}
@@ -322,7 +323,7 @@ function UpdateLocation() {
           />
         </div>
 
-        <div className="flex flex-col justify-center ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <div className="relative border-4 border-[#a04747] border-dotted p-3 my-5 w-64 h-64 flex flex-col justify-center items-center rounded-lg cursor-pointer">
             {selectedImage ? (
               <img
@@ -346,7 +347,7 @@ function UpdateLocation() {
         </div>
       </div>
 
-      <div className="w-full flex justify-center mb-5">
+      <div className="w-full mb-5">
         <button
           onClick={handleUpload}
           className="bg-[#c75f5f] hover:bg-[#a04747] text-white px-4 py-2 rounded-md font-semibold w-full "
@@ -355,7 +356,7 @@ function UpdateLocation() {
         </button>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
         {attachment?.map((photo, idx) => (
           <div
             key={photo?.location_attachments_id}
@@ -377,7 +378,7 @@ function UpdateLocation() {
           </div>
         ))}
       </div>
-      <div className="flex flex-col justify-center ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:">
         <div className="relative border-4 border-[#a04747] border-dotted p-3 my-5 w-64 h-64 flex flex-col justify-center items-center rounded-lg cursor-pointer">
           {attachmentPreview ? (
             <img
